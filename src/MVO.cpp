@@ -26,7 +26,7 @@ Point MVO::calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query)
 	tmp.x = 0;
 	tmp.y = 0;
 
-	for (int i=0; i<train.size();i++){
+	for (unsigned int i=0; i<train.size();i++){
 		tmp.x += (train[i].x-query[i].x);
 		tmp.y += (train[i].y-query[i].y);
 
@@ -43,7 +43,7 @@ Point MVO::calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query)
 MVO::~MVO() {
 	// TODO Auto-generated destructor stub
 	//cout << "MVO destroyed";
-	//destroyAllWindows();
+	cvDestroyAllWindows();
 }
 
 bool MVO::run(){
@@ -105,7 +105,7 @@ bool MVO::run(){
 		try{
 			//cout << matcher.best_train_[0] <<endl;
 			//Mat matrix = findFundamentalMat(matcher.best_train_, matcher.best_query_, CV_FM_8POINT, 3, 0.99);
-			Mat H = findHomography(matcher.query_,matcher.train_, CV_FM_8POINT);
+			Mat H = findHomography(matcher.query_,matcher.train_, RANSAC);
 			cout << H <<endl;
 			//waitKey(100);
 			//cvWriteFrame( writer, matcher.frame_);

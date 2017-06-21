@@ -19,8 +19,8 @@ class MyFeatureExtractor{
 		Mat descriptors_;
 		std::vector<cv::KeyPoint> keypoints_;
 		Mat frame_;
-		cv::OrbFeatureDetector fDetector_;
-		cv::OrbDescriptorExtractor dExtractor_;
+		Ptr<FeatureDetector> fDetector_;
+		Ptr<DescriptorExtractor> fExtractor_;
 		//cv::Ptr<cv::DescriptorMatcher> descriptorMatcher;
 		//featureDetector = cv::FeatureDetector::create("FAST");
 		//descriptorExtractor = cv::DescriptorExtractor::create("FAST");

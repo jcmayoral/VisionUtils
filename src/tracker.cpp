@@ -23,8 +23,8 @@ Tracker::~Tracker(){
 void Tracker::featureTracking(MyFeatureExtractor f1, MyFeatureExtractor f2, Matcher& match)	{
 
 //this function automatically gets rid of points for which tracking fails
-  vector<float> err;
-  vector<uchar> status;
+  std::vector<float> err;
+  std::vector<uchar> status;
   Size winSize=Size(21,21);
   TermCriteria criteria=TermCriteria(TermCriteria::COUNT+TermCriteria::EPS, 10, 0.01);
 
@@ -34,7 +34,7 @@ void Tracker::featureTracking(MyFeatureExtractor f1, MyFeatureExtractor f2, Matc
 
 
   // Process
-  calcOpticalFlowPyrLK(f1.frame_,f2.frame_,match.best_train_,match.best_query_,status,err,winSize,3,criteria,0.001);
+  cv::calcOpticalFlowPyrLK(f1.frame_,f2.frame_,match.best_train_,match.best_query_,status,err,winSize,3,criteria,0.001);
 
   //calcOpticalFlowPyrLK(f1.frame_, f2.frame_, match.best_train_, match.best_query_, status, err, winSize, 3, termcrit, 0, 0.001);
   std::cout << "here" << flow << std::endl;
@@ -42,7 +42,7 @@ void Tracker::featureTracking(MyFeatureExtractor f1, MyFeatureExtractor f2, Matc
   int indexCorrection = 0;
   assert (match.best_query_.size() == match.best_train_.size());
 
-  for( int i=0; i < match.best_query_.size(); i++){
+  for( unsigned int i=0; i < match.best_query_.size(); i++){
 	   Point2f pt = match.best_query_.at(i- indexCorrection);
 	   if ((pt.x<0)||(pt.y<0)){
 		   match.best_train_.erase(match.best_train_.begin() + i - indexCorrection);

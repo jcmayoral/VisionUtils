@@ -21,12 +21,12 @@ cv::Point3f operator*(cv::Mat M, const cv::Point3f& p)
 }
 
 Visualizer::Visualizer() {
-
+	cv::destroyWindow("Odometry");
 }
 Visualizer::Visualizer(Mat frame) {
 	// TODO Auto-generated constructor stub
 	view_ = Mat(frame.rows,frame.cols, CV_8UC3, Scalar(255,255,255));
-	namedWindow("Odometry",WINDOW_NORMAL );
+	cv::namedWindow("Odometry",WINDOW_NORMAL );
 	point_ = Point3f();
 	point_.x = 0;
 	point_.y = 0;

@@ -1,11 +1,12 @@
 #include "../monocularvision/matcher.h"
 
 void Matcher::matchD(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
+
 	match(ext1.descriptors_,ext2.descriptors_,matches_);
 };
 
 void Matcher::separateMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-	for (int i= 0; i< matches_.size();i++){
+	for (unsigned int i= 0; i< matches_.size();i++){
 		query_.push_back(ext1.keypoints_[matches_[i].queryIdx].pt);
 		train_.push_back(ext2.keypoints_[matches_[i].queryIdx].pt);
 		//std::cout << matches_[i].distance << std::endl;
@@ -15,7 +16,7 @@ void Matcher::separateMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
 
 void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
 
-	for (int i= 0; i< best_matches_.size();i++){
+	for (unsigned int i= 0; i< best_matches_.size();i++){
 		best_query_.push_back(ext1.keypoints_[best_matches_[i].queryIdx].pt);
 		best_train_.push_back(ext2.keypoints_[best_matches_[i].queryIdx].pt);
 		//std::cout << matches_[i].distance << std::endl;

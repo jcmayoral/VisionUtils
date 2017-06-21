@@ -6,15 +6,19 @@
  */
 
 #include "../monocularvision/myfeaturedetection.h"
+#include "opencv2/videoio.hpp"
+
 
 MyFeatureExtractor::MyFeatureExtractor(){
+	fDetector_ = ORB::create();
+	fExtractor_ = ORB::create();
 
 }
 
 MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other):frame_(other.frame_),
-		fDetector_(other.fDetector_), dExtractor_(other.dExtractor_), keypoints_(other.keypoints_),
-		descriptors_(other.descriptors_){
-
+		keypoints_(other.keypoints_), descriptors_(other.descriptors_){
+	fDetector_ = other.fDetector_;
+	fExtractor_ = other.fExtractor_;
 }
 
 
@@ -31,11 +35,11 @@ void MyFeatureExtractor::read(VideoCapture v){
 }
 
 void MyFeatureExtractor::detect(){
-	fDetector_.detect(frame_,keypoints_);
+	fDetector_->detect(frame_,keypoints_);
 }
 
 void MyFeatureExtractor::compute(){
-	dExtractor_.compute(frame_, keypoints_, descriptors_);
+	fExtractor_->compute(frame_, keypoints_, descriptors_);
 }
 
 void MyFeatureExtractor::drawKP(){

@@ -13,7 +13,9 @@
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
+#include "opencv2/videoio.hpp"
 
+#include "opencv2/opencv.hpp"
 #include "../calibration/Calibration.h"
 #include <unistd.h>
 
@@ -27,6 +29,7 @@ Calibration::Calibration() {
 
 Calibration::~Calibration() {
 	// TODO Auto-generated destructor stub
+	cvDestroyAllWindows();
 }
 
 static inline void read(const FileNode& node, Settings& x, const Settings& default_value = Settings())
@@ -97,6 +100,7 @@ bool Calibration::Calibrate(){
     	inputCapture >> view;
     	imshow("Video",view);
 
+    	key = char();
     	key = (char)waitKey(100);
 
     	if (key != 'a' && key != 'e'){
