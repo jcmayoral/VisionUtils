@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 PROJECT(MonnocularVisualOdometry)
 FIND_PACKAGE( OpenCV REQUIRED )
-file(GLOB SOURCES ../src/*.cpp)
+file(GLOB SOURCES src/*.cpp)
 ADD_EXECUTABLE(visualodom ${SOURCES})
 TARGET_LINK_LIBRARIES(visualodom ${OpenCV_LIBS})
