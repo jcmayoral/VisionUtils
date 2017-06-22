@@ -6,8 +6,8 @@
  */
 
 #include "../monocularvision/MVO.h"
-#include "../calibration/Calibration.h"
-#include "../gui/GUI.h"
+#include <calibration/Calibration.h>
+#include <gui/GUI.h>
 
 using namespace std;
 

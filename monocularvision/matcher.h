@@ -39,7 +39,7 @@ class Matcher:FlannBasedMatcher{
 
 		void clearing();
 
-		void destroyWindows();
+        void destroyWindow(std::string window_name);
 
 };
   

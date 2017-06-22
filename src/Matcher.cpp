@@ -1,4 +1,4 @@
-#include "../monocularvision/matcher.h"
+#include <monocularvision/matcher.h>
 
 void Matcher::matchD(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
 
@@ -23,8 +23,8 @@ void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ex
 	}
 };
 
-void Matcher::destroyWindows(){
-	destroyAllWindows();
+void Matcher::destroyWindow(std::string window_name){
+    destroyWindow(window_name);
 }
 
 void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){

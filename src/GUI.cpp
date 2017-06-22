@@ -5,7 +5,7 @@
  *      Author: jose
  */
 
-#include "../gui/GUI.h"
+#include <gui/GUI.h>
 
 using namespace cv;
 using namespace std;

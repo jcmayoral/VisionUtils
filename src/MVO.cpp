@@ -11,7 +11,7 @@
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include "../monocularvision/MVO.h"
+#include <monocularvision/MVO.h>
 
 using namespace cv;
 using namespace std;
@@ -132,8 +132,7 @@ bool MVO::run(){
 		}
 	}
     cap.release();
-    matcher.destroyWindows();
-    destroyAllWindows();
+    //matcher.destroyWindow("BestMatchesDisplay");
 	//video.release();
 	cout << "MVO finishing correctly" << endl;
 	return true;

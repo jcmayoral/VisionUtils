@@ -5,7 +5,7 @@
  *      Author: jose
  */
 
-#include "../monocularvision/myfeaturedetection.h"
+#include<monocularvision/myfeaturedetection.h>
 #include "opencv2/videoio.hpp"
 
 
