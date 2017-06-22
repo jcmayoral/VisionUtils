@@ -31,7 +31,6 @@ Visualizer::Visualizer(Mat frame) {
 	point_.x = 0;
 	point_.y = 0;
 	point_.z = 1;
-	std::cout << "beginning Point " << point_ << std::endl;
 }
 
 Visualizer::~Visualizer() {
@@ -44,13 +43,11 @@ void Visualizer::MyLine(Mat H)
   int thickness = 2;
   int lineType = 8;
   Point3f tmp;
-  std::cout << point_ << std::endl;
   tmp = H * point_;
 
   tmp.x /= tmp.z;
   tmp.y /= tmp.z;
   tmp.z /= tmp.z;
-  std::cout << tmp << std::endl;
 
   line( view_,
 		  Point(fabs(point_.x),fabs(point_.y)),

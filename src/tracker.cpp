@@ -37,7 +37,6 @@ void Tracker::featureTracking(MyFeatureExtractor f1, MyFeatureExtractor f2, Matc
   cv::calcOpticalFlowPyrLK(f1.frame_,f2.frame_,match.best_train_,match.best_query_,status,err,winSize,3,criteria,0.001);
 
   //calcOpticalFlowPyrLK(f1.frame_, f2.frame_, match.best_train_, match.best_query_, status, err, winSize, 3, termcrit, 0, 0.001);
-  std::cout << "here" << flow << std::endl;
   //getting rid of points for which the KLT tracking failed or those who have gone outside the frame
   int indexCorrection = 0;
   assert (match.best_query_.size() == match.best_train_.size());
@@ -53,4 +52,3 @@ void Tracker::featureTracking(MyFeatureExtractor f1, MyFeatureExtractor f2, Matc
    }
 
 }
-

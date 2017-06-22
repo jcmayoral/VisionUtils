@@ -11,14 +11,13 @@
 
 using namespace std;
 
-int main(int, char **){
+int main(int argc, char ** argv){
 
-	GUI gui;
-	Calibration cal;
-	MVO mvo;
-	char menu;
-
-	menu = '0';
+	Calibration cal = Calibration();
+	MVO mvo = MVO();
+	char menu = '0';
+	cvNamedWindow("main", CV_WINDOW_AUTOSIZE);
+	createTrackbar("trackbar", "Linear Blend", NULL, 100, NULL);
 
 	cout << "Welcome to the Monocular Visual Odometry Project..." << endl << "What do you want to do?" <<endl;
 
@@ -55,5 +54,3 @@ int main(int, char **){
 	}
 	return -1;
 }
-
-

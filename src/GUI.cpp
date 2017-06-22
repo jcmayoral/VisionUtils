@@ -12,15 +12,22 @@ using namespace std;
 
 GUI::GUI() {
 	// TODO Auto-generated constructor stub
-	cvNamedWindow("main1",CV_WINDOW_NORMAL);
+	cvNamedWindow("main", CV_WINDOW_AUTOSIZE);
 	//const char* button = "Button";
-	//int a = 0;
-	cv::createButton("button 1",NULL,NULL,CV_CHECKBOX,0);
-
+	Mat image;
+	int a = 0;
+	int alpha_slider = 0;
+  //image = imread("../img/kvothe.jpg",CV_LOAD_IMAGE_COLOR);
+	createButton("Calibration",GUI::callbackButton,&a,CV_PUSH_BUTTON);
+	createTrackbar("trackbar", "Linear Blend", &alpha_slider, 100, NULL);
+  //imshow("main", image);
 }
 
 GUI::~GUI() {
 	// TODO Auto-generated destructor stub
-	cvDestroyWindow("main1");
+	cvDestroyAllWindows();
 }
 
+void GUI::callbackButton(int state, void* userdata){
+	cout << "Inside Callback";
+}

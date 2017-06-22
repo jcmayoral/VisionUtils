@@ -30,7 +30,7 @@ void Matcher::destroyWindows(){
 void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
 	double min = 1000000;
 	double max = 0;
-	double percentage = 0.20;
+	double percentage = 0.10;
 	for( int i = 0; i < ext1.descriptors_.rows; i++ ){
 		if (matches_[i].distance <= min){
 			min = matches_[i].distance;

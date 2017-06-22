@@ -19,10 +19,8 @@ using namespace cv;
 class GUI {
 public:
 	GUI();
-	virtual ~GUI();
-	static void callbackButton(int state, void* userdata){
-
-	};
+	~GUI();
+	static void callbackButton(int state, void* userdata);
 };
 
 #endif /*GUI_H_ */

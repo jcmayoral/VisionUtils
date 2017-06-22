@@ -106,7 +106,6 @@ bool MVO::run(){
 			//cout << matcher.best_train_[0] <<endl;
 			//Mat matrix = findFundamentalMat(matcher.best_train_, matcher.best_query_, CV_FM_8POINT, 3, 0.99);
 			Mat H = findHomography(matcher.query_,matcher.train_, RANSAC);
-			cout << H <<endl;
 			//waitKey(100);
 			//cvWriteFrame( writer, matcher.frame_);
 			//video.write(first.frame_);
@@ -117,7 +116,6 @@ bool MVO::run(){
 		}
 		catch (exception e){
 			e.what();
-			cout << "here";
 		}
 
 
@@ -140,4 +138,3 @@ bool MVO::run(){
 	cout << "MVO finishing correctly" << endl;
 	return true;
 }
-
