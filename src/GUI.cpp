@@ -15,7 +15,7 @@ GUI::GUI() {
 	cvNamedWindow("main1",CV_WINDOW_NORMAL);
 	//const char* button = "Button";
 	//int a = 0;
-	//cv::createButton(button,callbackButton,NULL, CV_CHECKBOX,0);
+	cv::createButton("button 1",NULL,NULL,CV_CHECKBOX,0);
 
 }
 
