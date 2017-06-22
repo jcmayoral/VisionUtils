@@ -14,6 +14,6 @@ class MVO {
 public:
 	MVO();
 	virtual ~MVO();
-	bool run();
+    bool run();
 	Point calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query);
 };

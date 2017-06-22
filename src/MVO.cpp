@@ -131,9 +131,9 @@ bool MVO::run(){
 			break;
 		}
 	}
-	cap.release();
-	matcher.destroyWindows();
-	destroyAllWindows();
+    cap.release();
+    matcher.destroyWindows();
+    destroyAllWindows();
 	//video.release();
 	cout << "MVO finishing correctly" << endl;
 	return true;

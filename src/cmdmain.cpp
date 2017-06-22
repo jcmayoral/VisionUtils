@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int main(int argc, char ** argv){
+int cmdStart(){
 
 	Calibration cal = Calibration();
 	MVO mvo = MVO();
