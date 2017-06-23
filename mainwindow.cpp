@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    cout <<"Main Window destructor";
+
 }
 
 void MainWindow::on_calibration_button_clicked()

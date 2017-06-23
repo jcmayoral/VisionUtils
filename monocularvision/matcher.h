@@ -39,8 +39,6 @@ class Matcher:FlannBasedMatcher{
 
 		void clearing();
 
-        void destroyWindow(std::string window_name);
-
 };
   
 #endif /* MATCHER_H_ */

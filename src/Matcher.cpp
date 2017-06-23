@@ -23,10 +23,6 @@ void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ex
 	}
 };
 
-void Matcher::destroyWindow(std::string window_name){
-    destroyWindow(window_name);
-}
-
 void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
 	double min = 1000000;
 	double max = 0;

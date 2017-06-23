@@ -8,10 +8,11 @@
 #include "opencv2/opencv.hpp"
 #include <iostream>
 #include <exception>
-#include "opencv2/features2d/features2d.hpp"
-#include "opencv2/core/core.hpp"
-#include "opencv2/highgui/highgui.hpp"
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 #include <monocularvision/MVO.h>
+#include <statics/statics_tools.h>
 
 using namespace cv;
 using namespace std;
@@ -44,7 +45,7 @@ Point MVO::calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query)
 MVO::~MVO() {
 	// TODO Auto-generated destructor stub
 	//cout << "MVO destroyed";
-    //cvDestroyAllWindows();
+    //destroyWindow("clusters");
 }
 
 bool MVO::run(){
@@ -85,6 +86,7 @@ bool MVO::run(){
 	//namedWindow("Keypoints1",WINDOW_AUTOSIZE );
 	//namedWindow("Keypoints2",WINDOW_AUTOSIZE );
 	namedWindow("BestMatchesDisplay",WINDOW_AUTOSIZE );
+    namedWindow("clusters",WINDOW_AUTOSIZE );
 
 	cout << "Press ESC to EXIT" << endl;
 
@@ -103,17 +105,20 @@ bool MVO::run(){
 
 		matcher.drawBestMatches(first,second);
 		matcher.show("BestMatchesDisplay");
+        cout<< matcher.best_train_.size();
+        MyStatics::getKMeans(matcher);
 
 		try{
 			//cout << matcher.best_train_[0] <<endl;
 			//Mat matrix = findFundamentalMat(matcher.best_train_, matcher.best_query_, CV_FM_8POINT, 3, 0.99);
 			Mat H = findHomography(matcher.query_,matcher.train_, RANSAC);
-			//waitKey(100);
-			//cvWriteFrame( writer, matcher.frame_);
-			//video.write(first.frame_);
+
 			//Point thisPoint = calculateDiff(matcher.best_train_,matcher.best_query_);
 			//std::cout<<E<< std::endl;
-			visualizer.MyLine(H);
+
+
+            // Uncomment this line to Visualize for Odometry implementation still not working
+            //visualizer.MyLine(H);
 
 		}
 		catch (exception e){
@@ -134,8 +139,8 @@ bool MVO::run(){
 		}
 	}
     cap.release();
-    //matcher.destroyWindow("BestMatchesDisplay");
-	//video.release();
-	cout << "MVO finishing correctly" << endl;
+    matcher.clearing();
+    destroyAllWindows();
+    cout << "MVO finishing correctly" << endl;
 	return true;
 }

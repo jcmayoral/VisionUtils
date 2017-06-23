@@ -43,6 +43,7 @@ SOURCES += main.cpp \
         src/Settings.cpp \
         src/tracker.cpp \
         src/visualizer.cpp \
+    src/statics_tools.cpp
 
 HEADERS  += mainwindow.h\
         gui/GUI.h\
@@ -53,6 +54,7 @@ HEADERS  += mainwindow.h\
         monocularvision/visualizer.h \
         calibration/Calibration.h \
         calibration/Settings.h \
+    statics/statics_tools.h
 
 FORMS += mainwindow.ui
 

@@ -60,5 +60,4 @@ void Visualizer::MyLine(Mat H)
   point_.y = fabs(tmp.y);
   point_.z = fabs(tmp.z);
   imshow("Odometry",view_);
-
 };
