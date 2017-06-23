@@ -18,6 +18,7 @@ using namespace std;
 
 MVO::MVO() {
 	// TODO Auto-generated constructor stub
+    cout << "MVO Constructor" << endl;
 
 }
 
@@ -43,27 +44,28 @@ Point MVO::calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query)
 MVO::~MVO() {
 	// TODO Auto-generated destructor stub
 	//cout << "MVO destroyed";
-	cvDestroyAllWindows();
+    //cvDestroyAllWindows();
 }
 
 bool MVO::run(){
 
 	VideoCapture cap( 0 );
-	MyFeatureExtractor first, second;
-    // Tracker tracker;
+    MyFeatureExtractor first;
     Matcher matcher;
     Tracker tracker;
     Visualizer visualizer;
+    cout << "run " << endl;
 
 
     if (!cap.isOpened()){
     	cerr  << "Could not open the input video: " << endl;
 	    return false;
 	}
+
     Mat frame;
     cap >> frame;
     visualizer = Visualizer (frame);
-	/*
+    /*
 	VideoWriter video;
 	int width = (int) cap.get(CV_CAP_PROP_FRAME_WIDTH);
 	int height = (int) cap.get(CV_CAP_PROP_FRAME_HEIGHT);

@@ -50,5 +50,11 @@ HEADERS  += mainwindow.h\
         monocularvision/MVO.h \
         monocularvision/myfeaturedetection.h \
         monocularvision/tracker.h \
-        monocularvision/visualizer.h
+        monocularvision/visualizer.h \
+        calibration/Calibration.h \
+        calibration/Settings.h \
+
 FORMS += mainwindow.ui
+
+OTHER_FILES += \
+    camcalibration.xml

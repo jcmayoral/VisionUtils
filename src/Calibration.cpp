@@ -52,7 +52,7 @@ static inline void write(FileStorage& fs, const String&, const Settings& s )
 
 bool Calibration::getSettings(){
 
-	const string inputSettingsFile = "camcalibration.xml";
+    const string inputSettingsFile = "/home/jose/Dropbox/workspace/VisionUtils/camcalibration.xml";
     FileStorage fs(inputSettingsFile, FileStorage::READ); // Read the settings
 
     if (!fs.isOpened())

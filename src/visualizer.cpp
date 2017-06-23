@@ -21,7 +21,6 @@ cv::Point3f operator*(cv::Mat M, const cv::Point3f& p)
 }
 
 Visualizer::Visualizer() {
-	cv::destroyWindow("Odometry");
 }
 Visualizer::Visualizer(Mat frame) {
 	// TODO Auto-generated constructor stub
@@ -35,6 +34,8 @@ Visualizer::Visualizer(Mat frame) {
 
 Visualizer::~Visualizer() {
 	// TODO Auto-generated destructor stub
+    cv::destroyWindow("Odometry");
+
 }
 
 void Visualizer::MyLine(Mat H)

@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include<monocularvision/MVO.h>
+#include <calibration/Calibration.h>
+#include <gui/GUI.h>
+
+
 
 namespace Ui {
 class MainWindow;
@@ -17,11 +21,17 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_3_clicked();
+
+    void on_calibration_button_clicked();
+
+    void on_match_button_clicked();
+
+    void on_exit_button_clicked();
 
 private:
     Ui::MainWindow *ui;
-    MVO mvo;
+    MVO mvo_;
+    Calibration calibration_;
 };
 
 #endif // MAINWINDOW_H

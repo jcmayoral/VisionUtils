@@ -12,7 +12,7 @@
 MyFeatureExtractor::MyFeatureExtractor(){
 	fDetector_ = ORB::create();
 	fExtractor_ = ORB::create();
-
+    std::cout << "MyFeatureExtractor Contructor" << std::endl;
 }
 
 MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other):frame_(other.frame_),

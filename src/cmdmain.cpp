@@ -1,17 +1,15 @@
+#include <monocularvision/MVO.h>
+#include <calibration/Calibration.h>
+#include <gui/GUI.h>
 /*
  * main.cpp
  *
  *  Created on: Nov 24, 2016
  *      Author: jose
  */
-
-#include "../monocularvision/MVO.h"
-#include <calibration/Calibration.h>
-#include <gui/GUI.h>
-
 using namespace std;
 
-int cmdStart(){
+int startCMD(){
 
 	Calibration cal = Calibration();
 	MVO mvo = MVO();
@@ -52,5 +50,5 @@ int cmdStart(){
 		}
 
 	}
-	return -1;
+    return 1;
 }

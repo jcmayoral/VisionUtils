@@ -6,9 +6,10 @@
  */
 
 //#include "../monocularvision/featuredetection.h"
-#include "matcher.h"
-#include "tracker.h"
-#include "visualizer.h"
+#include <monocularvision/matcher.h>
+#include <monocularvision/tracker.h>
+#include <monocularvision/visualizer.h>
+
 
 class MVO {
 public:

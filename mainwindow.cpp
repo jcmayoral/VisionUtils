@@ -5,7 +5,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    mvo()
+    mvo_(), calibration_()
 {
     ui->setupUi(this);
 }
@@ -15,7 +15,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_calibration_button_clicked()
 {
-    mvo.run();
+    calibration_.Calibrate();
+
+}
+
+void MainWindow::on_match_button_clicked()
+{
+    mvo_.run();
+}
+
+void MainWindow::on_exit_button_clicked()
+{
+    delete this;
 }
