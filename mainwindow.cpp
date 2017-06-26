@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     mvo_(), calibration_()
 {
-    connect(this->ui->Visualize, SIGNAL(click()), this, SLOT(on_Visualize_clicked()));
+    //connect(this->ui->Visualize, SIGNAL(click()), this, SLOT(on_Visualize_clicked()));
     ui->setupUi(this);
 }
 
@@ -34,13 +34,15 @@ void MainWindow::on_exit_button_clicked()
     delete this;
 }
 
-void MainWindow::on_Visualize_clicked()
+
+
+void MainWindow::on_Visualize_clicked(bool checked)
 {
-    QWidget *wdg = new QWidget;
-    wdg->show();
-    hide();
-    /*
-    gaussWindow_ = GaussianWindow();
-    gaussWindow_.show();
-    */
+    wdg = new SecondaryWindow();
+    if (checked){
+        wdg->show();
+    }
+    else{
+        wdg->hide();
+    }
 }

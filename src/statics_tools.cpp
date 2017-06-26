@@ -1,5 +1,4 @@
 #include<statics/statics_tools.h>
-#include<random>
 
 using namespace std;
 using namespace cv;
@@ -17,10 +16,6 @@ void MyStatics::getGaussian(const Matcher input){
 
       Mat img(nrolls,nrolls, DataType<float>::type);
 
-      std::default_random_engine generator;
-      std::normal_distribution<double> distribution(5.0,2.0);
-
-
       double meanX = 0;
       double meanY = 0;
 
@@ -32,7 +27,7 @@ void MyStatics::getGaussian(const Matcher input){
       int p[10]={};
 
       for (int i=0; i<nrolls; ++i) {
-        double number = distribution(generator);
+        double number =0.0;
         if ((number>=0.0)&&(number<10.0)) ++p[int(number)];
       }
 

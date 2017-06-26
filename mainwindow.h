@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "secondarywindow.h"
 #include<monocularvision/MVO.h>
 #include <calibration/Calibration.h>
 #include <gui/GUI.h>
@@ -26,12 +27,14 @@ private slots:
 
     void on_exit_button_clicked();
 
-    void on_Visualize_clicked();
+    void on_Visualize_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
     MVO mvo_;
     Calibration calibration_;
+    SecondaryWindow *wdg;
+
 };
 
 #endif // MAINWINDOW_H

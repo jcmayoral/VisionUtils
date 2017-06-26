@@ -43,7 +43,8 @@ SOURCES += main.cpp \
         src/Settings.cpp \
         src/tracker.cpp \
         src/visualizer.cpp \
-    src/statics_tools.cpp
+    src/statics_tools.cpp \
+    secondarywindow.cpp
 
 HEADERS  += mainwindow.h\
         gui/GUI.h\
@@ -54,12 +55,16 @@ HEADERS  += mainwindow.h\
         monocularvision/visualizer.h \
         calibration/Calibration.h \
         calibration/Settings.h \
-    statics/statics_tools.h
+    statics/statics_tools.h \
+    secondarywindow.h
 
-FORMS += mainwindow.ui
+FORMS += mainwindow.ui \
+    secondarywindow.ui
 
 OTHER_FILES += \
     camcalibration.xml
 
 CONFIG += c++11
-LIBS += -lqwt-qt4
+
+INCLUDEPATH += /usr/include/qwt-qt4
+LIBS += -l qwt-qt4
