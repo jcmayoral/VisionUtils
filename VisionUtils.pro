@@ -60,3 +60,6 @@ FORMS += mainwindow.ui
 
 OTHER_FILES += \
     camcalibration.xml
+
+CONFIG += c++11
+LIBS += -lqwt-qt4

@@ -34,7 +34,7 @@ Visualizer::Visualizer(Mat frame) {
 
 Visualizer::~Visualizer() {
 	// TODO Auto-generated destructor stub
-    cv::destroyWindow("Odometry");
+    //cv::destroyWindow("Odometry");
 
 }
 

@@ -8,6 +8,7 @@ class MyStatics{
     MyStatics();
     ~MyStatics();
     static void getKMeans(const Matcher input);
+    static void getGaussian(const Matcher input);
 
 };
 #endif // STATICS_TOOLS_H

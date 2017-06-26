@@ -106,7 +106,11 @@ bool MVO::run(){
 		matcher.drawBestMatches(first,second);
 		matcher.show("BestMatchesDisplay");
         cout<< matcher.best_train_.size();
-        MyStatics::getKMeans(matcher);
+
+        //TODO
+        //MyStatics::getKMeans(matcher);
+        MyStatics::getGaussian(matcher);
+
 
 		try{
 			//cout << matcher.best_train_[0] <<endl;

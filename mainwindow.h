@@ -6,8 +6,6 @@
 #include <calibration/Calibration.h>
 #include <gui/GUI.h>
 
-
-
 namespace Ui {
 class MainWindow;
 }
@@ -27,6 +25,8 @@ private slots:
     void on_match_button_clicked();
 
     void on_exit_button_clicked();
+
+    void on_Visualize_clicked();
 
 private:
     Ui::MainWindow *ui;
