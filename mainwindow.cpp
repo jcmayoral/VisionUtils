@@ -34,10 +34,9 @@ void MainWindow::on_exit_button_clicked()
     delete this;
 }
 
-
-
-void MainWindow::on_Visualize_clicked(bool checked)
+void MainWindow::on_Visualize_clicked()
 {
+<<<<<<< HEAD
     /*
     wdg = new SecondaryWindow();
     if (checked){
@@ -46,5 +45,13 @@ void MainWindow::on_Visualize_clicked(bool checked)
     else{
         wdg->hide();
     }
+=======
+    QWidget *wdg = new QWidget;
+    wdg->show();
+    hide();
+    /*
+    gaussWindow_ = GaussianWindow();
+    gaussWindow_.show();
+>>>>>>> parent of a696445... window opening but plotting not
     */
 }

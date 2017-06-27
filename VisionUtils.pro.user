@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 3.0.1, 2017-06-27T12:33:17. -->
+=======
+<!-- Written by QtCreator 3.0.1, 2017-06-26T14:51:53. -->
+>>>>>>> parent of a696445... window opening but plotting not
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
