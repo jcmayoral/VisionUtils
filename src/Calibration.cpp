@@ -24,6 +24,7 @@ using namespace cv;
 
 Calibration::Calibration() {
 	// TODO Auto-generated constructor stub
+    cout << "Calibration Constructor";
 
 }
 

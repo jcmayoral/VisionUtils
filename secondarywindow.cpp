@@ -1,27 +1,15 @@
 #include "secondarywindow.h"
-#include "qwt-qt4/qwt_plot.h"
-#include "qwt-qt4/qwt_plot_curve.h"
+#include "QPushButton"
+#include "qwt_plot.h"
+#include "qwt_plot_curve.h"
 
-SecondaryWindow::SecondaryWindow()
+
+SecondaryWindow::SecondaryWindow(QWidget *parent) : QWidget(parent)
 {
-    double x[100], y[100]; // x and y values
-/*
-    qwtPlot = new QwtPlot;
-    curve1 = new QwtPlotCurve;
-
-    //getSomeValues(x, y1, y2);
-    for (int i=0;i<100;i++){
-        x[i] = i;
-        y[i] = i;
-    }
-    // copy the data into the curves
-    curve1->setData(x, y, 100);
-
-    curve1->attach(qwtPlot);
-
-    // finally, refresh the plot
-    qwtPlot->replot();
-*/
+    //setFixedSize(100, 50);
+    QPushButton* m_button = new QPushButton("Hello World", this);
+    m_button->setGeometry(10, 10, 80, 30);
+    show();
 }
 
 SecondaryWindow::~SecondaryWindow()

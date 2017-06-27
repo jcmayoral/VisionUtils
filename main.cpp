@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "secondarywindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

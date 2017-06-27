@@ -1,13 +1,13 @@
 #include "mainwindow.h"
+#include "secondarywindow.h"
 #include "ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    mvo_(), calibration_()
+    mvo_(), calibration_(), wdg()
 {
-    connect(this->ui->Visualize, SIGNAL(click()), this, SLOT(on_Visualize_clicked()));
     ui->setupUi(this);
 }
 
@@ -36,22 +36,5 @@ void MainWindow::on_exit_button_clicked()
 
 void MainWindow::on_Visualize_clicked()
 {
-<<<<<<< HEAD
-    /*
-    wdg = new SecondaryWindow();
-    if (checked){
-        wdg->show();
-    }
-    else{
-        wdg->hide();
-    }
-=======
-    QWidget *wdg = new QWidget;
-    wdg->show();
-    hide();
-    /*
-    gaussWindow_ = GaussianWindow();
-    gaussWindow_.show();
->>>>>>> parent of a696445... window opening but plotting not
-    */
+    wdg.show();
 }

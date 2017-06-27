@@ -2,12 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-<<<<<<< HEAD
 #include "secondarywindow.h"
 #include <monocularvision/MVO.h>
-=======
-#include<monocularvision/MVO.h>
->>>>>>> parent of a696445... window opening but plotting not
 #include <calibration/Calibration.h>
 #include <gui/GUI.h>
 
@@ -37,11 +33,7 @@ private:
     Ui::MainWindow *ui;
     MVO mvo_;
     Calibration calibration_;
-<<<<<<< HEAD
-    //SecondaryWindow *wdg;
-
-=======
->>>>>>> parent of a696445... window opening but plotting not
+    SecondaryWindow wdg;
 };
 
 #endif // MAINWINDOW_H

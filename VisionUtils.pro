@@ -1,3 +1,4 @@
+
 #-------------------------------------------------
 #
 # Project created by QtCreator 2017-06-22T17:29:35
@@ -43,7 +44,8 @@ SOURCES += main.cpp \
         src/Settings.cpp \
         src/tracker.cpp \
         src/visualizer.cpp \
-    src/statics_tools.cpp
+    src/statics_tools.cpp \
+    secondarywindow.cpp
 
 HEADERS  += mainwindow.h\
         gui/GUI.h\
@@ -54,22 +56,13 @@ HEADERS  += mainwindow.h\
         monocularvision/visualizer.h \
         calibration/Calibration.h \
         calibration/Settings.h \
-    statics/statics_tools.h
+    statics/statics_tools.h \
+    secondarywindow.h
 
 FORMS += mainwindow.ui
-<<<<<<< HEAD
-
-CONFIG += c++11
-=======
->>>>>>> parent of a696445... window opening but plotting not
 
 OTHER_FILES += \
     camcalibration.xml
 
-<<<<<<< HEAD
 INCLUDEPATH += /usr/include/qwt-qt4
 LIBS += -l qwt-qt4
-=======
-CONFIG += c++11
-LIBS += -lqwt-qt4
->>>>>>> parent of a696445... window opening but plotting not

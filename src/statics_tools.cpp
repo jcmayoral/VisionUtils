@@ -1,5 +1,5 @@
 #include<statics/statics_tools.h>
-#include<random>
+//#include<random>
 
 using namespace std;
 using namespace cv;
@@ -16,7 +16,7 @@ void MyStatics::getGaussian(const Matcher input){
       const int nstars=100;    // maximum number of stars to distribute
 
       Mat img(nrolls,nrolls, DataType<float>::type);
-
+      /*
       std::default_random_engine generator;
       std::normal_distribution<double> distribution(5.0,2.0);
 
@@ -42,6 +42,7 @@ void MyStatics::getGaussian(const Matcher input){
         std::cout << i << "-" << (i+1) << ": ";
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
       }
+      */
 
     imshow("clusters", img);
 }
