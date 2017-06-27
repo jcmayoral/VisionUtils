@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "secondarywindow.h"
-#include<monocularvision/MVO.h>
+#include <monocularvision/MVO.h>
 #include <calibration/Calibration.h>
 #include <gui/GUI.h>
 
@@ -33,7 +33,7 @@ private:
     Ui::MainWindow *ui;
     MVO mvo_;
     Calibration calibration_;
-    SecondaryWindow *wdg;
+    //SecondaryWindow *wdg;
 
 };
 

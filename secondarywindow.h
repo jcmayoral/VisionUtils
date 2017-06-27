@@ -2,21 +2,21 @@
 #define SECONDARYWINDOW_H
 
 #include <QWidget>
-
-namespace Ui {
-class SecondaryWindow;
-}
+#include <qwt-qt4/qwt_plot.h>
+#include <qwt-qt4/qwt_plot_curve.h>
 
 class SecondaryWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SecondaryWindow(QWidget *parent = 0);
+    SecondaryWindow();
     ~SecondaryWindow();
 
 private:
-    Ui::SecondaryWindow *ui;
+    QwtPlot *qwtPlot;
+    QwtPlotCurve *curve1;
+
 };
 
 #endif // SECONDARYWINDOW_H

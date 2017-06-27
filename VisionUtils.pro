@@ -58,13 +58,12 @@ HEADERS  += mainwindow.h\
     statics/statics_tools.h \
     secondarywindow.h
 
-FORMS += mainwindow.ui \
-    secondarywindow.ui
+FORMS += mainwindow.ui
+
+CONFIG += c++11
 
 OTHER_FILES += \
     camcalibration.xml
-
-CONFIG += c++11
 
 INCLUDEPATH += /usr/include/qwt-qt4
 LIBS += -l qwt-qt4
