@@ -7,7 +7,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = VisionUtils
 TEMPLATE = app
@@ -45,7 +45,9 @@ SOURCES += main.cpp \
         src/tracker.cpp \
         src/visualizer.cpp \
     src/statics_tools.cpp \
-    secondarywindow.cpp
+    secondarywindow.cpp \
+    qcustomplot/qcustomplot.cpp \
+    plot.cpp
 
 HEADERS  += mainwindow.h\
         gui/GUI.h\
@@ -57,12 +59,12 @@ HEADERS  += mainwindow.h\
         calibration/Calibration.h \
         calibration/Settings.h \
     statics/statics_tools.h \
-    secondarywindow.h
+    secondarywindow.h \
+    qcustomplot/qcustomplot.h \
+    plot.h
 
-FORMS += mainwindow.ui
+FORMS += mainwindow.ui \
+    plot.ui
 
 OTHER_FILES += \
     camcalibration.xml
-
-INCLUDEPATH += /usr/include/qwt-qt4
-LIBS += -l qwt-qt4

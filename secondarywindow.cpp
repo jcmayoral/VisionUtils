@@ -1,8 +1,5 @@
 #include "secondarywindow.h"
 #include "QPushButton"
-#include "qwt_plot.h"
-#include "qwt_plot_curve.h"
-
 
 SecondaryWindow::SecondaryWindow(QWidget *parent) : QWidget(parent)
 {
