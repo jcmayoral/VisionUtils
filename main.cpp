@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "plot.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -8,7 +7,7 @@ int main(int argc, char *argv[])
             QApplication::setGraphicsSystem("raster");
           #endif
     QApplication a(argc, argv);
-    Plot w;
+    MainWindow w;
     w.show();
     return a.exec();
 }

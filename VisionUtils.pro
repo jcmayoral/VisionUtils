@@ -34,7 +34,6 @@ LIBS += -L/usr/local/lib -lopencv_shape \
                          -lopencv_core
 
 SOURCES += main.cpp \
-        mainwindow.cpp \
         src/Calibration.cpp \
         src/cmdmain.cpp \
         src/GUI.cpp \
@@ -47,7 +46,8 @@ SOURCES += main.cpp \
     src/statics_tools.cpp \
     secondarywindow.cpp \
     qcustomplot/qcustomplot.cpp \
-    plot.cpp
+    mainwindow.cpp \
+    plotwindow.cpp
 
 HEADERS  += mainwindow.h\
         gui/GUI.h\
@@ -61,10 +61,10 @@ HEADERS  += mainwindow.h\
     statics/statics_tools.h \
     secondarywindow.h \
     qcustomplot/qcustomplot.h \
-    plot.h
+    plotwindow.h
 
 FORMS += mainwindow.ui \
-    plot.ui
+    plotwindow.ui
 
 OTHER_FILES += \
     camcalibration.xml

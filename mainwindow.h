@@ -3,9 +3,12 @@
 
 #include <QMainWindow>
 #include "secondarywindow.h"
+#include "plotwindow.h"
 #include <monocularvision/MVO.h>
 #include <calibration/Calibration.h>
 #include <gui/GUI.h>
+#include "qcustomplot/qcustomplot.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -27,13 +30,15 @@ private slots:
 
     void on_exit_button_clicked();
 
-    void on_Visualize_clicked();
+    void on_Visualize_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
     MVO mvo_;
     Calibration calibration_;
     SecondaryWindow wdg;
+    PlotWindow plt;
+
 };
 
 #endif // MAINWINDOW_H
