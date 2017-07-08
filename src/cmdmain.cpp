@@ -1,6 +1,5 @@
 #include <monocularvision/MVO.h>
 #include <calibration/Calibration.h>
-#include <gui/GUI.h>
 /*
  * main.cpp
  *

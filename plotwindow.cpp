@@ -4,7 +4,8 @@
 
 PlotWindow::PlotWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::PlotWindow)
+    ui(new Ui::PlotWindow),
+    newSample_()
 {
     ui->setupUi(this);
     ui->customPlot->addGraph(); // blue line
@@ -27,6 +28,9 @@ PlotWindow::PlotWindow(QWidget *parent) :
     connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
     dataTimer.start(0); // Interval 0 means to refresh as fast as possible
     ui->customPlot->replot();
+}
+
+void PlotWindow::addData(double x){
 
 }
 

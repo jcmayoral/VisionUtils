@@ -36,7 +36,6 @@ LIBS += -L/usr/local/lib -lopencv_shape \
 SOURCES += main.cpp \
         src/Calibration.cpp \
         src/cmdmain.cpp \
-        src/GUI.cpp \
         src/Matcher.cpp \
         src/MVO.cpp \
         src/myfeaturedetection.cpp \
@@ -50,7 +49,6 @@ SOURCES += main.cpp \
     plotwindow.cpp
 
 HEADERS  += mainwindow.h\
-        gui/GUI.h\
         monocularvision/matcher.h \
         monocularvision/MVO.h \
         monocularvision/myfeaturedetection.h \
