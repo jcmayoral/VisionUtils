@@ -32,6 +32,7 @@ private slots:
 
     void on_Visualize_clicked(bool checked);
 
+
 private:
     Ui::MainWindow *ui;
     MVO mvo_;
