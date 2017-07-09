@@ -1,7 +1,7 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include "../monocularvision/myfeaturedetection.h"
+#include <monocularvision/myfeaturedetection.h>
 using namespace cv;
 
 #ifndef MATCHER_H_

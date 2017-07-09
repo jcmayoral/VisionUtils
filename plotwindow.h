@@ -8,6 +8,7 @@ namespace Ui {
 class PlotWindow;
 }
 
+
 class PlotWindow : public QMainWindow
 {
     Q_OBJECT

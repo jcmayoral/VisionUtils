@@ -30,12 +30,12 @@ private slots:
 
     void on_Visualize_clicked(bool checked);
 
-
 private:
     Ui::MainWindow *ui;
     MVO mvo_;
     Calibration calibration_;
     PlotWindow plt;
+    bool stopFlag_;
 
 };
 

@@ -26,7 +26,14 @@ void MainWindow::on_calibration_button_clicked()
 
 void MainWindow::on_match_button_clicked()
 {
-    mvo_.run();
+    while(true){
+        mvo_.run();
+        plt.addData(mvo_.getMeanPoint().x,0);
+        plt.addData(mvo_.getMeanPoint().y,1);
+        if (char(waitKey(10)) == 27){break;
+        }
+    }
+    mvo_.stop();
 }
 
 void MainWindow::on_exit_button_clicked()
@@ -39,6 +46,7 @@ void MainWindow::on_Visualize_clicked(bool checked)
     if (checked){
         plt.show();
     }
+
     else{
         plt.close();
     }
