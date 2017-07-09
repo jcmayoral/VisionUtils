@@ -44,26 +44,8 @@ bool MVO::run(){
 
     Mat frame;
     cap >> frame;
-    /*
-	VideoWriter video;
-	int width = (int) cap.get(CV_CAP_PROP_FRAME_WIDTH);
-	int height = (int) cap.get(CV_CAP_PROP_FRAME_HEIGHT);
-	Size S = Size((int) cap.get(CV_CAP_PROP_FRAME_WIDTH),    // Acquire input size
-				   (int) cap.get(CV_CAP_PROP_FRAME_HEIGHT));
 
-	video.open("output.avi",cap.get(CV_CAP_PROP_FOURCC),
-	    			cap.get(CV_CAP_PROP_FPS), S,true);
-
-	if ( !video.isOpened() )
-	{
-		   std::cout << "ERROR: Failed to write the video" << std::endl;
-		   return -1;
-	}
-	*/
-
-	//namedWindow("Keypoints1",WINDOW_AUTOSIZE );
-	//namedWindow("Keypoints2",WINDOW_AUTOSIZE );
-	namedWindow("BestMatchesDisplay",WINDOW_AUTOSIZE );
+    namedWindow("BestMatchesDisplay",WINDOW_AUTOSIZE );
     namedWindow("clusters",WINDOW_AUTOSIZE );
 
 	cout << "Press ESC to EXIT" << endl;
@@ -86,33 +68,12 @@ bool MVO::run(){
         cout<< matcher_.best_train_.size();
 
 
-
-
 		try{
-			//cout << matcher.best_train_[0] <<endl;
-			//Mat matrix = findFundamentalMat(matcher.best_train_, matcher.best_query_, CV_FM_8POINT, 3, 0.99);
             Mat H = findHomography(matcher_.best_query_,matcher_.best_train_, RANSAC);
-
-			//Point thisPoint = calculateDiff(matcher.best_train_,matcher.best_query_);
-			//std::cout<<E<< std::endl;
-
-
-            // Uncomment this line to Visualize for Odometry implementation still not working
-            //visualizer.MyLine(H);
-
 		}
 		catch (exception e){
 			e.what();
 		}
-
-
-		/*
-
-		Point thisPoint = calculateDiff(matcher.best_train_,matcher.best_query_);
-		if (thisPoint.x!=0 && thisPoint.y!= 0){
-			visualizer.MyLine(thisPoint);
-		}
-		*/
 
 		if (char(waitKey(10)) == 27){
 			break;

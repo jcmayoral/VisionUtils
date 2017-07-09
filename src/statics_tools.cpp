@@ -10,21 +10,22 @@ MyStatics::MyStatics(){
 MyStatics::~MyStatics(){
 }
 
+Point MyStatics::calculateDiff(Matcher match){
 
-Point MyStatics::calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query){
+    int number_points = match.best_matches_.size();
     Point tmp;
     tmp.x = 0;
     tmp.y = 0;
 
-    for (unsigned int i=0; i<train.size();i++){
-        tmp.x += (train[i].x-query[i].x);
-        tmp.y += (train[i].y-query[i].y);
+    for (unsigned int i=0; i<match.best_train_.size();i++){
+        tmp.x += (match.best_train_[i].x-match.best_query_[i].x);
+        tmp.y += (match.best_train_[i].y-match.best_query_[i].y);
 
     }
 
-    if (train.size() > 0){
-        tmp.x /=train.size();
-        tmp.y /=train.size();
+    if (number_points > 0){
+        tmp.x /= number_points;
+        tmp.y /= number_points;
     }
 
     return tmp;
@@ -36,7 +37,6 @@ void MyStatics::getGaussian(const Matcher input){
       const int nstars=100;    // maximum number of stars to distribute
 
       Mat img(nrolls,nrolls, DataType<float>::type);
-      /*
       std::default_random_engine generator;
       std::normal_distribution<double> distribution(5.0,2.0);
 
@@ -62,7 +62,6 @@ void MyStatics::getGaussian(const Matcher input){
         std::cout << i << "-" << (i+1) << ": ";
         std::cout << std::string(p[i]*nstars/nrolls,'*') << std::endl;
       }
-      */
 
     imshow("clusters", img);
 }
