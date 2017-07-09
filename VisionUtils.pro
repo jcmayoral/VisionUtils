@@ -41,9 +41,7 @@ SOURCES += main.cpp \
         src/myfeaturedetection.cpp \
         src/Settings.cpp \
         src/tracker.cpp \
-        src/visualizer.cpp \
     src/statics_tools.cpp \
-    secondarywindow.cpp \
     qcustomplot/qcustomplot.cpp \
     mainwindow.cpp \
     plotwindow.cpp
@@ -53,11 +51,9 @@ HEADERS  += mainwindow.h\
         monocularvision/MVO.h \
         monocularvision/myfeaturedetection.h \
         monocularvision/tracker.h \
-        monocularvision/visualizer.h \
         calibration/Calibration.h \
         calibration/Settings.h \
     statics/statics_tools.h \
-    secondarywindow.h \
     qcustomplot/qcustomplot.h \
     plotwindow.h
 
@@ -66,3 +62,6 @@ FORMS += mainwindow.ui \
 
 OTHER_FILES += \
     camcalibration.xml
+
+CONFIG += c++11
+

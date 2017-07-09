@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "secondarywindow.h"
 #include "plotwindow.h"
 #include "ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
@@ -7,7 +6,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    mvo_(), calibration_(), wdg(), plt()
+    mvo_(), calibration_(), plt()
 {
     ui->setupUi(this);
 }
@@ -38,11 +37,9 @@ void MainWindow::on_exit_button_clicked()
 void MainWindow::on_Visualize_clicked(bool checked)
 {
     if (checked){
-        wdg.show();
         plt.show();
     }
     else{
-        wdg.close();
         plt.close();
     }
 }

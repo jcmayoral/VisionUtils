@@ -23,7 +23,7 @@ void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ex
 	}
 };
 
-void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
+void Matcher::getBestMatches(MyFeatureExtractor ext1){
 	double min = 1000000;
 	double max = 0;
 	double percentage = 0.10;
@@ -39,7 +39,7 @@ void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
 	//std::cout << "MAX" << max << std::endl;
 	//std::cout << "MIN" << min << std::endl;
 
-	for( int i = 0; i < ext1.descriptors_.rows; i++ ){
+    for( int i = 0; i < ext1.descriptors_.rows; i++ ){
 		if( matches_[i].distance <= percentage * max ){
 			best_matches_.push_back( matches_[i]);
 		}

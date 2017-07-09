@@ -14,7 +14,7 @@ class PlotWindow : public QMainWindow
 
 public:
     explicit PlotWindow(QWidget *parent = 0);
-    void addData(double x);
+    void addData(double x, int index);
     ~PlotWindow();
 
 private slots:
@@ -24,7 +24,7 @@ private slots:
 private:
     Ui::PlotWindow *ui;
     QTimer dataTimer;
-    double newSample_;
+    double data_[2];
 };
 
 #endif // PLOTWINDOW_H

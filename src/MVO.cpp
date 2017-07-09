@@ -23,25 +23,6 @@ MVO::MVO() {
 
 }
 
-Point MVO::calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query){
-	Point tmp;
-	tmp.x = 0;
-	tmp.y = 0;
-
-	for (unsigned int i=0; i<train.size();i++){
-		tmp.x += (train[i].x-query[i].x);
-		tmp.y += (train[i].y-query[i].y);
-
-	}
-
-	if (train.size() > 0){
-		tmp.x /=train.size();
-		tmp.y /=train.size();
-	}
-
-	return tmp;
-}
-
 MVO::~MVO() {
 	// TODO Auto-generated destructor stub
 	//cout << "MVO destroyed";
@@ -52,9 +33,7 @@ bool MVO::run(){
 
 	VideoCapture cap( 0 );
     MyFeatureExtractor first;
-    Matcher matcher;
     Tracker tracker;
-    Visualizer visualizer;
     cout << "run " << endl;
 
 
@@ -65,7 +44,6 @@ bool MVO::run(){
 
     Mat frame;
     cap >> frame;
-    visualizer = Visualizer (frame);
     /*
 	VideoWriter video;
 	int width = (int) cap.get(CV_CAP_PROP_FRAME_WIDTH);
@@ -96,26 +74,24 @@ bool MVO::run(){
 	while(1){
 		MyFeatureExtractor second(first);
 		first.read(cap);
-		matcher.clearing();
+        matcher_.clearing();
 		first.ORB();
-		matcher.matchD(first,second);
-		matcher.separateMatches(first,second);
-		matcher.getBestMatches(first,second);
-		matcher.separateBestMatches(first,second);
+        matcher_.matchD(first,second);
+        matcher_.separateMatches(first,second);
+        matcher_.getBestMatches(first);
+        matcher_.separateBestMatches(first,second);
 
-		matcher.drawBestMatches(first,second);
-		matcher.show("BestMatchesDisplay");
-        cout<< matcher.best_train_.size();
+        matcher_.drawBestMatches(first,second);
+        matcher_.show("BestMatchesDisplay");
+        cout<< matcher_.best_train_.size();
 
-        //TODO
-        //MyStatics::getKMeans(matcher);
-        MyStatics::getGaussian(matcher);
+
 
 
 		try{
 			//cout << matcher.best_train_[0] <<endl;
 			//Mat matrix = findFundamentalMat(matcher.best_train_, matcher.best_query_, CV_FM_8POINT, 3, 0.99);
-			Mat H = findHomography(matcher.query_,matcher.train_, RANSAC);
+            Mat H = findHomography(matcher_.best_query_,matcher_.best_train_, RANSAC);
 
 			//Point thisPoint = calculateDiff(matcher.best_train_,matcher.best_query_);
 			//std::cout<<E<< std::endl;
@@ -143,7 +119,7 @@ bool MVO::run(){
 		}
 	}
     cap.release();
-    matcher.clearing();
+    matcher_.clearing();
     destroyAllWindows();
     cout << "MVO finishing correctly" << endl;
 	return true;

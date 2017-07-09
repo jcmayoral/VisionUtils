@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "secondarywindow.h"
 #include "plotwindow.h"
 #include <monocularvision/MVO.h>
 #include <calibration/Calibration.h>
@@ -36,7 +35,6 @@ private:
     Ui::MainWindow *ui;
     MVO mvo_;
     Calibration calibration_;
-    SecondaryWindow wdg;
     PlotWindow plt;
 
 };

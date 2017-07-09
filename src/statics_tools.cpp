@@ -10,6 +10,26 @@ MyStatics::MyStatics(){
 MyStatics::~MyStatics(){
 }
 
+
+Point MyStatics::calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query){
+    Point tmp;
+    tmp.x = 0;
+    tmp.y = 0;
+
+    for (unsigned int i=0; i<train.size();i++){
+        tmp.x += (train[i].x-query[i].x);
+        tmp.y += (train[i].y-query[i].y);
+
+    }
+
+    if (train.size() > 0){
+        tmp.x /=train.size();
+        tmp.y /=train.size();
+    }
+
+    return tmp;
+}
+
 void MyStatics::getGaussian(const Matcher input){
 
       const int nrolls=input.best_train_.size();  // number of experiments

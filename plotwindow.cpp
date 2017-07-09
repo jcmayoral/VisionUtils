@@ -5,7 +5,7 @@
 PlotWindow::PlotWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PlotWindow),
-    newSample_()
+    data_{0,0}
 {
     ui->setupUi(this);
     ui->customPlot->addGraph(); // blue line
@@ -30,8 +30,8 @@ PlotWindow::PlotWindow(QWidget *parent) :
     ui->customPlot->replot();
 }
 
-void PlotWindow::addData(double x){
-
+void PlotWindow::addData(double x, int index){
+    data_[index] = x;
 }
 
 void PlotWindow::realtimeDataSlot()
@@ -43,8 +43,8 @@ void PlotWindow::realtimeDataSlot()
   if (key-lastPointKey > 0.002) // at most add point every 2 ms
   {
     // add data to lines:
-    ui->customPlot->graph(0)->addData(key, qSin(key)+qrand()/(double)RAND_MAX*1*qSin(key/0.3843));
-    ui->customPlot->graph(1)->addData(key, qCos(key)+qrand()/(double)RAND_MAX*0.5*qSin(key/0.4364));
+    ui->customPlot->graph(0)->addData(key, data_[0]);
+    ui->customPlot->graph(1)->addData(key, data_[1]);
     // rescale value (vertical) axis to fit the current data:
     //ui->customPlot->graph(0)->rescaleValueAxis();
     //ui->customPlot->graph(1)->rescaleValueAxis(true);

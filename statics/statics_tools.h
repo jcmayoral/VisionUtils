@@ -9,6 +9,7 @@ class MyStatics{
     ~MyStatics();
     static void getKMeans(const Matcher input);
     static void getGaussian(const Matcher input);
+    Point calculateDiff(std::vector<Point2f> train, std::vector<Point2f> query);
 
 };
 #endif // STATICS_TOOLS_H
