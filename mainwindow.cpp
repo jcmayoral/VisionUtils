@@ -6,7 +6,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    mvo_(), calibration_(), plt()
+    fd_(), calibration_(), plt()
 {
     ui->setupUi(this);
 }
@@ -27,13 +27,13 @@ void MainWindow::on_calibration_button_clicked()
 void MainWindow::on_match_button_clicked()
 {
     while(true){
-        mvo_.run();
-        plt.addData(mvo_.getMeanPoint().x,0);
-        plt.addData(mvo_.getMeanPoint().y,1);
+        fd_.run();
+        plt.addData(fd_.getMeanPoint().x,0);
+        plt.addData(fd_.getMeanPoint().y,1);
         if (char(waitKey(10)) == 27){break;
         }
     }
-    mvo_.stop();
+    fd_.stop();
 }
 
 void MainWindow::on_exit_button_clicked()

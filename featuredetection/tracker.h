@@ -1,9 +1,8 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include "../monocularvision/myfeaturedetection.h"
-#include "../monocularvision/matcher.h"
-
+#include <featuredetection/myfeaturedetection.h>
+#include <featuredetection/matcher.h>
 using namespace cv;
 
 class Tracker{

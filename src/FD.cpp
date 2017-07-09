@@ -11,19 +11,19 @@
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include <monocularvision/MVO.h>
+#include <featuredetection/FD.h>
 #include <statics/statics_tools.h>
 
 using namespace cv;
 using namespace std;
 
-MVO::MVO(): camera_( 0 ){
+FD::FD(): camera_( 0 ){
 	// TODO Auto-generated constructor stub
     cout << "MVO Constructor" << endl;
 
 }
 
-MVO::~MVO() {
+FD::~FD() {
 	// TODO Auto-generated destructor stub
 	//cout << "MVO destroyed";
     //destroyWindow("clusters");
@@ -31,15 +31,15 @@ MVO::~MVO() {
 
 }
 
-Matcher MVO::getMatcher(){
+Matcher FD::getMatcher(){
     return matcher_;
 }
 
-Point MVO::getMeanPoint(){
+Point FD::getMeanPoint(){
     return currentMeanPoint_;
 }
 
-bool MVO::run(){
+bool FD::run(){
     MyFeatureExtractor first;
     Tracker tracker;
     cout << "run " << endl;
@@ -83,7 +83,7 @@ bool MVO::run(){
     return true;
 }
 
-bool MVO::stop(){
+bool FD::stop(){
     try{
         matcher_.clearing();
         destroyAllWindows();

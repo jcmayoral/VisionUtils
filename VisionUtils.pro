@@ -37,7 +37,7 @@ SOURCES += main.cpp \
         src/Calibration.cpp \
         src/cmdmain.cpp \
         src/Matcher.cpp \
-        src/MVO.cpp \
+        src/FD.cpp \
         src/myfeaturedetection.cpp \
         src/Settings.cpp \
         src/tracker.cpp \
@@ -47,10 +47,10 @@ SOURCES += main.cpp \
     plotwindow.cpp
 
 HEADERS  += mainwindow.h\
-        monocularvision/matcher.h \
-        monocularvision/MVO.h \
-        monocularvision/myfeaturedetection.h \
-        monocularvision/tracker.h \
+        featuredetection/matcher.h \
+        featuredetection/FD.h \
+        featuredetection/myfeaturedetection.h \
+        featuredetection/tracker.h \
         calibration/Calibration.h \
         calibration/Settings.h \
     statics/statics_tools.h \

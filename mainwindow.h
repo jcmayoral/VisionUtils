@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "plotwindow.h"
-#include <monocularvision/MVO.h>
+#include <featuredetection/FD.h>
 #include <calibration/Calibration.h>
 #include "qcustomplot/qcustomplot.h"
 
@@ -32,7 +32,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    MVO mvo_;
+    FD fd_;
     Calibration calibration_;
     PlotWindow plt;
     bool stopFlag_;

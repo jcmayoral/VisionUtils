@@ -6,14 +6,14 @@
  */
 
 //#include "../monocularvision/featuredetection.h"
-#include <monocularvision/matcher.h>
-#include <monocularvision/tracker.h>
+#include <featuredetection/matcher.h>
+#include <featuredetection/tracker.h>
 #include <statics/statics_tools.h>
 
-class MVO{
+class FD{
 public:
-	MVO();
-	virtual ~MVO();
+    FD();
+    virtual ~FD();
     bool run();
     bool stop();
     Matcher getMatcher();

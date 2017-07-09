@@ -1,4 +1,4 @@
-#include <monocularvision/MVO.h>
+#include <featuredetection/FD.h>
 #include <calibration/Calibration.h>
 /*
  * main.cpp
@@ -11,7 +11,7 @@ using namespace std;
 int startCMD(){
 
 	Calibration cal = Calibration();
-	MVO mvo = MVO();
+    FD fd = FD();
 	char menu = '0';
 	cvNamedWindow("main", CV_WINDOW_AUTOSIZE);
 	createTrackbar("trackbar", "Linear Blend", NULL, 100, NULL);
@@ -37,7 +37,7 @@ int startCMD(){
 			cal.Calibrate();
 			break;
 		case '3':
-			mvo.run();
+            fd.run();
 			break;
 		case '4':
 			cout << "Thanks for visiting" << endl;
