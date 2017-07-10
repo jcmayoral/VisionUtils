@@ -40,8 +40,6 @@ Point MyStatics::calculateVariance(Matcher match, Point mean){
     tmp.y = 0;
 
     for (unsigned int i=0; i<match.best_train_.size();i++){
-        std::cout << "This feature X" << match.best_train_[i].x-match.best_query_[i].x << std::endl;
-        std::cout << "This feature Y" << match.best_train_[i].y-match.best_query_[i].y << std::endl;
         tmp.x += std::pow((match.best_train_[i].x-match.best_query_[i].x) - mean.x,2);
         tmp.y += std::pow((match.best_train_[i].y-match.best_query_[i].y) - mean.y,2);
 
@@ -51,9 +49,6 @@ Point MyStatics::calculateVariance(Matcher match, Point mean){
         tmp.x /= (number_points-1);
         tmp.y /= (number_points-1);
     }
-
-    std::cout<< tmp.x << " en X" << std::endl;
-    std::cout<< tmp.y << " en Y" << std::endl;
     return tmp;
 }
 

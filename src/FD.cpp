@@ -19,7 +19,7 @@ using namespace std;
 
 FaultDetection::FaultDetection(): camera_( 0 ){
 	// TODO Auto-generated constructor stub
-    matcher_.setMatchPercentage(0.10);
+    matcher_.setMatchPercentage(0.05);
     cout << "MVO Constructor" << endl;
 
 }
@@ -44,44 +44,37 @@ Point FaultDetection::getVariance(){
     return currentVariancePoint_;
 }
 
+bool FaultDetection::start(){
+    if (!camera_.isOpened()){
+        cerr  << "Could not open the input video: " << endl;
+        return false;
+    }
+
+    first_.read(camera_);
+    first_.ORB();
+}
+
+
 bool FaultDetection::run(){
-    MyFeatureExtractor first;
     Tracker tracker;
     cout << "run " << endl;
-
-
-    if (!camera_.isOpened()){
-    	cerr  << "Could not open the input video: " << endl;
-	    return false;
-	}
 
     Mat frame;
     camera_ >> frame;
 
     namedWindow("BestMatchesDisplay",WINDOW_AUTOSIZE );
-
-    first.read(camera_);
-	first.ORB();
-    MyFeatureExtractor second(first);
-    first.read(camera_);
+    second_ = first_;
+    std::cout << "here";
+    first_.read(camera_);
     matcher_.clearing();
-    first.ORB();
-    matcher_.matchD(first,second);
-    matcher_.separateMatches(first,second);
-    matcher_.getBestMatches(first);
-    matcher_.separateBestMatches(first,second);
-
-    matcher_.drawBestMatches(first,second);
+    first_.ORB();
+    matcher_.matchD(first_,second_);
+    matcher_.separateMatches(first_,second_);
+    matcher_.getBestMatches(first_);
+    matcher_.separateBestMatches(first_,second_);
+    //tracker.featureTracking(first_, second_,matcher_);
+    matcher_.drawBestMatches(first_,second_);
     matcher_.show("BestMatchesDisplay");
-    cout<< matcher_.best_train_.size();
-
-
-    try{
-        Mat H = findHomography(matcher_.best_query_,matcher_.best_train_, RANSAC);
-    }
-    catch (exception e){
-        e.what();
-    }
 
     currentMeanPoint_ = statics_tool->calculateMean(matcher_);
     currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentMeanPoint_);

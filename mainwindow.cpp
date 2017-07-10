@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     fd_(), calibration_(), plt()
 {
     ui->setupUi(this);
+    fd_.start();
 }
 
 MainWindow::~MainWindow()
@@ -33,6 +34,8 @@ void MainWindow::on_match_button_clicked()
         //plt.addData(fd_.getMeanPoint().y,1);
         plt.addData(fd_.getVariance().x,0);
         plt.addData(fd_.getVariance().y,1);
+        std::cout << fd_.getMeanPoint().x << "in X";
+        std::cout << fd_.getMeanPoint().x << "in Y";
         if (char(waitKey(10)) == 27){break;
         }
     }

@@ -1,6 +1,6 @@
 #include <featuredetection/matcher.h>
 
-Matcher::Matcher():matchPercentage_(0.10), frame_(){
+Matcher::Matcher(): frame_(), matchPercentage_(0.10){
 
 }
 

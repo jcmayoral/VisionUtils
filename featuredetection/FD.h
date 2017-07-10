@@ -14,6 +14,7 @@ class FaultDetection{
 public:
     FaultDetection();
     virtual ~FaultDetection();
+    bool start();
     bool run();
     bool stop();
     Matcher getMatcher();
@@ -25,5 +26,8 @@ private:
     Point currentVariancePoint_;
     VideoCapture camera_;
     MyStatics* statics_tool;
+    MyFeatureExtractor first_;
+    MyFeatureExtractor second_;
+
 
 };

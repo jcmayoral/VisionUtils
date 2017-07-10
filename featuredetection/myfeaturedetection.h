@@ -12,11 +12,10 @@
 #include "opencv2/xfeatures2d.hpp"
 
 using namespace cv;
+using namespace cv::xfeatures2d;
 
 #ifndef MYFEATUREDETECTION_H_
 #define MYFEATUREDETECTION_H_
-
-using namespace cv::xfeatures2d;
 
 class MyFeatureExtractor{
 	public:
@@ -46,7 +45,7 @@ class MyFeatureExtractor{
 		void ORB();
 
 		MyFeatureExtractor();
-		MyFeatureExtractor(const MyFeatureExtractor& other);
+        MyFeatureExtractor(const MyFeatureExtractor& other);
 		~MyFeatureExtractor();
 };
 
