@@ -10,17 +10,19 @@
 #include <featuredetection/tracker.h>
 #include <statics/statics_tools.h>
 
-class FD{
+class FaultDetection{
 public:
-    FD();
-    virtual ~FD();
+    FaultDetection();
+    virtual ~FaultDetection();
     bool run();
     bool stop();
     Matcher getMatcher();
     Point getMeanPoint();
+    Point getVariance();
 private:
     Matcher matcher_;
     Point currentMeanPoint_;
+    Point currentVariancePoint_;
     VideoCapture camera_;
     MyStatics* statics_tool;
 

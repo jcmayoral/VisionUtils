@@ -17,13 +17,14 @@
 using namespace cv;
 using namespace std;
 
-FD::FD(): camera_( 0 ){
+FaultDetection::FaultDetection(): camera_( 0 ){
 	// TODO Auto-generated constructor stub
+    matcher_.setMatchPercentage(0.20);
     cout << "MVO Constructor" << endl;
 
 }
 
-FD::~FD() {
+FaultDetection::~FaultDetection() {
 	// TODO Auto-generated destructor stub
 	//cout << "MVO destroyed";
     //destroyWindow("clusters");
@@ -31,15 +32,19 @@ FD::~FD() {
 
 }
 
-Matcher FD::getMatcher(){
+Matcher FaultDetection::getMatcher(){
     return matcher_;
 }
 
-Point FD::getMeanPoint(){
+Point FaultDetection::getMeanPoint(){
     return currentMeanPoint_;
 }
 
-bool FD::run(){
+Point FaultDetection::getVariance(){
+    return currentVariancePoint_;
+}
+
+bool FaultDetection::run(){
     MyFeatureExtractor first;
     Tracker tracker;
     cout << "run " << endl;
@@ -78,12 +83,12 @@ bool FD::run(){
         e.what();
     }
 
-    currentMeanPoint_ = statics_tool->calculateDiff(matcher_);
-
+    currentMeanPoint_ = statics_tool->calculateMean(matcher_);
+    currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentMeanPoint_);
     return true;
 }
 
-bool FD::stop(){
+bool FaultDetection::stop(){
     try{
         matcher_.clearing();
         destroyAllWindows();

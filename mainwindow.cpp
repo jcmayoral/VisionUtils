@@ -26,10 +26,13 @@ void MainWindow::on_calibration_button_clicked()
 
 void MainWindow::on_match_button_clicked()
 {
+
     while(true){
         fd_.run();
-        plt.addData(fd_.getMeanPoint().x,0);
-        plt.addData(fd_.getMeanPoint().y,1);
+        //plt.addData(fd_.getMeanPoint().x,0);
+        //plt.addData(fd_.getMeanPoint().y,1);
+        plt.addData(fd_.getVariance().x,0);
+        plt.addData(fd_.getVariance().y,1);
         if (char(waitKey(10)) == 27){break;
         }
     }

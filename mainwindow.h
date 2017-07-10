@@ -32,7 +32,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    FD fd_;
+    FaultDetection fd_;
     Calibration calibration_;
     PlotWindow plt;
     bool stopFlag_;

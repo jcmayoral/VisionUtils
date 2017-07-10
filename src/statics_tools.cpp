@@ -10,7 +10,7 @@ MyStatics::MyStatics(){
 MyStatics::~MyStatics(){
 }
 
-Point MyStatics::calculateDiff(Matcher match){
+Point MyStatics::calculateMean(Matcher match){
 
     int number_points = match.best_matches_.size();
     Point tmp;
@@ -31,6 +31,32 @@ Point MyStatics::calculateDiff(Matcher match){
     return tmp;
 }
 
+
+Point MyStatics::calculateVariance(Matcher match, Point mean){
+
+    int number_points = match.best_matches_.size();
+    Point tmp;
+    tmp.x = 0;
+    tmp.y = 0;
+
+    for (unsigned int i=0; i<match.best_train_.size();i++){
+        std::cout << "This feature X" << match.best_train_[i].x-match.best_query_[i].x << std::endl;
+        std::cout << "This feature Y" << match.best_train_[i].y-match.best_query_[i].y << std::endl;
+        tmp.x += std::pow((match.best_train_[i].x-match.best_query_[i].x) - mean.x,2);
+        tmp.y += std::pow((match.best_train_[i].y-match.best_query_[i].y) - mean.y,2);
+
+    }
+
+    if (number_points > 1){
+        tmp.x /= (number_points-1);
+        tmp.y /= (number_points-1);
+    }
+
+    std::cout<< tmp.x << " en X" << std::endl;
+    std::cout<< tmp.y << " en Y" << std::endl;
+    return tmp;
+}
+
 void MyStatics::getGaussian(const Matcher input){
 
       const int nrolls=input.best_train_.size();  // number of experiments
@@ -39,10 +65,6 @@ void MyStatics::getGaussian(const Matcher input){
       Mat img(nrolls,nrolls, DataType<float>::type);
       std::default_random_engine generator;
       std::normal_distribution<double> distribution(5.0,2.0);
-
-
-      double meanX = 0;
-      double meanY = 0;
 
       //for (int k=0; k< nrolls; k++){
       //    meanX = meanX + input.best_train_[0].at(k);

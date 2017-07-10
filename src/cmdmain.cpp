@@ -11,7 +11,7 @@ using namespace std;
 int startCMD(){
 
 	Calibration cal = Calibration();
-    FD fd = FD();
+    FaultDetection fd = FaultDetection();
 	char menu = '0';
 	cvNamedWindow("main", CV_WINDOW_AUTOSIZE);
 	createTrackbar("trackbar", "Linear Blend", NULL, 100, NULL);

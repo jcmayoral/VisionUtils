@@ -17,11 +17,8 @@ class Matcher:FlannBasedMatcher{
 		std::vector<DMatch> best_matches_;
 		Mat frame_;
 
-		Matcher(){
-
-		};
-		~Matcher(){
-		};
+        Matcher();
+        ~Matcher();
 
 		void matchD(MyFeatureExtractor ext1, MyFeatureExtractor ext2);
 
@@ -38,6 +35,11 @@ class Matcher:FlannBasedMatcher{
 		void show(std::string window_name);
 
 		void clearing();
+
+        void setMatchPercentage(double val);
+
+    private:
+        double matchPercentage_;
 
 };
   
