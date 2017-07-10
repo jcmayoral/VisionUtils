@@ -59,10 +59,6 @@ bool FaultDetection::start(){
 bool FaultDetection::run(){
 
     Tracker tracker;
-    Mat frame;
-    camera_ >> frame;
-
-    namedWindow("BestMatchesDisplay",WINDOW_AUTOSIZE );
     second_ = first_;
     first_.read(camera_);
     matcher_.clearing();
@@ -71,9 +67,10 @@ bool FaultDetection::run(){
     matcher_.separateMatches(first_,second_);
     matcher_.getBestMatches(first_);
     matcher_.separateBestMatches(first_,second_);
-    //tracker.featureTracking(first_, second_,matcher_);
+    tracker.featureTracking(first_, second_,matcher_);
     matcher_.drawBestMatches(first_,second_);
     matcher_.show("BestMatchesDisplay");
+    //namedWindow("BestMatchesDisplay",WINDOW_AUTOSIZE );
 
     currentMeanPoint_ = statics_tool->calculateMean(matcher_);
     currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentMeanPoint_);
