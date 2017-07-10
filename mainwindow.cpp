@@ -27,15 +27,17 @@ void MainWindow::on_calibration_button_clicked()
 
 void MainWindow::on_match_button_clicked()
 {
-
+    Point last(0,0);
     while(true){
         fd_.run();
-        //plt.addData(fd_.getMeanPoint().x,0);
-        //plt.addData(fd_.getMeanPoint().y,1);
-        plt.addData(fd_.getVariance().x,0);
-        plt.addData(fd_.getVariance().y,1);
-        std::cout << fd_.getMeanPoint().x << "in X";
-        std::cout << fd_.getMeanPoint().x << "in Y";
+        last.x = last.x + fd_.getVariance().x;
+        last.y = last.y + fd_.getVariance().y;
+
+        plt.addData(last.x,0);
+        plt.addData(last.y,1);
+        //last = fd_.getMeanPoint();
+        //plt.addData(fd_.getVariance().x,0);
+        //plt.addData(fd_.getVariance().y,1);
         if (char(waitKey(10)) == 27){break;
         }
     }

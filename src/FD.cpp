@@ -19,7 +19,7 @@ using namespace std;
 
 FaultDetection::FaultDetection(): camera_( 0 ){
 	// TODO Auto-generated constructor stub
-    matcher_.setMatchPercentage(0.05);
+    matcher_.setMatchPercentage(0.10);
     cout << "MVO Constructor" << endl;
 
 }
@@ -52,19 +52,18 @@ bool FaultDetection::start(){
 
     first_.read(camera_);
     first_.ORB();
+    return true;
 }
 
 
 bool FaultDetection::run(){
-    Tracker tracker;
-    cout << "run " << endl;
 
+    Tracker tracker;
     Mat frame;
     camera_ >> frame;
 
     namedWindow("BestMatchesDisplay",WINDOW_AUTOSIZE );
     second_ = first_;
-    std::cout << "here";
     first_.read(camera_);
     matcher_.clearing();
     first_.ORB();
