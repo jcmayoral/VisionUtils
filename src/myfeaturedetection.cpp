@@ -8,15 +8,15 @@
 #include<featuredetection/myfeaturedetection.h>
 #include "opencv2/videoio.hpp"
 
-
-MyFeatureExtractor::MyFeatureExtractor(){
-	fDetector_ = ORB::create();
-	fExtractor_ = ORB::create();
+MyFeatureExtractor::MyFeatureExtractor(): descriptors_(), keypoints_(),frame_(){
+    //fDetector_ = ORB::create();
+    fDetector_ = SURF::create();
+    fExtractor_ = SURF::create();
     std::cout << "MyFeatureExtractor Contructor" << std::endl;
 }
 
-MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other):frame_(other.frame_),
-		keypoints_(other.keypoints_), descriptors_(other.descriptors_){
+MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other): descriptors_(other.descriptors_),
+                                            keypoints_(other.keypoints_), frame_(other.frame_){
 	fDetector_ = other.fDetector_;
 	fExtractor_ = other.fExtractor_;
 }

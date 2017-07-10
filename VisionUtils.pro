@@ -22,6 +22,7 @@ LIBS += -L/usr/local/lib -lopencv_shape \
                          -lopencv_videostab \
                          -lopencv_calib3d \
                          -lopencv_features2d \
+                         -lopencv_xfeatures2d \
                          -lopencv_highgui \
                          -lopencv_videoio \
                          -lopencv_imgcodecs \

@@ -8,19 +8,25 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
+#include "opencv2/features2d.hpp"
+#include "opencv2/xfeatures2d.hpp"
+
 using namespace cv;
 
 #ifndef MYFEATUREDETECTION_H_
 #define MYFEATUREDETECTION_H_
 
+using namespace cv::xfeatures2d;
 
 class MyFeatureExtractor{
 	public:
 		Mat descriptors_;
 		std::vector<cv::KeyPoint> keypoints_;
 		Mat frame_;
-		Ptr<FeatureDetector> fDetector_;
-		Ptr<DescriptorExtractor> fExtractor_;
+        //Ptr<FeatureDetector> fDetector_;
+        Ptr<SurfFeatureDetector> fDetector_;
+        //Ptr<DescriptorExtractor> fExtractor_;
+        Ptr<SurfDescriptorExtractor> fExtractor_;
 		//cv::Ptr<cv::DescriptorMatcher> descriptorMatcher;
 		//featureDetector = cv::FeatureDetector::create("FAST");
 		//descriptorExtractor = cv::DescriptorExtractor::create("FAST");

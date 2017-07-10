@@ -19,7 +19,7 @@ using namespace std;
 
 FaultDetection::FaultDetection(): camera_( 0 ){
 	// TODO Auto-generated constructor stub
-    matcher_.setMatchPercentage(0.20);
+    matcher_.setMatchPercentage(0.10);
     cout << "MVO Constructor" << endl;
 
 }
