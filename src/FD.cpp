@@ -19,17 +19,15 @@ using namespace std;
 
 FaultDetection::FaultDetection(): camera_( 0 ){
 	// TODO Auto-generated constructor stub
-    matcher_.setMatchPercentage(0.10);
-    cout << "MVO Constructor" << endl;
+    matcher_.setMatchPercentage(0.05);
+    cout << "FD Constructor" << endl;
 
 }
 
 FaultDetection::~FaultDetection() {
 	// TODO Auto-generated destructor stub
-	//cout << "MVO destroyed";
-    //destroyWindow("clusters");
+    cout << "FD destroyed";
     camera_.release();
-
 }
 
 Matcher FaultDetection::getMatcher(){
@@ -42,6 +40,10 @@ Point FaultDetection::getMeanPoint(){
 
 Point FaultDetection::getVariance(){
     return currentVariancePoint_;
+}
+
+Point FaultDetection::getCurrentCenter(){
+    return currentCenter_;
 }
 
 bool FaultDetection::start(){
@@ -67,13 +69,12 @@ bool FaultDetection::run(){
     matcher_.separateMatches(first_,second_);
     matcher_.getBestMatches(first_);
     matcher_.separateBestMatches(first_,second_);
-    tracker.featureTracking(first_, second_,matcher_);
+    //tracker.featureTracking(first_, second_,matcher_);
     matcher_.drawBestMatches(first_,second_);
     matcher_.show("BestMatchesDisplay");
-    //namedWindow("BestMatchesDisplay",WINDOW_AUTOSIZE );
-
     currentMeanPoint_ = statics_tool->calculateMean(matcher_);
-    currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentMeanPoint_);
+    currentCenter_ = statics_tool->getKMeans(matcher_);
+    currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentCenter_);
     return true;
 }
 

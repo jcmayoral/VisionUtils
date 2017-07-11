@@ -1,5 +1,6 @@
 #include<featuredetection/matcher.h>
 #include<opencv2/imgproc.hpp>
+#include <opencv2/plot.hpp>
 #include <featuredetection/matcher.h>
 #include <math.h>
 
@@ -9,7 +10,7 @@ class MyStatics{
     public:
     MyStatics();
     ~MyStatics();
-    static void getKMeans(const Matcher input);
+    Point getKMeans(const Matcher input);
     static void getGaussian(const Matcher input);
     Point calculateMean(Matcher match);
     Point calculateVariance(Matcher match, Point mean);

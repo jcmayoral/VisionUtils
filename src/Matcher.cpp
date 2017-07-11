@@ -13,12 +13,11 @@ void Matcher::setMatchPercentage(double val){
 }
 
 void Matcher::matchD(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-
-	match(ext1.descriptors_,ext2.descriptors_,matches_);
+    match(ext1.descriptors_,ext2.descriptors_,matches_);
 }
 
 void Matcher::separateMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-	for (unsigned int i= 0; i< matches_.size();i++){
+    for (unsigned int i= 0; i< matches_.size();i++){
 		query_.push_back(ext1.keypoints_[matches_[i].queryIdx].pt);
 		train_.push_back(ext2.keypoints_[matches_[i].queryIdx].pt);
 		//std::cout << matches_[i].distance << std::endl;
@@ -27,7 +26,6 @@ void Matcher::separateMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
 
 
 void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-
 	for (unsigned int i= 0; i< best_matches_.size();i++){
 		best_query_.push_back(ext1.keypoints_[best_matches_[i].queryIdx].pt);
 		best_train_.push_back(ext2.keypoints_[best_matches_[i].queryIdx].pt);
@@ -36,20 +34,13 @@ void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ex
 }
 
 void Matcher::getBestMatches(MyFeatureExtractor ext1){
-	double min = 1000000;
 	double max = 0;
 
     for( int i = 0; i < ext1.descriptors_.rows; i++ ){
-		if (matches_[i].distance <= min){
-			min = matches_[i].distance;
-		}
 		if (matches_[i].distance > max){
 			max = matches_[i].distance;
 		}
 	}
-
-	//std::cout << "MAX" << max << std::endl;
-	//std::cout << "MIN" << min << std::endl;
 
     for( int i = 0; i < ext1.descriptors_.rows; i++ ){
         if( matches_[i].distance <= matchPercentage_ * max ){
@@ -59,7 +50,7 @@ void Matcher::getBestMatches(MyFeatureExtractor ext1){
 }
 
 void Matcher::drawBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-	drawMatches(ext1.frame_, ext1.keypoints_, ext2.frame_, ext2.keypoints_, best_matches_,frame_, Scalar::all(-1), Scalar::all(-1),std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+    drawMatches(ext1.frame_, ext1.keypoints_, ext2.frame_, ext2.keypoints_, best_matches_,frame_, Scalar::all(-1), Scalar::all(-1),std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
 }
 
 void Matcher::drawAllMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){

@@ -29,15 +29,16 @@ void MainWindow::on_match_button_clicked()
 {
     Point last(0,0);
     while(true){
-        fd_.run();
-        last.x = last.x + fd_.getVariance().x;
-        last.y = last.y + fd_.getVariance().y;
+        if(fd_.run()){
+            last.x = fd_.getVariance().x;
+            last.y = fd_.getVariance().y;
 
-        plt.addData(last.x,0);
-        plt.addData(last.y,1);
-        //last = fd_.getMeanPoint();
-        //plt.addData(fd_.getVariance().x,0);
-        //plt.addData(fd_.getVariance().y,1);
+            plt.addData(last.x,0);
+            plt.addData(last.y,1);
+            //last = fd_.getMeanPoint();
+            //plt.addData(fd_.getVariance().x,0);
+            //plt.addData(fd_.getVariance().y,1);
+        }
         if (char(waitKey(10)) == 27){break;
         }
     }

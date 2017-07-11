@@ -12,13 +12,13 @@ MyFeatureExtractor::MyFeatureExtractor(): descriptors_(), keypoints_(),frame_(){
     //fDetector_ = ORB::create();
     fDetector_ = SURF::create();
     fExtractor_ = SURF::create();
-    std::cout << "MyFeatureExtractor Contructor" << std::endl;
+    std::cout << "MyFeatureExtractor Constructor" << std::endl;
 }
 
 MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other): descriptors_(other.descriptors_),
                                             keypoints_(other.keypoints_), frame_(other.frame_){
-	fDetector_ = other.fDetector_;
-	fExtractor_ = other.fExtractor_;
+    fDetector_ = SURF::create();
+    fExtractor_ = SURF::create();
 }
 
 
@@ -39,17 +39,17 @@ void MyFeatureExtractor::detect(){
 }
 
 void MyFeatureExtractor::compute(){
-	fExtractor_->compute(frame_, keypoints_, descriptors_);
+    fExtractor_->compute(frame_, keypoints_, descriptors_);
 }
 
 void MyFeatureExtractor::drawKP(){
-	drawKeypoints(frame_, keypoints_, frame_);
+    drawKeypoints(frame_, keypoints_, frame_);
 }
 
 void MyFeatureExtractor::convertD(){
-	if(descriptors_.type()!=CV_32F) {
-		descriptors_.convertTo(descriptors_, CV_32F);
-	}
+    if (descriptors_.type()!=CV_32F) {
+            descriptors_.convertTo(descriptors_, CV_32F);
+    }
 }
 
 void MyFeatureExtractor::ORB(){
@@ -57,7 +57,4 @@ void MyFeatureExtractor::ORB(){
 	compute();
 	drawKP();
 	convertD();
-
 }
-
-

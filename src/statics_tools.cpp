@@ -18,9 +18,8 @@ Point MyStatics::calculateMean(Matcher match){
     tmp.y = 0;
 
     for (unsigned int i=0; i<match.best_train_.size();i++){
-        tmp.x += (match.best_train_[i].x-match.best_query_[i].x);
-        tmp.y += (match.best_train_[i].y-match.best_query_[i].y);
-
+        tmp.x = tmp.x + (match.best_query_[i].x);
+        tmp.y = tmp.y + (match.best_query_[i].y);
     }
 
     if (number_points > 0){
@@ -39,18 +38,19 @@ Point MyStatics::calculateVariance(Matcher match, Point mean){
     tmp.x = 0;
     tmp.y = 0;
 
-    for (unsigned int i=0; i<match.best_train_.size();i++){
-        tmp.x += std::pow((match.best_train_[i].x-match.best_query_[i].x) - mean.x,2);
-        tmp.y += std::pow((match.best_train_[i].y-match.best_query_[i].y) - mean.y,2);
-
+    for (unsigned int i=0; i<match.best_matches_.size();i++){
+        tmp.x += std::pow(match.best_query_[i].x - mean.x,2);
+        tmp.y += std::pow(match.best_query_[i].y - mean.y,2);
     }
 
     if (number_points > 1){
         tmp.x /= (number_points-1);
         tmp.y /= (number_points-1);
     }
+
     return tmp;
 }
+
 
 void MyStatics::getGaussian(const Matcher input){
 
@@ -83,7 +83,9 @@ void MyStatics::getGaussian(const Matcher input){
     imshow("clusters", img);
 }
 
-void MyStatics::getKMeans(const Matcher input){
+Point MyStatics::getKMeans(const Matcher input){
+
+    Point tmp(0,0);
     Mat labels(1, 1, DataType<float>::type);
     Mat centers(1, 1, DataType<float>::type);
     Mat img(300, 400, DataType<float>::type);
@@ -100,16 +102,24 @@ void MyStatics::getKMeans(const Matcher input){
         kmeans(input.best_query_, 1, labels,
                TermCriteria( TermCriteria::EPS+TermCriteria::COUNT, 10, 1.0),
                   3, KMEANS_PP_CENTERS, centers);
-
         for(uint i = 0; i < input.best_query_.size(); i++ )
             {
                 int clusterIdx = labels.at<int>(i);
                 Point ipt = input.best_query_.at(i);
                 circle( img, ipt, 2, colorTab[clusterIdx], FILLED, LINE_AA );
             }
-        imshow("clusters", img);
     }
     catch(Exception e){
-
+        e.what();
     }
+    Mat plot_result;
+    centers.convertTo(centers,CV_64F);
+    tmp.x = centers.at<double>(0,0);
+    tmp.y = centers.at<double>(0,1);
+    Ptr<cv::plot::Plot2d> plot;
+    plot = cv::plot::createPlot2d(centers);
+    plot->render(plot_result);
+    imshow("centers", plot_result);
+    return tmp;
+
 }

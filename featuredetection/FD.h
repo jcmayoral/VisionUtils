@@ -20,10 +20,12 @@ public:
     Matcher getMatcher();
     Point getMeanPoint();
     Point getVariance();
+    Point getCurrentCenter();
 private:
     Matcher matcher_;
     Point currentMeanPoint_;
     Point currentVariancePoint_;
+    Point currentCenter_;
     VideoCapture camera_;
     MyStatics* statics_tool;
     MyFeatureExtractor first_;

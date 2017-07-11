@@ -32,7 +32,8 @@ LIBS += -L/usr/local/lib -lopencv_shape \
                          -lopencv_imgproc \
                          -lopencv_flann \
                          -lopencv_viz \
-                         -lopencv_core
+                         -lopencv_core\
+                         -lopencv_plot
 
 SOURCES += main.cpp \
         src/Calibration.cpp \
