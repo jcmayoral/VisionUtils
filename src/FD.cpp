@@ -67,7 +67,7 @@ bool FaultDetection::run(){
     first_.ORB();
     matcher_.matchD(first_,second_);
     matcher_.separateMatches(first_,second_);
-    matcher_.getBestMatches(first_);
+    matcher_.getBestMatches(first_,second_);
     matcher_.separateBestMatches(first_,second_);
     //tracker.featureTracking(first_, second_,matcher_);
     matcher_.drawBestMatches(first_,second_);

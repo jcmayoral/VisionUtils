@@ -26,7 +26,7 @@ class Matcher:FlannBasedMatcher{
 
 		void separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2);
 
-        void getBestMatches(MyFeatureExtractor ext1);
+        void getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2);
 
         void drawBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2);
 

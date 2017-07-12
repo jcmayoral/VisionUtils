@@ -33,17 +33,12 @@ void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ex
 	}
 }
 
-void Matcher::getBestMatches(MyFeatureExtractor ext1){
-	double max = 0;
-
+void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
+    /*From \cite{Mori2013} First Results in Deeting and Avoiding Frontal Obstacles from
+    * A Monocular Camera fro Micro Unmanned Aerial Vehicles
+    */
     for( int i = 0; i < ext1.descriptors_.rows; i++ ){
-		if (matches_[i].distance > max){
-			max = matches_[i].distance;
-		}
-	}
-
-    for( int i = 0; i < ext1.descriptors_.rows; i++ ){
-        if( matches_[i].distance <= matchPercentage_ * max ){
+        if ((ext2.keypoints_[i].size > ext1.keypoints_[i].size)&& (matches_[i].distance<0.25)){
 			best_matches_.push_back( matches_[i]);
 		}
 	}
