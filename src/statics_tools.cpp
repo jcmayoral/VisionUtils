@@ -64,7 +64,13 @@ double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany
         tmp += (match.best_query_[i].x -meany) * (match.best_query_[i].y -meanx);
     }
 
-    return tmp/(number_points-1);
+    tmp/=(number_points-1);
+    //Normalizing
+    if(sqrt(pow(meanx,2) + pow(meany,2))>1e-10){
+        tmp/=sqrt(pow(meanx,2) + pow(meany,2));
+    }
+
+    return tmp;
 }
 
 void MyStatics::getGaussian(const Matcher input){
