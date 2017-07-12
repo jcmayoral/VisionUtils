@@ -51,6 +51,21 @@ Point MyStatics::calculateVariance(Matcher match, Point mean){
     return tmp;
 }
 
+double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany){
+
+    int number_points = match.best_matches_.size();
+    double tmp=0.0;
+
+    if (number_points == 0){
+        return 0.0;
+    }
+
+    for (unsigned int i=0; i<match.best_matches_.size();i++){
+        tmp += (match.best_query_[i].x -meany) * (match.best_query_[i].y -meanx);
+    }
+
+    return tmp/(number_points-1);
+}
 
 void MyStatics::getGaussian(const Matcher input){
 

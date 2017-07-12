@@ -46,6 +46,10 @@ Point FaultDetection::getCurrentCenter(){
     return currentCenter_;
 }
 
+double FaultDetection::getCovariance(){
+    return covariance_;
+}
+
 bool FaultDetection::start(){
     if (!camera_.isOpened()){
         cerr  << "Could not open the input video: " << endl;
@@ -62,7 +66,6 @@ bool FaultDetection::run(){
 
     Tracker tracker;
     second_ = first_;
-    cv::waitKey(100);
     first_.read(camera_);
     matcher_.clearing();
     first_.ORB();
@@ -76,6 +79,7 @@ bool FaultDetection::run(){
     currentMeanPoint_ = statics_tool->calculateMean(matcher_);
     currentCenter_ = statics_tool->getKMeans(matcher_);
     currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentCenter_);
+    covariance_ = statics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
     return true;
 }
 

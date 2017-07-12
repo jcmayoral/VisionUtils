@@ -8,18 +8,24 @@ PlotWindow::PlotWindow(QWidget *parent) :
     data_{0,0}
 {
     ui->setupUi(this);
-    ui->customPlot->addGraph(); // blue line
-    ui->customPlot->graph(0)->setPen(QPen(QColor(40, 110, 255)));
+    ui->customPlot->addGraph();
+    ui->customPlot->graph(0)->setPen(QPen(QColor(255,0,0)));
     ui->customPlot->graph(0)->setName(QString("Variance X"));
-    ui->customPlot->addGraph(); // red line
-    ui->customPlot->graph(1)->setPen(QPen(QColor(255, 110, 40)));
+
+    ui->customPlot->addGraph();
+    ui->customPlot->graph(1)->setPen(QPen(QColor(0, 255, 0)));
     ui->customPlot->graph(1)->setName(QString("Variance Y"));
+
+    ui->customPlot->addGraph(); // red line
+    ui->customPlot->graph(2)->setPen(QPen(QColor(0,0,255)));
+    ui->customPlot->graph(2)->setName(QString("Test"));
+
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->customPlot->xAxis->setTicker(timeTicker);
     ui->customPlot->axisRect()->setupFullAxesBox();
-    ui->customPlot->yAxis->setRange(-50000, 50000);
+    ui->customPlot->yAxis->setRange(-0.5, 1);
     ui->customPlot->xAxis->setLabel(QString("Time"));
     ui->customPlot->yAxis->setLabel(QString("Variance"));
     ui->customPlot->legend->setVisible(true);
@@ -50,9 +56,12 @@ void PlotWindow::realtimeDataSlot()
     // add data to lines:
     ui->customPlot->graph(0)->addData(key, data_[0]);
     ui->customPlot->graph(1)->addData(key, data_[1]);
+
+    ui->customPlot->graph(2)->addData(key, data_[2]);
     // rescale value (vertical) axis to fit the current data:
     //ui->customPlot->graph(0)->rescaleValueAxis();
     //ui->customPlot->graph(1)->rescaleValueAxis(true);
+    ui->customPlot->graph(2)->rescaleValueAxis();
     lastPointKey = key;
   }
   // make key axis range scroll with the data (at a constant range size of 8):

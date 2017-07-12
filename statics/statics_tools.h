@@ -14,6 +14,7 @@ class MyStatics{
     static void getGaussian(const Matcher input);
     Point calculateMean(Matcher match);
     Point calculateVariance(Matcher match, Point mean);
+    double CalculateCovariance(Matcher match , double meanx, double meany);
 
 };
 #endif // STATICS_TOOLS_H

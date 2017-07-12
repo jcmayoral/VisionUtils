@@ -21,11 +21,14 @@ public:
     Point getMeanPoint();
     Point getVariance();
     Point getCurrentCenter();
+    double getCovariance();
+
 private:
     Matcher matcher_;
     Point currentMeanPoint_;
     Point currentVariancePoint_;
     Point currentCenter_;
+    double covariance_;
     VideoCapture camera_;
     MyStatics* statics_tool;
     MyFeatureExtractor first_;
