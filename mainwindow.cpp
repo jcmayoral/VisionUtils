@@ -30,8 +30,8 @@ void MainWindow::on_match_button_clicked()
     Point last(0,0);
     while(true){
         if(fd_.run()){
-            last.x = fd_.getVariance().x;
-            last.y = fd_.getVariance().y;
+            last.x = fd_.getVariance().x - last.x;
+            last.y = fd_.getVariance().y - last.y;
 
             plt.addData(last.x,0);
             plt.addData(last.y,1);

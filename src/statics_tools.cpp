@@ -112,14 +112,20 @@ Point MyStatics::getKMeans(const Matcher input){
     catch(Exception e){
         e.what();
     }
+    /*
     Mat plot_result;
+    */
     centers.convertTo(centers,CV_64F);
     tmp.x = centers.at<double>(0,0);
     tmp.y = centers.at<double>(0,1);
+
+    /*
     Ptr<cv::plot::Plot2d> plot;
     plot = cv::plot::createPlot2d(centers);
     plot->render(plot_result);
     imshow("centers", plot_result);
+    */
+    //imshow("centers", img);
     return tmp;
 
 }

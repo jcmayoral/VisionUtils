@@ -9,16 +9,21 @@ PlotWindow::PlotWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->customPlot->addGraph(); // blue line
-    ui->customPlot->addGraph(); // blue line
     ui->customPlot->graph(0)->setPen(QPen(QColor(40, 110, 255)));
+    ui->customPlot->graph(0)->setName(QString("Variance X"));
     ui->customPlot->addGraph(); // red line
     ui->customPlot->graph(1)->setPen(QPen(QColor(255, 110, 40)));
+    ui->customPlot->graph(1)->setName(QString("Variance Y"));
 
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->customPlot->xAxis->setTicker(timeTicker);
     ui->customPlot->axisRect()->setupFullAxesBox();
     ui->customPlot->yAxis->setRange(-50000, 50000);
+    ui->customPlot->xAxis->setLabel(QString("Time"));
+    ui->customPlot->yAxis->setLabel(QString("Variance"));
+    ui->customPlot->legend->setVisible(true);
+
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->xAxis2, SLOT(setRange(QCPRange)));

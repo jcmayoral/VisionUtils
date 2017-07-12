@@ -62,14 +62,15 @@ bool FaultDetection::run(){
 
     Tracker tracker;
     second_ = first_;
+    cv::waitKey(100);
     first_.read(camera_);
     matcher_.clearing();
     first_.ORB();
     matcher_.matchD(first_,second_);
     matcher_.separateMatches(first_,second_);
+    //tracker.featureTracking(first_, second_,matcher_);
     matcher_.getBestMatches(first_,second_);
     matcher_.separateBestMatches(first_,second_);
-    //tracker.featureTracking(first_, second_,matcher_);
     matcher_.drawBestMatches(first_,second_);
     matcher_.show("BestMatchesDisplay");
     currentMeanPoint_ = statics_tool->calculateMean(matcher_);
