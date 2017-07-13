@@ -61,7 +61,7 @@ double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany
     }
 
     for (unsigned int i=0; i<match.best_matches_.size();i++){
-        tmp += (match.best_query_[i].x -meany) * (match.best_query_[i].y -meanx);
+        tmp += (match.best_query_[i].x -meanx) * (match.best_query_[i].x -meanx);
     }
 
     tmp/=(number_points-1);
