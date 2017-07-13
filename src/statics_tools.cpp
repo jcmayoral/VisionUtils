@@ -1,4 +1,4 @@
-#include "../statics/statics_tools.h"
+#include "statics/statics_tools.h"
 #include<random>
 
 using namespace std;

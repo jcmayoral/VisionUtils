@@ -5,7 +5,7 @@
  *      Author: jose
  */
 
-#include"../featuredetection/myfeaturedetection.h"
+#include "featuredetection/myfeaturedetection.h"
 #include "opencv2/videoio.hpp"
 
 MyFeatureExtractor::MyFeatureExtractor(): descriptors_(), keypoints_(),frame_(){

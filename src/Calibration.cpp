@@ -16,7 +16,7 @@
 #include "opencv2/videoio.hpp"
 
 #include "opencv2/opencv.hpp"
-#include "../calibration/Calibration.h"
+#include "calibration/Calibration.h"
 #include <unistd.h>
 
 using namespace std;
@@ -319,4 +319,3 @@ void Calibration::saveCameraParams( Settings& s, Size& imageSize, Mat& cameraMat
         fs << "image_points" << imagePtMat;
     }
 }
-
