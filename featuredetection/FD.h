@@ -6,9 +6,9 @@
  */
 
 //#include "../monocularvision/featuredetection.h"
-#include <featuredetection/matcher.h>
-#include <featuredetection/tracker.h>
-#include <statics/statics_tools.h>
+#include "../featuredetection/matcher.h"
+#include "../featuredetection/tracker.h"
+#include "../statics/statics_tools.h"
 
 class FaultDetection{
 public:

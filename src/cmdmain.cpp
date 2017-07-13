@@ -1,5 +1,5 @@
-#include <featuredetection/FD.h>
-#include <calibration/Calibration.h>
+#include "../featuredetection/FD.h"
+#include "../calibration/Calibration.h"
 /*
  * main.cpp
  *
