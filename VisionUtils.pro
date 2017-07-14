@@ -49,13 +49,13 @@ SOURCES += main.cpp \
     plotwindow.cpp
 
 HEADERS  += mainwindow.h\
-        featuredetection/matcher.h \
-        featuredetection/FD.h \
-        featuredetection/myfeaturedetection.h \
-        featuredetection/tracker.h \
-        calibration/Calibration.h \
-        calibration/Settings.h \
-    statics/statics_tools.h \
+        include/featuredetection/matcher.h \
+        include/featuredetection/FD.h \
+        include/featuredetection/myfeaturedetection.h \
+        include/featuredetection/tracker.h \
+        include/calibration/Calibration.h \
+        include/calibration/Settings.h \
+        include/statics/statics_tools.h \
     qcustomplot/qcustomplot.h \
     plotwindow.h
 
