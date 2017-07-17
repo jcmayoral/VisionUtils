@@ -61,7 +61,7 @@ void PlotWindow::realtimeDataSlot()
     // rescale value (vertical) axis to fit the current data:
     //ui->customPlot->graph(0)->rescaleValueAxis();
     //ui->customPlot->graph(1)->rescaleValueAxis(true);
-    ui->customPlot->graph(2)->rescaleValueAxis();
+    ui->customPlot->graph(0)->rescaleValueAxis();
     lastPointKey = key;
   }
   // make key axis range scroll with the data (at a constant range size of 8):

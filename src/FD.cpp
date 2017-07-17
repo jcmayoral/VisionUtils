@@ -65,22 +65,28 @@ bool FaultDetection::start(){
 bool FaultDetection::run(){
 
     Tracker tracker;
-    second_ = first_;
-    first_.read(camera_);
-    matcher_.clearing();
-    first_.ORB();
-    matcher_.matchD(first_,second_);
-    matcher_.separateMatches(first_,second_);
-    //tracker.featureTracking(first_, second_,matcher_);
-    matcher_.getBestMatches(first_,second_);
-    matcher_.separateBestMatches(first_,second_);
-    matcher_.drawBestMatches(first_,second_);
-    matcher_.show("BestMatchesDisplay");
-    currentMeanPoint_ = statics_tool->calculateMean(matcher_);
-    currentCenter_ = statics_tool->getKMeans(matcher_);
-    currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentCenter_);
-    covariance_ = statics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
-    return true;
+    try{
+        second_ = first_;
+        first_.read(camera_);
+        matcher_.clearing();
+        first_.ORB();
+        matcher_.matchD(first_,second_);
+        matcher_.separateMatches(first_,second_);
+        matcher_.getBestMatches(first_,second_);
+        matcher_.separateBestMatches(first_,second_);
+        //tracker.featureTracking(first_, second_,matcher_);
+        matcher_.drawBestMatches(first_,second_);
+        matcher_.show("BestMatchesDisplay");
+        currentMeanPoint_ = statics_tool->calculateMean(matcher_);
+        currentCenter_ = statics_tool->getKMeans(matcher_);
+        currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentCenter_);
+        covariance_ = statics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
+        return true;
+    }
+    catch(Exception e){
+        e.what();
+        return false;
+    }
 }
 
 bool FaultDetection::stop(){
