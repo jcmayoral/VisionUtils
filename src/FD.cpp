@@ -11,8 +11,8 @@
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include "featuredetection/FD.h"
-#include "statics/statics_tools.h"
+#include <featuredetection/FD.h>
+#include <statics/statics_tools.h>
 
 using namespace cv;
 using namespace std;
@@ -50,6 +50,10 @@ double FaultDetection::getCovariance(){
     return covariance_;
 }
 
+double FaultDetection::getPearson(){
+    return pearson_;
+}
+
 bool FaultDetection::start(){
     if (!camera_.isOpened()){
         cerr  << "Could not open the input video: " << endl;
@@ -81,6 +85,8 @@ bool FaultDetection::run(){
         currentCenter_ = statics_tool->getKMeans(matcher_);
         currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentCenter_);
         covariance_ = statics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
+        pearson_ = statics_tool->CalculatePearsonCorrelation(matcher_,currentMeanPoint_.x,currentMeanPoint_.y, currentVariancePoint_.x, currentVariancePoint_.y);
+
         return true;
     }
     catch(Exception e){

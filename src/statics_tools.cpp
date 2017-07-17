@@ -1,4 +1,4 @@
-#include "statics/statics_tools.h"
+#include <statics/statics_tools.h>
 #include<random>
 
 using namespace std;
@@ -61,17 +61,34 @@ double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany
     }
 
     for (unsigned int i=0; i<match.best_matches_.size();i++){
-        tmp += (match.best_query_[i].x -meanx) * (match.best_query_[i].x -meanx);
+        tmp += (match.best_query_[i].x - meanx) * (match.best_query_[i].y -meany);
     }
 
-    tmp/=(number_points-1);
-    //Normalizing
-    if(sqrt(pow(meanx,2) + pow(meany,2))>1e-10){
-        tmp/=sqrt(pow(meanx,2) + pow(meany,2));
+    if(number_points>0){
+        tmp/=number_points;
     }
-
     return tmp;
 }
+
+double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary){
+
+    int number_points = match.best_matches_.size();
+    double tmp=0.0;
+
+    if (number_points == 0){
+        return 0.0;
+    }
+
+    for (unsigned int i=0; i<match.best_matches_.size();i++){
+        tmp += (match.best_query_[i].x - meanx) * (match.best_query_[i].y -meany);
+    }
+
+    if((varx*vary)>1e-5){
+        tmp/=(varx*vary);
+    }
+    return tmp;
+}
+
 
 void MyStatics::getGaussian(const Matcher input){
 

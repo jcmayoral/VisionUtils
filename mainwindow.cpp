@@ -29,7 +29,7 @@ void MainWindow::on_calibration_button_clicked()
 
 void MainWindow::on_match_button_clicked()
 {
-    double lastx,lasty,lastcov=0.0;
+    double lastx,lasty,lastcov,lastpearson=0.0;
     double length = 0.0;
 
     while(true){
@@ -38,6 +38,8 @@ void MainWindow::on_match_button_clicked()
             lastx = (fd_.getVariance().x-lastx);
             lasty = (fd_.getVariance().y-lasty);
             lastcov = (fd_.getCovariance() - lastcov);
+            lastpearson = (fd_.getPearson() - lastpearson);
+            std::cout << "Pearson " << lastpearson << std::endl;
 
             if (length > 1e-10){
                 lastx/=length;
@@ -48,6 +50,7 @@ void MainWindow::on_match_button_clicked()
             plt.addData(lastx,0);
             plt.addData(lasty,1);
             plt.addData(lastcov,2);
+            plt.addData(lastpearson,2);
             //last = fd_.getMeanPoint();
             //plt.addData(fd_.getVariance().x,0);
             //plt.addData(fd_.getVariance().y,1);
