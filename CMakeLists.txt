@@ -46,3 +46,7 @@ install (
   RUNTIME DESTINATION bin
 ) 
 
+install( 
+  TARGETS qt_vision
+  RUNTIME DESTINATION bin
+)
