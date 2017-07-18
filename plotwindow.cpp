@@ -34,7 +34,6 @@ PlotWindow::PlotWindow(QWidget *parent) :
     ui->customPlot->yAxis->setLabel(QString("Variance"));
     ui->customPlot->legend->setVisible(true);
 
-
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->yAxis2, SLOT(setRange(QCPRange)));
@@ -51,6 +50,7 @@ void PlotWindow::addData(double x, int index){
 
 void PlotWindow::realtimeDataSlot()
 {
+  ui->customPlot->setGeometry(0,0,this->width(), this->height());
   static QTime time(QTime::currentTime());
   // calculate two new data points:
   double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
