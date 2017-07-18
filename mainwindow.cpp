@@ -36,7 +36,7 @@ void MainWindow::on_match_button_clicked()
             lastx = (fd_.getVariance().x-lastx);
             lasty = (fd_.getVariance().y-lasty);
             lastcov = (fd_.getCovariance() - lastcov);
-            lastpearson = (fd_.getPearson());
+            lastpearson = (fd_.getPearson() - lastpearson);
             std::cout << "Pearson " << lastpearson << std::endl;
 
             //plt.addData(lastx,0);
