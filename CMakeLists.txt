@@ -1,27 +1,44 @@
 set(PROJECT_NAME vision_utils)
 
 PROJECT(${PROJECT_NAME})
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 cmake_minimum_required(VERSION 2.8)
 
-find_package( OpenCV REQUIRED )
-file( GLOB SOURCE_FILES src/*.cpp)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_AUTOMOC ON)  
+set(CMAKE_AUTOUIC ON)  
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories (${PROJECT_SOURCE_DIR} include)
+find_package(OpenCV REQUIRED)
+find_package(Qt5Core)
+find_package(Qt5Gui)
+find_package(Qt5PrintSupport REQUIRED)
+find_package(Qt5Widgets)
+
+file(GLOB SOURCE_FILES src/*.cpp)
+file(GLOB SOURCESQT *.cpp qcustomplot/*.cpp)
+file(GLOB HEADERSQT *.h qcustomplot/*.h)
+file(GLOB UIQT *.ui)
+MESSAGE( STATUS "INCLUDE_DIRS: " ${HEADERSQT} )
+
+add_definitions( ${QT_DEFINITIONS} )
+include_directories(include)
+
+qt5_wrap_cpp(qt_visioni_qt_sources  ${HEADERSQT})
+qt5_wrap_ui(qt_vision_utils_ui ${UIQT})
 
 
-file(GLOB_RECURSE hdrs "*.h") 
+add_library(vision_utils SHARED ${SOURCE_FILES})
+#add_library(qt_vision SHARED ${SOURCESQT} ${SOURCE_FILES})
+add_executable(qt_vision WIN32 ${SOURCESQT} ${SOURCE_FILES} ${qt_vision_qt_sources} ${qt_vision_utils_ui})
 
-MESSAGE( STATUS "INCLUDE_DIRS: " ${OpenCV_LIBS} )
-add_library(vision_utils SHARED ${SOURCE_FILES} ${hdrs})
+#MESSAGE( STATUS "INCLUDE_DIRS: " ${QT_LIBRARIES} )
+target_link_libraries(vision_utils ${OpenCV_LIBS} )
+target_link_libraries(qt_vision ${OpenCV_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::PrintSupport)
 
-target_link_libraries( vision_utils ${OpenCV_LIBS} )
-
-
-MESSAGE( STATUS "INCLUDE_DIRS: " ${PROJECT_SOURCE_DIR} )
 install (DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include 
          FILES_MATCHING PATTERN "*.h")
+
 install (
   TARGETS ${PROJECT_NAME} 
   ARCHIVE DESTINATION lib 
