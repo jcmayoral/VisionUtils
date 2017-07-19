@@ -7,8 +7,7 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    fd_(), calibration_(), plt()
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 }
@@ -22,7 +21,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_calibration_button_clicked()
 {
-    calibration_.Calibrate();
+    //calibration_.Calibrate();
 
 }
 
@@ -72,7 +71,8 @@ void MainWindow::on_match_button_clicked()
 
 void MainWindow::on_exit_button_clicked()
 {
-    delete this;
+    this->close();
+    std::cout << "exit outside " << std::endl;
 }
 
 void MainWindow::on_Visualize_clicked(bool checked)

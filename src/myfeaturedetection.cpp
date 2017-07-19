@@ -33,7 +33,7 @@ void MyFeatureExtractor::show(std::string window_name){
 }
 
 void MyFeatureExtractor::read(VideoCapture v){
-	v >> frame_;
+    v  >> frame_;
     cv::cvtColor(frame_,frame_,cv::COLOR_RGB2GRAY);
 }
 

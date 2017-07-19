@@ -30,7 +30,7 @@ FaultDetection::FaultDetection(bool ros): first_(),second_(){
 
 FaultDetection::~FaultDetection() {
 	// TODO Auto-generated destructor stub
-    delete this->statics_tool;
+    //delete this->statics_tool;
     cout << "FD destroyed";
 }
 
