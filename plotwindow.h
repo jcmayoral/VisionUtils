@@ -16,6 +16,11 @@ class PlotWindow : public QMainWindow
 public:
     explicit PlotWindow(QWidget *parent = 0);
     void addData(double x, int index);
+    void addGraph(QString name, QColor c);
+    void setIsInitialized(bool a);
+    bool getIsInitialized();
+    void setMainGraphIndex(int index);
+    int getMainGraphIndex();
     ~PlotWindow();
 
 private slots:
@@ -25,7 +30,10 @@ private slots:
 private:
     Ui::PlotWindow *ui;
     QTimer dataTimer;
-    double data_[2];
+    std::vector<double> data_;
+    int graph_number_;
+    int main_graph_index_;
+    bool isInitialized_;
 };
 
 #endif // PLOTWINDOW_H

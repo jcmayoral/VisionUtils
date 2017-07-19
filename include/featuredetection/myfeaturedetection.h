@@ -46,7 +46,7 @@ class MyFeatureExtractor{
 
 		MyFeatureExtractor();
         MyFeatureExtractor(const MyFeatureExtractor& other);
-		~MyFeatureExtractor();
+        ~MyFeatureExtractor();
 };
 
 #endif /* MYFEATUREDETECTION_H_ */
