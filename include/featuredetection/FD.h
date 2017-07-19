@@ -9,6 +9,7 @@
 #include "featuredetection/matcher.h"
 #include "featuredetection/tracker.h"
 #include "statics/statics_tools.h"
+#include <memory>
 
 class FaultDetection{
 public:
@@ -33,7 +34,7 @@ private:
     double pearson_;
     double covariance_;
     VideoCapture camera_;
-    MyStatics* statics_tool;
+    std::shared_ptr<MyStatics> statics_tool;
     MyFeatureExtractor first_;
     MyFeatureExtractor second_;
 
