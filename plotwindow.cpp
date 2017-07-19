@@ -5,48 +5,60 @@
 PlotWindow::PlotWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PlotWindow),
-    data_{0,0}
+    graph_number_(-1), isInitialized_(false),
+    main_graph_index_(0), data_()
 {
     ui->setupUi(this);
-    ui->customPlot->addGraph();
-    ui->customPlot->graph(0)->setPen(QPen(QColor(255,0,0)));
-    ui->customPlot->graph(0)->setName(QString("Variance X"));
-
-    ui->customPlot->addGraph();
-    ui->customPlot->graph(1)->setPen(QPen(QColor(0, 255, 0)));
-    ui->customPlot->graph(1)->setName(QString("Variance Y"));
-
-    ui->customPlot->addGraph(); // red line
-    ui->customPlot->graph(2)->setPen(QPen(QColor(0,0,255)));
-    ui->customPlot->graph(2)->setName(QString("Test"));
-
-
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
     timeTicker->setTimeFormat("%h:%m:%s");
     ui->customPlot->xAxis->setTicker(timeTicker);
     ui->customPlot->axisRect()->setupFullAxesBox();
-    ui->customPlot->yAxis->setRange(-0.5, 1);
+    ui->customPlot->yAxis->setRange(-0.2, 0.2);
     ui->customPlot->xAxis->setLabel(QString("Time"));
-    ui->customPlot->yAxis->setLabel(QString("Variance"));
+    ui->customPlot->yAxis->setLabel(QString("Value"));
     ui->customPlot->legend->setVisible(true);
-
 
     // make left and bottom axes transfer their ranges to right and top axes:
     connect(ui->customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->yAxis2, SLOT(setRange(QCPRange)));
 
     // setup a timer that repeatedly calls MainWindow::realtimeDataSlot:
-    connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
     dataTimer.start(0); // Interval 0 means to refresh as fast as possible
     ui->customPlot->replot();
 }
 
+void PlotWindow::addGraph(QString name, QColor c){
+    graph_number_++;
+    ui->customPlot->addGraph();
+    ui->customPlot->graph(graph_number_)->setPen(c);
+    ui->customPlot->graph(graph_number_)->setName(name);
+    data_.push_back(0.0);
+}
+
+void PlotWindow::setIsInitialized(bool a){
+    isInitialized_ = a;
+    connect(&dataTimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
+}
+
+bool PlotWindow::getIsInitialized(){
+    return isInitialized_;
+}
+
+void PlotWindow::setMainGraphIndex(int index){
+    main_graph_index_ = index;
+}
+
+int PlotWindow::getMainGraphIndex(){
+    return main_graph_index_;
+}
+
 void PlotWindow::addData(double x, int index){
-    data_[index] = x;
+    data_.at(index) = x;
 }
 
 void PlotWindow::realtimeDataSlot()
 {
+  ui->customPlot->setGeometry(0,0,this->width(), this->height());
   static QTime time(QTime::currentTime());
   // calculate two new data points:
   double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
@@ -54,14 +66,10 @@ void PlotWindow::realtimeDataSlot()
   if (key-lastPointKey > 0.002) // at most add point every 2 ms
   {
     // add data to lines:
-    ui->customPlot->graph(0)->addData(key, data_[0]);
-    ui->customPlot->graph(1)->addData(key, data_[1]);
-
-    ui->customPlot->graph(2)->addData(key, data_[2]);
-    // rescale value (vertical) axis to fit the current data:
-    //ui->customPlot->graph(0)->rescaleValueAxis();
-    //ui->customPlot->graph(1)->rescaleValueAxis(true);
-    ui->customPlot->graph(2)->rescaleValueAxis();
+    for(int i=0; i< graph_number_;++i){
+        ui->customPlot->graph(i)->addData(key, data_[i]);
+    }
+    ui->customPlot->graph(main_graph_index_)->rescaleValueAxis();
     lastPointKey = key;
   }
   // make key axis range scroll with the data (at a constant range size of 8):
@@ -72,15 +80,19 @@ void PlotWindow::realtimeDataSlot()
   static double lastFpsKey;
   static int frameCount;
   ++frameCount;
+
   if (key-lastFpsKey > 2) // average fps over 2 seconds
   {
-    ui->statusbar->showMessage(
-          QString("%1 FPS, Total Data points: %2")
-          .arg(frameCount/(key-lastFpsKey), 0, 'f', 0)
-          .arg(ui->customPlot->graph(0)->data()->size()+ui->customPlot->graph(1)->data()->size())
-          , 0);
-    lastFpsKey = key;
-    frameCount = 0;
+
+    if(graph_number_>=0){
+        ui->statusbar->showMessage(
+              QString("%1 FPS, Total Data points: %2")
+              .arg(frameCount/(key-lastFpsKey), 0, 'f', 0)
+              .arg(ui->customPlot->graph(0)->data()->size()+ui->customPlot->graph(1)->data()->size())
+              , 0);
+        lastFpsKey = key;
+        frameCount = 0;
+    }
   }
 }
 

@@ -1,5 +1,5 @@
-#include<statics/statics_tools.h>
-//#include<random>
+#include <statics/statics_tools.h>
+#include<random>
 
 using namespace std;
 using namespace cv;
@@ -12,7 +12,7 @@ MyStatics::~MyStatics(){
 
 Point MyStatics::calculateMean(Matcher match){
 
-    int number_points = match.best_matches_.size();
+    int number_points = match.best_query_.size();
     Point tmp;
     tmp.x = 0;
     tmp.y = 0;
@@ -33,12 +33,12 @@ Point MyStatics::calculateMean(Matcher match){
 
 Point MyStatics::calculateVariance(Matcher match, Point mean){
 
-    int number_points = match.best_matches_.size();
+    int number_points = match.best_query_.size();
     Point tmp;
     tmp.x = 0;
     tmp.y = 0;
 
-    for (unsigned int i=0; i<match.best_matches_.size();i++){
+    for (unsigned int i=0; i<match.best_query_.size();i++){
         tmp.x += std::pow(match.best_query_[i].x - mean.x,2);
         tmp.y += std::pow(match.best_query_[i].y - mean.y,2);
     }
@@ -48,30 +48,55 @@ Point MyStatics::calculateVariance(Matcher match, Point mean){
         tmp.y /= (number_points-1);
     }
 
+    else{
+        tmp.x =0.0;
+        tmp.y = 0.0;
+    }
+
     return tmp;
 }
 
 double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany){
 
-    int number_points = match.best_matches_.size();
+    int number_points = match.best_query_.size();
     double tmp=0.0;
 
     if (number_points == 0){
         return 0.0;
     }
 
-    for (unsigned int i=0; i<match.best_matches_.size();i++){
-        tmp += (match.best_query_[i].x -meanx) * (match.best_query_[i].x -meanx);
+    for (unsigned int i=0; i<match.best_query_.size();i++){
+        tmp += (match.best_query_[i].x - meanx) * (match.best_query_[i].y -meany);
     }
 
-    tmp/=(number_points-1);
-    //Normalizing
-    if(sqrt(pow(meanx,2) + pow(meany,2))>1e-10){
-        tmp/=sqrt(pow(meanx,2) + pow(meany,2));
+    if(number_points>0){
+        tmp/=number_points;
     }
-
+    else{
+        tmp = 0.0;
+    }
     return tmp;
 }
+
+double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary){
+
+    int number_points = match.best_query_.size();
+    double tmp=0.0;
+
+    if (number_points == 0){
+        return 0.0;
+    }
+
+    for (unsigned int i=0; i<match.best_query_.size();i++){
+        tmp += (match.best_query_[i].x - meanx) * (match.best_query_[i].y -meany);
+    }
+
+    if((varx*vary)>1e-10){
+        tmp/=(varx*vary);
+    }
+    return tmp;
+}
+
 
 void MyStatics::getGaussian(const Matcher input){
 

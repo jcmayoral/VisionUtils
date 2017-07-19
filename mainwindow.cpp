@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
     fd_(), calibration_(), plt()
 {
     ui->setupUi(this);
-    fd_.start();
 }
 
 MainWindow::~MainWindow()
@@ -29,25 +28,38 @@ void MainWindow::on_calibration_button_clicked()
 
 void MainWindow::on_match_button_clicked()
 {
-    double lastx,lasty,lastcov=0.0;
-    double length = 0.0;
+    double lastx,lasty,lastcov,lastpearson=0.0;
+
+    fd_.start();
+
+    if(!plt.getIsInitialized()){
+        plt.addGraph(QString("Variance X"),QColor(255,0,0));
+        plt.addGraph(QString("Variance X"),QColor(0,255,0));
+        plt.addGraph(QString("Covariance"),QColor(0,0,255));
+        plt.addGraph(QString("Pearson Coefficient"),QColor(255,255,0));
+        plt.addGraph(QString("Collision State"),QColor(0,255,255));
+        plt.setMainGraphIndex(3);
+        plt.setIsInitialized(true);
+    }
 
     while(true){
         if(fd_.run()){           
-            length = std::sqrt(std::pow(fd_.getVariance().x,2) + std::pow(fd_.getVariance().y,2));
             lastx = (fd_.getVariance().x-lastx);
             lasty = (fd_.getVariance().y-lasty);
             lastcov = (fd_.getCovariance() - lastcov);
-
-            if (length > 1e-10){
-                lastx/=length;
-                lasty/=length;
-                lastcov/=length;
-            }
+            lastpearson = (fd_.getPearson());
 
             plt.addData(lastx,0);
             plt.addData(lasty,1);
             plt.addData(lastcov,2);
+            plt.addData(lastpearson,3);
+
+            if (fabs(lastpearson)>1e-10){
+               plt.addData(1,4);
+            }
+            else{
+               plt.addData(0,4);
+            }
             //last = fd_.getMeanPoint();
             //plt.addData(fd_.getVariance().x,0);
             //plt.addData(fd_.getVariance().y,1);

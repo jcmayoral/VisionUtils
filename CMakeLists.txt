@@ -1,23 +1,52 @@
+set(PROJECT_NAME vision_utils)
+
+PROJECT(${PROJECT_NAME})
 cmake_minimum_required(VERSION 2.8)
-PROJECT(MonocularVisualOdometry)
 
-# Find the QtWidgets library
-FIND_PACKAGE(Qt5Widgets)
-FIND_PACKAGE( OpenCV REQUIRED )
-
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_AUTOMOC ON)  
+set(CMAKE_AUTOUIC ON)  
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-file(GLOB SOURCES src/*.cpp)
-file(GLOB SOURCESQT qt/mainQt.cpp)
+find_package(OpenCV REQUIRED)
+find_package(Qt5Core)
+find_package(Qt5Gui)
+find_package(Qt5PrintSupport REQUIRED)
+find_package(Qt5Widgets)
 
-add_library(qtwindow qt/mainwindow.cpp)
-TARGET_LINK_LIBRARIES(qtwindow  Qt5::Widgets)
+file(GLOB SOURCE_FILES src/*.cpp)
+file(GLOB SOURCESQT *.cpp qcustomplot/*.cpp)
+file(GLOB HEADERSQT *.h qcustomplot/*.h)
+file(GLOB UIQT *.ui)
+MESSAGE( STATUS "INCLUDE_DIRS: " ${HEADERSQT} )
 
-ADD_EXECUTABLE(visualodom WIN32 ${SOURCES})
-ADD_EXECUTABLE(qtvisual WIN32 ${SOURCESQT})
+add_definitions( ${QT_DEFINITIONS} )
+include_directories(include)
 
-qt5_use_modules(qtvisual Core Gui Widgets)
-TARGET_LINK_LIBRARIES(visualodom ${OpenCV_LIBS})
-TARGET_LINK_LIBRARIES(qtvisual qtwindow Qt5Widgets)
+qt5_wrap_cpp(qt_visioni_qt_sources  ${HEADERSQT})
+qt5_wrap_ui(qt_vision_utils_ui ${UIQT})
+
+
+add_library(vision_utils SHARED ${SOURCE_FILES})
+#add_library(qt_vision SHARED ${SOURCESQT} ${SOURCE_FILES})
+add_executable(qt_vision WIN32 ${SOURCESQT} ${SOURCE_FILES} ${qt_vision_qt_sources} ${qt_vision_utils_ui})
+
+#MESSAGE( STATUS "INCLUDE_DIRS: " ${QT_LIBRARIES} )
+target_link_libraries(vision_utils ${OpenCV_LIBS} )
+target_link_libraries(qt_vision ${OpenCV_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::PrintSupport)
+
+install (DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include 
+         FILES_MATCHING PATTERN "*.h")
+
+install (
+  TARGETS ${PROJECT_NAME} 
+  ARCHIVE DESTINATION lib 
+  LIBRARY DESTINATION lib 
+  RUNTIME DESTINATION bin
+) 
+
+install( 
+  TARGETS qt_vision
+  RUNTIME DESTINATION bin
+)

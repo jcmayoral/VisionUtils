@@ -1,7 +1,7 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include <featuredetection/myfeaturedetection.h>
+#include "myfeaturedetection.h"
 using namespace cv;
 
 #ifndef MATCHER_H_
@@ -42,5 +42,5 @@ class Matcher:FlannBasedMatcher{
         double matchPercentage_;
 
 };
-  
+
 #endif /* MATCHER_H_ */
