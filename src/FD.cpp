@@ -21,7 +21,11 @@ FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(){
 	// TODO Auto-generated constructor stub
     matcher_.setMatchPercentage(0.05);
     cout << "FD Constructor" << endl;
+}
 
+FaultDetection::FaultDetection(bool ros): first_(),second_(){
+    matcher_.setMatchPercentage(0.05);
+    cout << "ROS Constructor" << endl;
 }
 
 FaultDetection::~FaultDetection() {

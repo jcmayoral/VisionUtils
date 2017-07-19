@@ -13,6 +13,7 @@
 class FaultDetection{
 public:
     FaultDetection();
+    FaultDetection(bool ros);
     virtual ~FaultDetection();
     bool start();
     bool run();
