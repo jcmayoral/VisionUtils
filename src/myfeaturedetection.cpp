@@ -32,6 +32,11 @@ void MyFeatureExtractor::show(std::string window_name){
 	imshow(window_name, frame_);
 }
 
+void MyFeatureExtractor::setFrame(Mat new_frame){
+  frame_ = new_frame;
+}
+
+
 void MyFeatureExtractor::read(VideoCapture v){
     v  >> frame_;
     cv::cvtColor(frame_,frame_,cv::COLOR_RGB2GRAY);

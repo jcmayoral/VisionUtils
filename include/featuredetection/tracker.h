@@ -6,8 +6,9 @@
 using namespace cv;
 
 class Tracker{
+
 	public:
-	Tracker();
-	~Tracker();
-	void featureTracking(MyFeatureExtractor f1, MyFeatureExtractor f2, Matcher& match);
+		Tracker();
+		~Tracker();
+		void featureTracking(MyFeatureExtractor f1, MyFeatureExtractor f2, Matcher& match);
 };

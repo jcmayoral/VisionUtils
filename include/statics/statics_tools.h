@@ -6,7 +6,7 @@
 #ifndef STATICS_TOOLS_H
 #define STATICS_TOOLS_H
 class MyStatics{
-    public:
+  public:
     MyStatics();
     ~MyStatics();
     Point getKMeans(const Matcher input);

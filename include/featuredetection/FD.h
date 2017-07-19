@@ -13,30 +13,30 @@
 
 class FaultDetection{
 public:
-    FaultDetection();
-    FaultDetection(bool ros);
-    virtual ~FaultDetection();
-    bool start();
-    bool run();
-    bool stop();
-    Matcher getMatcher();
-    Point getMeanPoint();
-    Point getVariance();
-    Point getCurrentCenter();
-    double getCovariance();
-    double getPearson();
+  FaultDetection();
+  FaultDetection(bool ros);
+  virtual ~FaultDetection();
+  bool start();
+  bool run();
+  bool stop();
+  Matcher getMatcher();
+  Point getMeanPoint();
+  Point getVariance();
+  Point getCurrentCenter();
+  double getCovariance();
+  double getPearson();
+
+protected:
+  MyFeatureExtractor first_;
+  MyFeatureExtractor second_;
 
 private:
-    Matcher matcher_;
-    Point currentMeanPoint_;
-    Point currentVariancePoint_;
-    Point currentCenter_;
-    double pearson_;
-    double covariance_;
-    VideoCapture camera_;
-    std::shared_ptr<MyStatics> statics_tool;
-    MyFeatureExtractor first_;
-    MyFeatureExtractor second_;
-
-
+  Matcher matcher_;
+  Point currentMeanPoint_;
+  Point currentVariancePoint_;
+  Point currentCenter_;
+  double pearson_;
+  double covariance_;
+  VideoCapture camera_;
+  std::shared_ptr<MyStatics> statics_tool;
 };
