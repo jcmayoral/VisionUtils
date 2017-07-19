@@ -17,7 +17,7 @@
 using namespace cv;
 using namespace std;
 
-FaultDetection::FaultDetection(): camera_( 0 ){
+FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(){
 	// TODO Auto-generated constructor stub
     matcher_.setMatchPercentage(0.05);
     cout << "FD Constructor" << endl;
@@ -26,8 +26,8 @@ FaultDetection::FaultDetection(): camera_( 0 ){
 
 FaultDetection::~FaultDetection() {
 	// TODO Auto-generated destructor stub
+    delete this->statics_tool;
     cout << "FD destroyed";
-    camera_.release();
 }
 
 Matcher FaultDetection::getMatcher(){
@@ -97,6 +97,7 @@ bool FaultDetection::run(){
 
 bool FaultDetection::stop(){
     try{
+        camera_.release();
         matcher_.clearing();
         destroyAllWindows();
         cout << "MVO finishing correctly" << endl;

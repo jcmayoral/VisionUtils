@@ -19,11 +19,13 @@ MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other): descrip
                                             keypoints_(other.keypoints_), frame_(other.frame_){
     fDetector_ = SURF::create();
     fExtractor_ = SURF::create();
+    cv::cvtColor(frame_,frame_,cv::COLOR_RGB2GRAY);
+
 }
 
 
 MyFeatureExtractor::~MyFeatureExtractor(){
-
+    frame_.release();
 }
 
 void MyFeatureExtractor::show(std::string window_name){
@@ -32,6 +34,7 @@ void MyFeatureExtractor::show(std::string window_name){
 
 void MyFeatureExtractor::read(VideoCapture v){
 	v >> frame_;
+    cv::cvtColor(frame_,frame_,cv::COLOR_RGB2GRAY);
 }
 
 void MyFeatureExtractor::detect(){

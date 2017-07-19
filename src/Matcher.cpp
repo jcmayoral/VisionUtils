@@ -38,7 +38,7 @@ void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
     * A Monocular Camera fro Micro Unmanned Aerial Vehicles
     */
     for( int i = 0; i < ext1.descriptors_.rows; i++ ){
-        if ((ext2.keypoints_[i].size > ext1.keypoints_[i].size)&& (matches_[i].distance<0.05)){
+        if ((ext2.keypoints_[i].size > ext1.keypoints_[i].size)&& (matches_[i].distance<0.03)){
 			best_matches_.push_back( matches_[i]);
 		}
 	}
