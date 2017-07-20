@@ -86,8 +86,8 @@ bool FaultDetection::run(){
     matcher_.drawBestMatches(first_,second_);
     matcher_.show("BestMatchesDisplay");
     currentMeanPoint_ = statics_tool->calculateMean(matcher_);
-    currentCenter_ = statics_tool->getKMeans(matcher_);
-    currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentCenter_);
+    //currentCenter_ = statics_tool->getKMeans(matcher_);
+    currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentMeanPoint_);
     covariance_ = statics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
     pearson_ = statics_tool->CalculatePearsonCorrelation(matcher_,currentMeanPoint_.x,currentMeanPoint_.y, currentVariancePoint_.x, currentVariancePoint_.y);
     return true;
