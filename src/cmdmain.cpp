@@ -1,5 +1,4 @@
 #include "featuredetection/FD.h"
-#include "calibration/Calibration.h"
 /*
  * main.cpp
  *
@@ -10,8 +9,7 @@ using namespace std;
 
 int startCMD(){
 
-	Calibration cal = Calibration();
-    FaultDetection fd = FaultDetection();
+        FaultDetection fd = FaultDetection();
 	char menu = '0';
 	cvNamedWindow("main", CV_WINDOW_AUTOSIZE);
 	createTrackbar("trackbar", "Linear Blend", NULL, 100, NULL);
@@ -20,7 +18,7 @@ int startCMD(){
 
 	while (menu!=4){
 
-		cout << "Press your desire action\n 1. Calibrate Camera Matrix \n 2. Calibrate Scaling \n 3. Run application\n 4. Exit\n";
+		cout << "Press your desire action \n 1. Run application\n 4. Exit\n";
 
 		//cin >> menu;
 		cin.clear();
@@ -34,9 +32,6 @@ int startCMD(){
 
 		switch(menu){
 		case '1':
-			cal.Calibrate();
-			break;
-		case '3':
             fd.run();
 			break;
 		case '4':

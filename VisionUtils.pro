@@ -36,13 +36,11 @@ LIBS += -L/usr/local/lib -lopencv_shape \
                          -lopencv_plot
 
 SOURCES += main.cpp \
-        src/Calibration.cpp \
         src/cmdmain.cpp \
         src/Matcher.cpp \
         src/FD.cpp \
         src/myfeaturedetection.cpp \
         src/Settings.cpp \
-        src/tracker.cpp \
     src/statics_tools.cpp \
     qcustomplot/qcustomplot.cpp \
     mainwindow.cpp \
@@ -61,9 +59,6 @@ HEADERS  += mainwindow.h\
 
 FORMS += mainwindow.ui \
     plotwindow.ui
-
-OTHER_FILES += \
-    camcalibration.xml
 
 CONFIG += c++11
 
