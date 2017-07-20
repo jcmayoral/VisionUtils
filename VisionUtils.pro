@@ -40,19 +40,16 @@ SOURCES += main.cpp \
         src/Matcher.cpp \
         src/FD.cpp \
         src/myfeaturedetection.cpp \
-        src/Settings.cpp \
-    src/statics_tools.cpp \
-    qcustomplot/qcustomplot.cpp \
-    mainwindow.cpp \
-    plotwindow.cpp
+        src/statics_tools.cpp \
+        qcustomplot/qcustomplot.cpp \
+        mainwindow.cpp \
+        plotwindow.cpp
 
 HEADERS  += mainwindow.h\
         include/featuredetection/matcher.h \
         include/featuredetection/FD.h \
         include/featuredetection/myfeaturedetection.h \
         include/featuredetection/tracker.h \
-        include/calibration/Calibration.h \
-        include/calibration/Settings.h \
         include/statics/statics_tools.h \
     qcustomplot/qcustomplot.h \
     plotwindow.h
