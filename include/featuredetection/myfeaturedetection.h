@@ -22,10 +22,10 @@ class MyFeatureExtractor{
 		Mat descriptors_;
 		std::vector<cv::KeyPoint> keypoints_;
 		Mat frame_;
-    //Ptr<FeatureDetector> fDetector_;
-    Ptr<SurfFeatureDetector> fDetector_;
-    //Ptr<DescriptorExtractor> fExtractor_;
-    Ptr<SurfDescriptorExtractor> fExtractor_;
+        //Ptr<FeatureDetector> fDetector_;
+        Ptr<SurfFeatureDetector> fDetector_;
+        //Ptr<DescriptorExtractor> fExtractor_;
+        Ptr<SurfDescriptorExtractor> fExtractor_;
 		//cv::Ptr<cv::DescriptorMatcher> descriptorMatcher;
 		//featureDetector = cv::FeatureDetector::create("FAST");
 		//descriptorExtractor = cv::DescriptorExtractor::create("FAST");
@@ -46,8 +46,8 @@ class MyFeatureExtractor{
 		void ORB();
 
 		MyFeatureExtractor();
-    MyFeatureExtractor(const MyFeatureExtractor& other);
-    ~MyFeatureExtractor();
+        MyFeatureExtractor(const MyFeatureExtractor& other);
+       ~MyFeatureExtractor();
 };
 
 #endif /* MYFEATUREDETECTION_H_ */

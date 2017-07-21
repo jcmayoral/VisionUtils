@@ -39,6 +39,7 @@ SOURCES += main.cpp \
         src/cmdmain.cpp \
         src/Matcher.cpp \
         src/FD.cpp \
+        src/tracker.cpp \
         src/myfeaturedetection.cpp \
         src/statics_tools.cpp \
         qcustomplot/qcustomplot.cpp \

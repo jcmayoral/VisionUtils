@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QStringList>
 
 namespace Ui {
 class PlotWindow;
@@ -26,10 +27,12 @@ public:
 private slots:
     void realtimeDataSlot();
 
+    void on_select_graph_clicked();
 
 private:
     Ui::PlotWindow *ui;
     QTimer dataTimer;
+    QStringList observed_graphs_;
     std::vector<double> data_;
     int graph_number_;
     int main_graph_index_;

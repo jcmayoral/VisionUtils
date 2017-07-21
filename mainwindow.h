@@ -22,20 +22,18 @@ public:
 
 private slots:
 
-    void on_calibration_button_clicked();
-
     void on_match_button_clicked();
 
     void on_exit_button_clicked();
 
-    void on_Visualize_clicked(bool checked);
+    void on_gui_button_pressed();
 
 private:
     Ui::MainWindow *ui;
     FaultDetection fd_;
-    //Calibration calibration_;
     PlotWindow plt;
     bool stopFlag_;
+    bool exit_request_;
 
 };
 

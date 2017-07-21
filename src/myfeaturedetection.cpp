@@ -23,7 +23,6 @@ MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other): descrip
 
 }
 
-
 MyFeatureExtractor::~MyFeatureExtractor(){
     frame_.release();
 }

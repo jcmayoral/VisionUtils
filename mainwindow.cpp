@@ -7,7 +7,8 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    exit_request_(false)
 {
     ui->setupUi(this);
 }
@@ -16,13 +17,6 @@ MainWindow::~MainWindow()
 {
     delete ui;
     cout <<"Main Window destructor";
-
-}
-
-void MainWindow::on_calibration_button_clicked()
-{
-    //calibration_.Calibrate();
-
 }
 
 void MainWindow::on_match_button_clicked()
@@ -33,16 +27,17 @@ void MainWindow::on_match_button_clicked()
 
     if(!plt.getIsInitialized()){
         plt.addGraph(QString("Variance X"),QColor(255,0,0));
-        plt.addGraph(QString("Variance X"),QColor(0,255,0));
+        plt.addGraph(QString("Variance Y"),QColor(0,255,0));
         plt.addGraph(QString("Covariance"),QColor(0,0,255));
         plt.addGraph(QString("Pearson Coefficient"),QColor(255,255,0));
-        plt.addGraph(QString("Collision State"),QColor(0,255,255));
+        plt.addGraph(QString("Collision State"),QColor(255,255,255));
         plt.setMainGraphIndex(3);
         plt.setIsInitialized(true);
     }
 
     while(true){
-        if(fd_.run()){           
+        std::cout<< exit_request_;
+        if(fd_.run()){
             lastx = (fd_.getVariance().x-lastx);
             lasty = (fd_.getVariance().y-lasty);
             lastcov = (fd_.getCovariance() - lastcov);
@@ -59,12 +54,9 @@ void MainWindow::on_match_button_clicked()
             else{
                plt.addData(0,4);
             }
-            //last = fd_.getMeanPoint();
-            //plt.addData(fd_.getVariance().x,0);
-            //plt.addData(fd_.getVariance().y,1);
         }
-        if (char(waitKey(10)) == 27){break;
-        }
+        cv::waitKey(10);
+        if (exit_request_){break;}
     }
     fd_.stop();
 }
@@ -72,16 +64,15 @@ void MainWindow::on_match_button_clicked()
 void MainWindow::on_exit_button_clicked()
 {
     this->close();
+    plt.close();
+    exit_request_ = true;
     std::cout << "exit outside " << std::endl;
 }
 
-void MainWindow::on_Visualize_clicked(bool checked)
-{
-    if (checked){
-        plt.show();
-    }
 
-    else{
-        plt.close();
-    }
+void MainWindow::on_gui_button_pressed()
+{
+    plt.show();
+    std::cout << "activate";
+
 }
