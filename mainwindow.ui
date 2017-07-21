@@ -7,31 +7,18 @@
     <x>0</x>
     <y>0</y>
     <width>121</width>
-    <height>245</height>
+    <height>189</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="calibration_button">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>99</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Calibration</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="match_button">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
+      <y>10</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -44,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>150</y>
+      <y>70</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -53,17 +40,17 @@
      <string>Exit</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="Visualize">
+   <widget class="QPushButton" name="gui_button">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>120</y>
-      <width>117</width>
-      <height>22</height>
+      <x>10</x>
+      <y>40</y>
+      <width>99</width>
+      <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Enable GUI </string>
+     <string>GUI</string>
     </property>
    </widget>
   </widget>

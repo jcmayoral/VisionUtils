@@ -25,6 +25,8 @@ PlotWindow::PlotWindow(QWidget *parent) :
     // setup a timer that repeatedly calls MainWindow::realtimeDataSlot:
     dataTimer.start(0); // Interval 0 means to refresh as fast as possible
     ui->customPlot->replot();
+
+    ui->graph_list_->setSelectionMode(QAbstractItemView::ExtendedSelection);
 }
 
 void PlotWindow::addGraph(QString name, QColor c){
@@ -32,6 +34,7 @@ void PlotWindow::addGraph(QString name, QColor c){
     ui->customPlot->addGraph();
     ui->customPlot->graph(graph_number_)->setPen(c);
     ui->customPlot->graph(graph_number_)->setName(name);
+    ui->graph_list_->addItem(name);
     data_.push_back(0.0);
 }
 
@@ -58,7 +61,9 @@ void PlotWindow::addData(double x, int index){
 
 void PlotWindow::realtimeDataSlot()
 {
-  ui->customPlot->setGeometry(0,0,this->width(), this->height());
+  //ui->groupBox->setGeometry(0,0,this->width(),this->height());
+  ui->customPlot->setGeometry(0,0,ui->groupBox->width(), ui->groupBox->height());
+  ui->graph_list_->setGeometry(0,0,ui->centralwidget->width(),ui->graph_list_->height());
   static QTime time(QTime::currentTime());
   // calculate two new data points:
   double key = time.elapsed()/1000.0; // time elapsed since start of demo, in seconds
@@ -100,4 +105,22 @@ PlotWindow::~PlotWindow()
 {
     std::cout<<"Plot Window Destroyed";
     delete ui;
+}
+
+void PlotWindow::on_select_graph_clicked()
+{
+    QList<QListWidgetItem*> list;
+    list  = ui->graph_list_->selectedItems();
+
+
+    for (int j=0; j< this->graph_number_; j++){
+        ui->customPlot->graph(j)->setVisible(false);
+        for (int i=0; i< list.size();i++){
+            QString str = list.at(i)->text();
+            if (!QString::compare(str,ui->customPlot->graph(j)->name())){
+                std::cout << "Enabling " << j <<std::endl;
+                ui->customPlot->graph(j)->setVisible(true);
+            }
+        }
+   }
 }
