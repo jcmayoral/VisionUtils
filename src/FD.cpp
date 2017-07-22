@@ -58,6 +58,10 @@ double FaultDetection::getPearson(){
   return pearson_;
 }
 
+double FaultDetection::getCUSUM(){
+    return cusum_;
+}
+
 bool FaultDetection::start(){
   if (!camera_.isOpened()){
     cerr  << "Could not open the input video: " << endl;
@@ -90,6 +94,7 @@ bool FaultDetection::run(){
     currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentMeanPoint_);
     covariance_ = statics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
     pearson_ = statics_tool->CalculatePearsonCorrelation(matcher_,currentMeanPoint_.x,currentMeanPoint_.y, currentVariancePoint_.x, currentVariancePoint_.y);
+    cusum_ = statics_tool->CUSUM(matcher_);
     return true;
   }
 

@@ -30,8 +30,9 @@ void MainWindow::on_match_button_clicked()
         plt.addGraph(QString("Variance Y"),QColor(0,255,0));
         plt.addGraph(QString("Covariance"),QColor(0,0,255));
         plt.addGraph(QString("Pearson Coefficient"),QColor(255,255,0));
-        plt.addGraph(QString("Collision State"),QColor(255,255,255));
-        plt.setMainGraphIndex(3);
+        plt.addGraph(QString("Collision State"),QColor(0,255,255));
+        plt.addGraph(QString("Experiment"),QColor(255,0,0));
+        plt.setMainGraphIndex(5);
         plt.setIsInitialized(true);
     }
 
@@ -47,6 +48,7 @@ void MainWindow::on_match_button_clicked()
             plt.addData(lasty,1);
             plt.addData(lastcov,2);
             plt.addData(lastpearson,3);
+            plt.addData(fd_.getCUSUM(),5);
 
             if (fabs(lastpearson)>1e-10){
                plt.addData(1,4);

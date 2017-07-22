@@ -25,6 +25,7 @@ public:
   Point getCurrentCenter();
   double getCovariance();
   double getPearson();
+  double getCUSUM();
 
 protected:
   MyFeatureExtractor first_;
@@ -37,6 +38,7 @@ private:
   Point currentCenter_;
   double pearson_;
   double covariance_;
+  double cusum_;
   VideoCapture camera_;
   std::shared_ptr<MyStatics> statics_tool;
 };

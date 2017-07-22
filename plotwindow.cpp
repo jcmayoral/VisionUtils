@@ -71,7 +71,7 @@ void PlotWindow::realtimeDataSlot()
   if (key-lastPointKey > 0.002) // at most add point every 2 ms
   {
     // add data to lines:
-    for(int i=0; i< graph_number_;++i){
+    for(int i=0; i<= graph_number_;++i){
         ui->customPlot->graph(i)->addData(key, data_[i]);
     }
     ui->customPlot->graph(main_graph_index_)->rescaleValueAxis();

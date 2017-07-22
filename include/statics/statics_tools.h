@@ -10,10 +10,10 @@ class MyStatics{
     MyStatics();
     ~MyStatics();
     Point getKMeans(const Matcher input);
-    static void getGaussian(const Matcher input);
     Point calculateMean(Matcher match);
     Point calculateVariance(Matcher match, Point mean);
     double CalculateCovariance(Matcher match , double meanx, double meany);
     double CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary);
+    double CUSUM(Matcher input);
 };
 #endif // STATICS_TOOLS_H
