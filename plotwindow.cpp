@@ -112,8 +112,7 @@ void PlotWindow::on_select_graph_clicked()
     QList<QListWidgetItem*> list;
     list  = ui->graph_list_->selectedItems();
 
-
-    for (int j=0; j< this->graph_number_; j++){
+    for (int j=0; j<= this->graph_number_; j++){
         ui->customPlot->graph(j)->setVisible(false);
         for (int i=0; i< list.size();i++){
             QString str = list.at(i)->text();

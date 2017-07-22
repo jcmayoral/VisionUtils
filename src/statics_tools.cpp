@@ -91,6 +91,9 @@ double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, doub
     if((varx*vary)>1e-20){
         tmp/=(varx*vary);
     }
+    else{
+      return 0.0;
+    }
 
     return tmp;
 }
@@ -98,10 +101,14 @@ double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, doub
 double MyStatics::CUSUM(Matcher input){
 
     double cusum = 0.0;
-    for (unsigned int i=0; i<input.best_matches_.size();i++){
-      cusum += input.best_matches_[i].distance;
+
+    if (input.best_matches_.size()>1){
+      for (unsigned int i=0; i<input.best_matches_.size();i++){
+        cusum += input.best_matches_[i].distance;
+      }
+
+      cusum = cusum/input.best_matches_.size();
     }
-    std::cout << "Cusum current value " << cusum << std::endl;
     return cusum;
 }
 

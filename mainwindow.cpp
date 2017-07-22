@@ -21,7 +21,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_match_button_clicked()
 {
-    double lastx,lasty,lastcov,lastpearson=0.0;
+    double lastx,lasty,lastcov,lastpearson,lastcusum=0.0;
 
     fd_.start();
 
@@ -29,9 +29,10 @@ void MainWindow::on_match_button_clicked()
         plt.addGraph(QString("Variance X"),QColor(255,0,0));
         plt.addGraph(QString("Variance Y"),QColor(0,255,0));
         plt.addGraph(QString("Covariance"),QColor(0,0,255));
-        plt.addGraph(QString("Pearson Coefficient"),QColor(255,255,0));
-        plt.addGraph(QString("Collision State"),QColor(0,255,255));
-        plt.addGraph(QString("Experiment"),QColor(255,0,0));
+        plt.addGraph(QString("Pearson Coefficient"),QColor(0,0,0));
+        plt.addGraph(QString("Collision State CUSUM"),QColor(0,255,255));
+        plt.addGraph(QString("CUSUM"),QColor(255,0,0));
+        plt.addGraph(QString("Collision State Pearson"),QColor(255,0,255));
         plt.setMainGraphIndex(5);
         plt.setIsInitialized(true);
     }
@@ -48,14 +49,26 @@ void MainWindow::on_match_button_clicked()
             plt.addData(lasty,1);
             plt.addData(lastcov,2);
             plt.addData(lastpearson,3);
-            plt.addData(fd_.getCUSUM(),5);
 
-            if (fabs(lastpearson)>1e-10){
+            lastcusum = fd_.getCUSUM() + lastcusum;
+            plt.addData(lastcusum,5);
+
+            if (fd_.getCUSUM() == 0.0){
                plt.addData(1,4);
             }
             else{
                plt.addData(0,4);
             }
+
+            if (fabs(lastpearson)>1e-05){
+              plt.addData(1,6);
+           }
+           else{
+              plt.addData(0,6);
+           }
+
+
+
         }
         cv::waitKey(10);
         if (exit_request_){break;}
