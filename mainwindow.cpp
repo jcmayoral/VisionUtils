@@ -33,7 +33,7 @@ void MainWindow::on_match_button_clicked()
         plt.addGraph(QString("SURF-Based Collision"),QColor(0,255,255));
         plt.addGraph(QString("SURF Feature Distance"),QColor(255,0,0));
         plt.addGraph(QString("Pearson-Based Collision"),QColor(255,0,255));
-        plt.setMainGraphIndex(5);
+        plt.setMainGraphIndex(4);
         plt.setIsInitialized(true);
     }
 
@@ -52,9 +52,6 @@ void MainWindow::on_match_button_clicked()
 
             currentcusum += fd_.getCUSUM();
             plt.addData(currentcusum,5);
-
-            std::cout << "diff pearson " << fabs(currentpearson - lastpearson ) << std::endl;
-            std::cout << "diff cusum " << fabs(currentcusum - lastcusum ) << std::endl;
 
             if (fabs(currentcusum - lastcusum) == 0){
                plt.addData(1,4);

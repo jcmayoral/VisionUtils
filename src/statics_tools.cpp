@@ -100,16 +100,23 @@ double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, doub
 
 double MyStatics::CUSUM(Matcher input){
 
-    double cusum = 0.0;
+    double cusum_mean, cusum_var = 0.0;
 
     if (input.best_matches_.size()>1){
       for (unsigned int i=0; i<input.best_matches_.size();i++){
-        cusum += input.best_matches_[i].distance;
+        cusum_mean += input.best_matches_[i].distance;
       }
 
-      cusum = cusum/input.best_matches_.size();
+      cusum_mean = cusum_mean/input.best_matches_.size();
+
+      for (unsigned int i=0; i<input.best_matches_.size();i++){
+          cusum_var += std::pow(input.best_matches_[i].distance - cusum_mean,2);
+      }
+
+      cusum_var = cusum_var/(input.best_matches_.size()-1);
     }
-    return cusum;
+
+    return cusum_var;
 }
 
 Point MyStatics::getKMeans(const Matcher input){
