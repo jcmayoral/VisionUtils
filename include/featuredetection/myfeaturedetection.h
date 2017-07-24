@@ -33,7 +33,7 @@ class MyFeatureExtractor{
 
 		void show(std::string window_name);
 
-		void read(VideoCapture v);
+		virtual void read(VideoCapture v);
 
 		void detect();
 

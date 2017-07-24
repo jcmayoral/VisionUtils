@@ -16,9 +16,9 @@ public:
   FaultDetection();
   FaultDetection(bool ros);
   virtual ~FaultDetection();
-  bool start();
-  bool run();
-  bool stop();
+  virtual bool start();
+  virtual bool run();
+  virtual bool stop();
   Matcher getMatcher();
   Point getMeanPoint();
   Point getVariance();
@@ -27,7 +27,6 @@ public:
   double getPearson();
   double getCUSUM();
 
-protected:
   MyFeatureExtractor first_;
   MyFeatureExtractor second_;
 
