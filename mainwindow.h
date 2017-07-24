@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "plotwindow.h"
 #include <featuredetection/FD.h>
-#include <calibration/Calibration.h>
+//#include <calibration/Calibration.h>
 #include "qcustomplot/qcustomplot.h"
 
 

@@ -117,7 +117,7 @@ void PlotWindow::on_select_graph_clicked()
         for (int i=0; i< list.size();i++){
             QString str = list.at(i)->text();
             if (!QString::compare(str,ui->customPlot->graph(j)->name())){
-                std::cout << "Enabling " << j <<std::endl;
+                setMainGraphIndex(j);
                 ui->customPlot->graph(j)->setVisible(true);
             }
         }

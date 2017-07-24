@@ -53,14 +53,14 @@ void MainWindow::on_match_button_clicked()
             currentcusum += fd_.getCUSUM();
             plt.addData(currentcusum,5);
 
-            if (fabs(currentcusum - lastcusum) == 0){
+            if (fabs(currentcusum - lastcusum) <= 1e-1){
                plt.addData(1,4);
             }
             else{
                plt.addData(0,4);
             }
 
-            if (fabs(currentpearson - lastpearson) < 1e-05){
+            if (fabs(currentpearson - lastpearson) < 0.1){
               plt.addData(0,6);
             }
             else{
