@@ -26,6 +26,7 @@ class MyFeatureExtractor{
 		void setDescriptors(Mat desc);
 		Mat getDescriptors();
 		std::vector<cv::KeyPoint> getKeyPoints();
+		void setKeyPoints(std::vector<cv::KeyPoint> kp);
 
 		MyFeatureExtractor();
     MyFeatureExtractor(const MyFeatureExtractor& other);

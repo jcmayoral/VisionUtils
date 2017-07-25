@@ -9,7 +9,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 3.2.0 REQUIRED)
 find_package(Qt5Core)
 find_package(Qt5Gui)
 find_package(Qt5PrintSupport REQUIRED)

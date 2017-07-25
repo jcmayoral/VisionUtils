@@ -22,7 +22,7 @@ public:
   bool start();
   bool run();
   bool stop();
-  virtual void runSURF();
+  void runSURF();
   Matcher getMatcher();
   Point getMeanPoint();
   Point getVariance();

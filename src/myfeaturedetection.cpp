@@ -14,7 +14,7 @@ MyFeatureExtractor::MyFeatureExtractor(): descriptors_(), keypoints_(),frame_(){
 
 MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other): descriptors_(other.descriptors_),
                                             keypoints_(other.keypoints_), frame_(other.frame_){
-    cv::cvtColor(frame_,frame_,cv::COLOR_RGB2GRAY);
+    //cv::cvtColor(frame_,frame_,cv::COLOR_RGB2GRAY);
 }
 
 MyFeatureExtractor::~MyFeatureExtractor(){
@@ -45,7 +45,11 @@ std::vector<cv::KeyPoint> MyFeatureExtractor::getKeyPoints(){
   return keypoints_;
 }
 
+void MyFeatureExtractor::setKeyPoints(std::vector<cv::KeyPoint> kp){
+  keypoints_ = kp;
+}
+
 void MyFeatureExtractor::read(VideoCapture v){
     v  >> frame_;
-    cv::cvtColor(frame_,frame_,cv::COLOR_BGR2GRAY);
+    //cv::cvtColor(frame_,frame_,cv::COLOR_BGR2GRAY);
 }
