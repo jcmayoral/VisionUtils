@@ -11,14 +11,14 @@
 MyFeatureExtractor::MyFeatureExtractor(): descriptors_(), keypoints_(),frame_(){
     //fDetector_ = ORB::create();
     fDetector_ = SURF::create();
-    fExtractor_ = SURF::create();
+    //fExtractor_ = SURF::create();
     std::cout << "MyFeatureExtractor Constructor" << std::endl;
 }
 
 MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other): descriptors_(other.descriptors_),
                                             keypoints_(other.keypoints_), frame_(other.frame_){
     fDetector_ = SURF::create();
-    fExtractor_ = SURF::create();
+    //fExtractor_ = SURF::create();
     cv::cvtColor(frame_,frame_,cv::COLOR_RGB2GRAY);
 
 }
@@ -46,7 +46,7 @@ void MyFeatureExtractor::detect(){
 }
 
 void MyFeatureExtractor::compute(){
-    fExtractor_->compute(frame_, keypoints_, descriptors_);
+    fDetector_->compute(frame_, keypoints_, descriptors_);
 }
 
 void MyFeatureExtractor::drawKP(){
@@ -61,6 +61,7 @@ void MyFeatureExtractor::convertD(){
 
 void MyFeatureExtractor::ORB(){
 	detect();
+  std::cout << "After Detect";
 	compute();
 	drawKP();
 	convertD();
