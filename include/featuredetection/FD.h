@@ -15,11 +15,11 @@ class FaultDetection{
 public:
   FaultDetection();
   FaultDetection(bool ros);
-  virtual ~FaultDetection();
-  virtual bool start();
-  virtual bool run();
-  virtual bool stop();
-	virtual void SURF();
+  ~FaultDetection();
+  bool start();
+  bool run();
+  bool stop();
+  virtual void SURF();
   Matcher getMatcher();
   Point getMeanPoint();
   Point getVariance();
