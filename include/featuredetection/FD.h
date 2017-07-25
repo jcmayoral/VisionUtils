@@ -27,10 +27,10 @@ public:
   double getPearson();
   double getCUSUM();
 
+protected:
   MyFeatureExtractor first_;
   MyFeatureExtractor second_;
 
-private:
   Matcher matcher_;
   Point currentMeanPoint_;
   Point currentVariancePoint_;
