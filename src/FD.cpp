@@ -17,6 +17,18 @@
 using namespace cv;
 using namespace std;
 
+void FaultDetection::SURF(){
+  std::cout << "Before Detect";
+  first_.fDetector_->detect(first_.frame_,first_.keypoints_);
+  first_.fDetector_->compute(first_.frame_, first_.keypoints_, first_.descriptors_);
+  drawKeypoints(first_.frame_, first_.keypoints_, first_.frame_);
+
+  if (first_.descriptors_.type()!=CV_32F) {
+              first_.descriptors_.convertTo(first_.descriptors_, CV_32F);
+  }
+}
+
+
 FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(){
   // TODO Auto-generated constructor stub
   matcher_.setMatchPercentage(0.05);
@@ -69,7 +81,7 @@ bool FaultDetection::start(){
   }
 
   first_.read(camera_);
-  first_.ORB();
+  SURF();
   return true;
 }
 
@@ -81,7 +93,7 @@ bool FaultDetection::run(){
     second_ = first_;
     first_.read(camera_);
     matcher_.clearing();
-    first_.ORB();
+    SURF();
     matcher_.matchD(first_,second_);
     matcher_.separateMatches(first_,second_);
     matcher_.getBestMatches(first_,second_);

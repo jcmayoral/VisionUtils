@@ -19,6 +19,7 @@ public:
   virtual bool start();
   virtual bool run();
   virtual bool stop();
+	virtual void SURF();
   Matcher getMatcher();
   Point getMeanPoint();
   Point getVariance();

@@ -31,19 +31,9 @@ class MyFeatureExtractor{
 
 		virtual void read(VideoCapture v);
 
-		void detect();
-
-		void compute();
-
-		void drawKP();
-
-		void convertD();
-
-		void ORB();
-
 		MyFeatureExtractor();
-        MyFeatureExtractor(const MyFeatureExtractor& other);
-       ~MyFeatureExtractor();
+    MyFeatureExtractor(const MyFeatureExtractor& other);
+    ~MyFeatureExtractor();
 };
 
 #endif /* MYFEATUREDETECTION_H_ */

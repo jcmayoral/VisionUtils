@@ -36,31 +36,3 @@ void MyFeatureExtractor::read(VideoCapture v){
     v  >> frame_;
     cv::cvtColor(frame_,frame_,cv::COLOR_BGR2GRAY);
 }
-
-void MyFeatureExtractor::detect(){
-  std::cout << "During Detect";
-	fDetector_->detect(frame_,keypoints_);
-}
-
-void MyFeatureExtractor::compute(){
-  fDetector_->compute(frame_, keypoints_, descriptors_);
-}
-
-void MyFeatureExtractor::drawKP(){
-    drawKeypoints(frame_, keypoints_, frame_);
-}
-
-void MyFeatureExtractor::convertD(){
-    if (descriptors_.type()!=CV_32F) {
-            descriptors_.convertTo(descriptors_, CV_32F);
-    }
-}
-
-void MyFeatureExtractor::ORB(){
-  std::cout << "Before Detect";
-	detect();
-  std::cout << "After Detect";
-	compute();
-	drawKP();
-	convertD();
-}
