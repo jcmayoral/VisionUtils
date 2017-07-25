@@ -9,18 +9,14 @@
 #include "opencv2/videoio.hpp"
 
 MyFeatureExtractor::MyFeatureExtractor(): descriptors_(), keypoints_(),frame_(){
-    //fDetector_ = ORB::create();
     fDetector_ = SURF::create();
-    //fExtractor_ = SURF::create();
     std::cout << "MyFeatureExtractor Constructor" << std::endl;
 }
 
 MyFeatureExtractor::MyFeatureExtractor(const MyFeatureExtractor& other): descriptors_(other.descriptors_),
                                             keypoints_(other.keypoints_), frame_(other.frame_){
     fDetector_ = SURF::create();
-    //fExtractor_ = SURF::create();
     cv::cvtColor(frame_,frame_,cv::COLOR_RGB2GRAY);
-
 }
 
 MyFeatureExtractor::~MyFeatureExtractor(){
@@ -42,11 +38,12 @@ void MyFeatureExtractor::read(VideoCapture v){
 }
 
 void MyFeatureExtractor::detect(){
+  std::cout << "During Detect";
 	fDetector_->detect(frame_,keypoints_);
 }
 
 void MyFeatureExtractor::compute(){
-    fDetector_->compute(frame_, keypoints_, descriptors_);
+  fDetector_->compute(frame_, keypoints_, descriptors_);
 }
 
 void MyFeatureExtractor::drawKP(){
@@ -60,6 +57,7 @@ void MyFeatureExtractor::convertD(){
 }
 
 void MyFeatureExtractor::ORB(){
+  std::cout << "Before Detect";
 	detect();
   std::cout << "After Detect";
 	compute();

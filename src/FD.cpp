@@ -23,7 +23,7 @@ FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(){
   cout << "FD Constructor" << endl;
 }
 
-FaultDetection::FaultDetection(bool ros): first_(),second_(){
+FaultDetection::FaultDetection(bool ros): camera_(0), first_(),second_(){
   matcher_.setMatchPercentage(0.05);
   cout << "ROS Constructor" << endl;
 }
@@ -75,7 +75,7 @@ bool FaultDetection::start(){
 
 
 bool FaultDetection::run(){
-
+  std::cout << "original RUN";
   Tracker tracker;
   try{
     second_ = first_;
