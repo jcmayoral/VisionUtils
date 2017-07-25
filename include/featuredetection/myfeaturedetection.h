@@ -19,21 +19,23 @@ using namespace cv::xfeatures2d;
 
 class MyFeatureExtractor{
 	public:
-		Mat descriptors_;
-		std::vector<cv::KeyPoint> keypoints_;
-		Mat frame_;
-    //Ptr<FeatureDetector> fDetector_;
-    Ptr<SURF> fDetector_;
-    //Ptr<SurfDescriptorExtractor> fExtractor_;
 		void setFrame(Mat new_frame);
-
+		Mat getFrame();
 		void show(std::string window_name);
-
-		virtual void read(VideoCapture v);
+		void read(VideoCapture v);
+		void setDescriptors(Mat desc);
+		Mat getDescriptors();
+		std::vector<cv::KeyPoint> getKeyPoints();
 
 		MyFeatureExtractor();
     MyFeatureExtractor(const MyFeatureExtractor& other);
     ~MyFeatureExtractor();
+
+	protected:
+		Mat frame_;
+		Mat descriptors_;
+		std::vector<cv::KeyPoint> keypoints_;
+
 };
 
 #endif /* MYFEATUREDETECTION_H_ */

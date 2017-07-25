@@ -11,6 +11,9 @@
 #include "statics/statics_tools.h"
 #include <memory>
 
+using namespace cv;
+using namespace cv::xfeatures2d;
+
 class FaultDetection{
 public:
   FaultDetection();
@@ -19,7 +22,7 @@ public:
   bool start();
   bool run();
   bool stop();
-  virtual void SURF();
+  virtual void runSURF();
   Matcher getMatcher();
   Point getMeanPoint();
   Point getVariance();
@@ -28,10 +31,11 @@ public:
   double getPearson();
   double getCUSUM();
 
+
 protected:
   MyFeatureExtractor first_;
   MyFeatureExtractor second_;
-
+  Ptr<SURF> fDetector_;
   Matcher matcher_;
   Point currentMeanPoint_;
   Point currentVariancePoint_;

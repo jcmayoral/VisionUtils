@@ -12,14 +12,15 @@ MyStatics::~MyStatics(){
 
 Point MyStatics::calculateMean(Matcher match){
 
-    int number_points = match.best_query_.size();
+    int number_points = match.getSize(2);
+    std::vector<Point2f> v = match.getVector(2);
     Point tmp;
     tmp.x = 0;
     tmp.y = 0;
 
-    for (unsigned int i=0; i<match.best_train_.size();i++){
-        tmp.x = tmp.x + (match.best_query_[i].x);
-        tmp.y = tmp.y + (match.best_query_[i].y);
+    for (unsigned int i=0; i<match.getSize(2);i++){
+        tmp.x = tmp.x + (v.at(i).x);
+        tmp.y = tmp.y + (v.at(i).y);
     }
 
     if (number_points > 0){
@@ -31,13 +32,14 @@ Point MyStatics::calculateMean(Matcher match){
 }
 
 Point MyStatics::calculateVariance(Matcher match, Point mean){
-    int number_points = match.best_query_.size();
+    int number_points = match.getSize(2);
+    std::vector<Point2f> v = match.getVector(2);
     Point tmp;
     tmp.x = 0;
     tmp.y = 0;
-    for (unsigned int i=0; i<match.best_query_.size();i++){
-        tmp.x += std::pow(match.best_query_[i].x - mean.x,2);
-        tmp.y += std::pow(match.best_query_[i].y - mean.y,2);
+    for (unsigned int i=0; i<match.getSize(2);i++){
+        tmp.x += std::pow(v.at(i).x - mean.x,2);
+        tmp.y += std::pow(v.at(i).y - mean.y,2);
     }
 
     if (number_points > 1){
@@ -55,15 +57,16 @@ Point MyStatics::calculateVariance(Matcher match, Point mean){
 
 double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany){
 
-    int number_points = match.best_query_.size();
+    int number_points = match.getSize(2);
+    std::vector<Point2f> v = match.getVector(2);
     double tmp=0.0;
 
     if (number_points == 0){
         return 0.0;
     }
 
-    for (unsigned int i=0; i<match.best_query_.size();i++){
-        tmp += (match.best_query_[i].x - meanx) * (match.best_query_[i].y -meany);
+    for (unsigned int i=0; i<match.getSize(2);i++){
+        tmp += (v[i].x - meanx) * (v[i].y -meany);
     }
 
     if(number_points>0){
@@ -77,15 +80,16 @@ double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany
 
 double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary){
 
-    int number_points = match.best_query_.size();
+    int number_points = match.getSize(2);
+    std::vector<Point2f> v = match.getVector(2);
     double tmp=0.0;
 
     if (number_points == 0){
         return 0.0;
     }
 
-    for (unsigned int i=0; i<match.best_query_.size();i++){
-        tmp += (match.best_query_[i].x - meanx) * (match.best_query_[i].y -meany);
+    for (unsigned int i=0; i<match.getSize(2);i++){
+        tmp += (v[i].x - meanx) * (v[i].y -meany);
     }
 
     if((varx*vary)>1e-20){
@@ -101,19 +105,20 @@ double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, doub
 double MyStatics::CUSUM(Matcher input){
 
     double cusum_mean, cusum_var = 0.0;
+    std::vector<DMatch> v = input.getBestMatches();
 
-    if (input.best_matches_.size()>1){
-      for (unsigned int i=0; i<input.best_matches_.size();i++){
-        cusum_mean += input.best_matches_[i].distance;
+    if (input.getSize(4)>1){
+      for (unsigned int i=0; i<input.getSize(4);i++){
+        cusum_mean += v[i].distance;
       }
 
-      cusum_mean = cusum_mean/input.best_matches_.size();
+      cusum_mean = cusum_mean/input.getSize(4);
 
-      for (unsigned int i=0; i<input.best_matches_.size();i++){
-          cusum_var += std::pow(input.best_matches_[i].distance - cusum_mean,2);
+      for (unsigned int i=0; i<input.getSize(4);i++){
+          cusum_var += std::pow(v[i].distance - cusum_mean,2);
       }
 
-      cusum_var = cusum_var/(input.best_matches_.size()-1);
+      cusum_var = cusum_var/(input.getSize(4)-1);
     }
 
     return cusum_var;
@@ -132,14 +137,17 @@ Point MyStatics::getKMeans(const Matcher input){
         Scalar(0,255,255)
     };
 
+    Matcher c = input;
+    std::vector<Point2f> v = c.getVector(2);
+
     try{
-        kmeans(input.best_query_, 1, labels,
+        kmeans(v, 1, labels,
         TermCriteria( TermCriteria::EPS+TermCriteria::COUNT, 10, 1.0),
               3, KMEANS_PP_CENTERS, centers);
 
-        for(uint i = 0; i < input.best_query_.size(); i++ ){
+        for(uint i = 0; i < v.size(); i++ ){
             int clusterIdx = labels.at<int>(i);
-            Point ipt = input.best_query_.at(i);
+            Point ipt = v.at(i);
             circle( img, ipt, 2, colorTab[clusterIdx], FILLED, LINE_AA );
         }
     }

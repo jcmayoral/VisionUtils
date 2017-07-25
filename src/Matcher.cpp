@@ -13,22 +13,28 @@ void Matcher::setMatchPercentage(double val){
 }
 
 void Matcher::matchD(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-  match(ext1.descriptors_,ext2.descriptors_,matches_);
+  match(ext1.getDescriptors(),ext2.getDescriptors(),matches_);
 }
 
 void Matcher::separateMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
+  std::vector<cv::KeyPoint> k1 = ext1.getKeyPoints();
+  std::vector<cv::KeyPoint> k2 = ext2.getKeyPoints();
+
   for (unsigned int i= 0; i< matches_.size();i++){
-    query_.push_back(ext1.keypoints_[matches_[i].queryIdx].pt);
-		train_.push_back(ext2.keypoints_[matches_[i].queryIdx].pt);
+    query_.push_back(k1[matches_[i].queryIdx].pt);
+		train_.push_back(k2[matches_[i].queryIdx].pt);
 		//std::cout << matches_[i].distance << std::endl;
   }
 }
 
 
 void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
+  std::vector<cv::KeyPoint> k1 = ext1.getKeyPoints();
+  std::vector<cv::KeyPoint> k2 = ext2.getKeyPoints();
+
 	for (unsigned int i= 0; i< best_matches_.size();i++){
-    best_query_.push_back(ext1.keypoints_[best_matches_[i].queryIdx].pt);
-		best_train_.push_back(ext2.keypoints_[best_matches_[i].queryIdx].pt);
+    best_query_.push_back(k1[best_matches_[i].queryIdx].pt);
+		best_train_.push_back(k2[best_matches_[i].queryIdx].pt);
 		//std::cout << matches_[i].distance << std::endl;
 	}
 }
@@ -37,19 +43,23 @@ void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
     /*From \cite{Mori2013} First Results in Deeting and Avoiding Frontal Obstacles from
     * A Monocular Camera fro Micro Unmanned Aerial Vehicles
     */
-    for( int i = 0; i < ext1.descriptors_.rows; i++ ){
-      if ((ext2.keypoints_[i].size > ext1.keypoints_[i].size)&& (matches_[i].distance<0.03)){
+    std::vector<cv::KeyPoint> k1 = ext1.getKeyPoints();
+    std::vector<cv::KeyPoint> k2 = ext2.getKeyPoints();
+    Mat descriptors = ext1.getDescriptors();
+
+    for( int i = 0; i < descriptors.rows; i++ ){
+      if ((k2[i].size > k1[i].size)&& (matches_[i].distance<0.03)){
         best_matches_.push_back( matches_[i]);
 		}
 	}
 }
 
 void Matcher::drawBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-  drawMatches(ext1.frame_, ext1.keypoints_, ext2.frame_, ext2.keypoints_, best_matches_,frame_, Scalar::all(-1), Scalar::all(-1),std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+  drawMatches(ext1.getFrame(), ext1.getKeyPoints(), ext2.getFrame(), ext2.getKeyPoints(), best_matches_,frame_, Scalar::all(-1), Scalar::all(-1),std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
 }
 
 void Matcher::drawAllMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-	drawMatches(ext1.frame_, ext1.keypoints_, ext2.frame_, ext2.keypoints_, matches_,frame_, Scalar::all(-1), Scalar::all(-1),std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+	drawMatches(ext1.getFrame(), ext1.getKeyPoints(), ext2.getFrame(), ext2.getKeyPoints(), matches_,frame_, Scalar::all(-1), Scalar::all(-1),std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
 }
 
 void Matcher::show(std::string window_name){
@@ -63,4 +73,28 @@ void Matcher::clearing(){
 	best_train_.clear();
 	matches_.clear();
 	best_matches_.clear();
+}
+
+int Matcher::getSize(int index){
+  switch (index){
+    case 0: return query_.size();
+    case 1: return train_.size();
+    case 2: return best_query_.size();
+    case 3: return best_train_.size();
+    case 4: return best_matches_.size();
+    default: return 0;
+  }
+}
+
+std::vector<Point2f> Matcher::getVector(int index){
+  switch (index){
+    case 0: return query_;
+    case 1: return train_;
+    case 2: return best_query_;
+    case 3: return best_train_;
+  }
+}
+
+std::vector<DMatch> Matcher::getBestMatches(){
+  return best_matches_;
 }

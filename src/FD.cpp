@@ -17,25 +17,32 @@
 using namespace cv;
 using namespace std;
 
-void FaultDetection::SURF(){
+void FaultDetection::runSURF(){
   std::cout << "Before Detect";
-  first_.fDetector_->detect(first_.frame_,first_.keypoints_);
-  first_.fDetector_->compute(first_.frame_, first_.keypoints_, first_.descriptors_);
-  drawKeypoints(first_.frame_, first_.keypoints_, first_.frame_);
+  Mat descriptors = first_.getDescriptors();
+  std::vector<cv::KeyPoint> k1 = first_.getKeyPoints();
+  fDetector_->detect(first_.getFrame(),k1);
+  fDetector_->compute(first_.getFrame(), k1, descriptors);
+  Mat tmp;
+  drawKeypoints(first_.getFrame(), first_.getKeyPoints(), tmp);
+  first_.setFrame(tmp);
 
-  if (first_.descriptors_.type()!=CV_32F) {
-              first_.descriptors_.convertTo(first_.descriptors_, CV_32F);
+  if (descriptors.type()!=CV_32F) {
+    descriptors.convertTo(descriptors, CV_32F);
+    first_.setDescriptors(descriptors);
   }
 }
 
 
 FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(){
   // TODO Auto-generated constructor stub
+  fDetector_ = SURF::create();
   matcher_.setMatchPercentage(0.05);
   cout << "FD Constructor" << endl;
 }
 
 FaultDetection::FaultDetection(bool ros): camera_(0), first_(),second_(){
+  fDetector_ = SURF::create();
   matcher_.setMatchPercentage(0.05);
   cout << "ROS Constructor" << endl;
 }
@@ -81,7 +88,7 @@ bool FaultDetection::start(){
   }
 
   first_.read(camera_);
-  SURF();
+  runSURF();
   return true;
 }
 
@@ -93,7 +100,7 @@ bool FaultDetection::run(){
     second_ = first_;
     first_.read(camera_);
     matcher_.clearing();
-    SURF();
+    runSURF();
     matcher_.matchD(first_,second_);
     matcher_.separateMatches(first_,second_);
     matcher_.getBestMatches(first_,second_);
