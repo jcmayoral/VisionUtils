@@ -38,7 +38,6 @@ void MainWindow::on_match_button_clicked()
     }
 
     while(true){
-        std::cout<< exit_request_;
         if(fd_.run()){
             lastx = (fd_.getVariance().x-lastx);
             lasty = (fd_.getVariance().y-lasty);
