@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     exit_request_(false)
 {
-    ui->setupUi(this);
+    ui->setupUi(this);	
 }
 
 MainWindow::~MainWindow()
@@ -22,6 +22,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_match_button_clicked()
 {
     double lastx,lasty,lastcov, currentpearson, lastpearson,lastcusum,currentcusum=0.0;
+    double cusum_, pearson_ = 0.0;
 
     fd_.start();
 
@@ -42,28 +43,30 @@ void MainWindow::on_match_button_clicked()
             lastx = (fd_.getVariance().x-lastx);
             lasty = (fd_.getVariance().y-lasty);
             lastcov = (fd_.getCovariance() - lastcov);
-            currentpearson = (fd_.getPearson());
+            currentpearson = (currentpearson + fd_.getPearson());
+            pearson_ += currentpearson;
 
             plt.addData(lastx,0);
             plt.addData(lasty,1);
             plt.addData(lastcov,2);
-            plt.addData(currentpearson,3);
+            plt.addData(pearson_,3);
 
-            currentcusum += fd_.getCUSUM();
-            plt.addData(currentcusum,5);
+            currentcusum = (currentcusum + fd_.getCUSUM())/2;
+            cusum_ += currentcusum;
+            plt.addData(cusum_,5);
 
-            if (fabs(currentcusum - lastcusum) <= 1e-1){
+            if (fabs(currentcusum)  <= 1e-6){
                plt.addData(1,4);
             }
             else{
                plt.addData(0,4);
             }
 
-            if (fabs(currentpearson - lastpearson) < 0.1){
-              plt.addData(0,6);
+            if (fabs(pearson_) < 1e-3){
+              plt.addData(1,6);
             }
             else{
-              plt.addData(1,6);
+              plt.addData(0,6);
            }
            lastcusum =  currentcusum;
            lastpearson = currentpearson;
