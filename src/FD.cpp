@@ -37,8 +37,12 @@ void FaultDetection::runSURF(){
   first_.setKeyPoints(k1);
 }
 
+void FaultDetection::stopRequest(){
+    cout << "Stop Requested";
+    stop_requested_=true;
+}
 
-FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(){
+FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(),stop_requested_(false){
   // TODO Auto-generated constructor stub
   fDetector_ = SURF::create();
   fDetector_->setHessianThreshold(400);
@@ -97,8 +101,11 @@ bool FaultDetection::start(){
   return true;
 }
 
-
 bool FaultDetection::run(){
+  if (stop_requested_){
+      cout << "request " << stop_requested_;
+      return false;
+  }
   Tracker tracker;
   try{
     second_ = first_;

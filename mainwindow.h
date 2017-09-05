@@ -24,16 +24,14 @@ private slots:
 
     void on_match_button_clicked();
 
-    void on_exit_button_clicked();
-
     void on_gui_button_pressed();
+
+    void on_stop_button_clicked();
 
 private:
     Ui::MainWindow *ui;
     FaultDetection fd_;
     PlotWindow plt;
-    bool stopFlag_;
-    bool exit_request_;
 
 };
 

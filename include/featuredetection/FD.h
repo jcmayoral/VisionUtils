@@ -22,6 +22,7 @@ public:
   bool start();
   bool run();
   bool stop();
+  void stopRequest();
   void runSURF();
   Matcher getMatcher();
   Point getMeanPoint();
@@ -43,6 +44,7 @@ protected:
   double pearson_;
   double covariance_;
   double cusum_;
+  bool stop_requested_;
   VideoCapture camera_;
   std::shared_ptr<MyStatics> statics_tool;
 };

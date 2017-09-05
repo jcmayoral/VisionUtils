@@ -109,7 +109,7 @@ double MyStatics::CUSUM(Matcher input){
 
     if (input.getSize(4)>1){
       for (unsigned int i=0; i<input.getSize(4);i++){
-        cusum_mean += v[i].distance;
+        cusum_mean += v[i].distance/0.05;
       }
 
       cusum_mean = cusum_mean/input.getSize(4);
