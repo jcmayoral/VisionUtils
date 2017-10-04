@@ -22,12 +22,16 @@ public:
     bool getIsInitialized();
     void setMainGraphIndex(int index);
     int getMainGraphIndex();
+    double getThreshold();
+    void setThreshold(double val);
     ~PlotWindow();
 
 private slots:
     void realtimeDataSlot();
 
     void on_select_graph_clicked();
+
+    void on_doubleSpinBox_valueChanged(double arg1);
 
 private:
     Ui::PlotWindow *ui;
@@ -36,6 +40,7 @@ private:
     std::vector<double> data_;
     int graph_number_;
     int main_graph_index_;
+    double threshold_;
     bool isInitialized_;
 };
 

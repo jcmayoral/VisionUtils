@@ -37,7 +37,11 @@ void MainWindow::on_match_button_clicked()
         plt.setIsInitialized(true);
     }
 
+    double current_threshold = plt.getThreshold();
+
     while(fd_.run()){
+        current_threshold = plt.getThreshold();
+
         lastx += fd_.getVariance().x;
         lasty += fd_.getVariance().y;
         lastcov += fd_.getCovariance();
@@ -53,7 +57,7 @@ void MainWindow::on_match_button_clicked()
         //currentcusum = (currentcusum + fd_.getCUSUM())/2;
         //cusum_ += currentcusum;
 
-        if (fabs(cusum_-lastcusum)  <= 1.5e-5){
+        if (fabs(cusum_-lastcusum)  <= current_threshold){
            plt.addData(1,6);
         }
         else{

@@ -1,4 +1,4 @@
-#include "plotwindow.h"
+    #include "plotwindow.h"
 #include <iostream>
 #include "ui_plotwindow.h"
 
@@ -6,7 +6,7 @@ PlotWindow::PlotWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PlotWindow),
     graph_number_(-1), isInitialized_(false),
-    main_graph_index_(0), data_()
+    main_graph_index_(0), data_(), threshold_(0.0)
 {
     ui->setupUi(this);
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
@@ -27,6 +27,14 @@ PlotWindow::PlotWindow(QWidget *parent) :
     ui->customPlot->replot();
 
     ui->graph_list_->setSelectionMode(QAbstractItemView::ExtendedSelection);
+}
+
+void PlotWindow::setThreshold(double val){
+    threshold_ = val;
+}
+
+double PlotWindow::getThreshold(){
+    return threshold_;
 }
 
 void PlotWindow::addGraph(QString name, QColor c){
@@ -122,4 +130,9 @@ void PlotWindow::on_select_graph_clicked()
             }
         }
    }
+}
+
+void PlotWindow::on_doubleSpinBox_valueChanged(double arg1)
+{
+    setThreshold(arg1);
 }
