@@ -73,7 +73,6 @@ void MainWindow::on_match_button_clicked()
        lastcusum =  cusum_;
        lastpearson = pearson_;
        cv::waitKey(10);
-       cout << "cycle";
      }
     cout << "stop";
     fd_.stop();
