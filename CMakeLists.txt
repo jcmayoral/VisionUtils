@@ -30,11 +30,11 @@ qt5_wrap_ui(qt_vision_utils_ui ${UIQT})
 
 add_library(vision_utils SHARED ${SOURCE_FILES})
 #add_library(qt_vision SHARED ${SOURCESQT} ${SOURCE_FILES})
-add_executable(qt_vision WIN32 ${SOURCESQT} ${SOURCE_FILES} ${qt_vision_qt_sources} ${qt_vision_utils_ui})
+add_executable(collision_detector WIN32 ${SOURCESQT} ${SOURCE_FILES} ${qt_vision_qt_sources} ${qt_vision_utils_ui})
 
 #MESSAGE( STATUS "INCLUDE_DIRS: " ${QT_LIBRARIES} )
 target_link_libraries(vision_utils ${OpenCV_LIBS} )#${catkin_LIBRARIES})
-target_link_libraries(qt_vision ${OpenCV_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::PrintSupport)
+target_link_libraries(collision_detector ${OpenCV_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::PrintSupport)
 
 install (DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include)
 
@@ -47,7 +47,7 @@ install (
 
 
 install( 
-  TARGETS qt_vision
+  TARGETS collision_detector
   RUNTIME DESTINATION bin
 )
 
