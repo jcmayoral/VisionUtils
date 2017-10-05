@@ -6,7 +6,8 @@ PlotWindow::PlotWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PlotWindow),
     graph_number_(-1), isInitialized_(false),
-    main_graph_index_(0), data_(), threshold_(0.0)
+    main_graph_index_(0), data_(), threshold_(0.0),
+    hessian_(400), matching_threshold_(0.10)
 {
     ui->setupUi(this);
     QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
@@ -36,6 +37,23 @@ void PlotWindow::setThreshold(double val){
 double PlotWindow::getThreshold(){
     return threshold_;
 }
+
+void PlotWindow::setHessian(double val){
+    hessian_ = val;
+}
+
+double PlotWindow::getHessian(){
+    return hessian_;
+}
+
+void PlotWindow::setMatchingThreshold(double val){
+    matching_threshold_ = val;
+}
+
+double PlotWindow::getMatchingThreshold(){
+    return matching_threshold_;
+}
+
 
 void PlotWindow::addGraph(QString name, QColor c){
     graph_number_++;
@@ -135,4 +153,14 @@ void PlotWindow::on_select_graph_clicked()
 void PlotWindow::on_doubleSpinBox_valueChanged(double arg1)
 {
     setThreshold(arg1);
+}
+
+void PlotWindow::on_doubleSpinBox2_valueChanged(double arg1)
+{
+    setHessian(arg1);
+}
+
+void PlotWindow::on_doubleSpinBox_2_valueChanged(double arg1)
+{
+    setMatchingThreshold(arg1);
 }

@@ -42,6 +42,8 @@
         </sizepolicy>
        </property>
       </widget>
+      <zorder>customPlot</zorder>
+      <zorder>groupBox_2</zorder>
      </widget>
     </item>
     <item>
@@ -55,7 +57,7 @@
          <x>40</x>
          <y>40</y>
          <width>291</width>
-         <height>261</height>
+         <height>161</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -68,10 +70,10 @@
       <widget class="QPushButton" name="select_graph">
        <property name="geometry">
         <rect>
-         <x>220</x>
-         <y>320</y>
-         <width>111</width>
-         <height>51</height>
+         <x>160</x>
+         <y>290</y>
+         <width>181</width>
+         <height>71</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -81,20 +83,106 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Set</string>
+        <string>Update Selected Graphs</string>
        </property>
       </widget>
       <widget class="QDoubleSpinBox" name="doubleSpinBox">
        <property name="geometry">
         <rect>
-         <x>120</x>
+         <x>40</x>
+         <y>250</y>
+         <width>81</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <double>1.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.001000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.010000000000000</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>220</y>
+         <width>141</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Collision Threshold</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>176</x>
+         <y>220</y>
+         <width>141</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Hessian Threshold</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="doubleSpinBox2">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>250</y>
+         <width>81</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <double>500.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>10.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>400.000000000000000</double>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>300</y>
+         <width>141</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Matching Threshold</string>
+       </property>
+      </widget>
+      <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
          <y>330</y>
          <width>69</width>
          <height>27</height>
         </rect>
        </property>
+       <property name="decimals">
+        <number>3</number>
+       </property>
+       <property name="maximum">
+        <double>5.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.100000000000000</double>
+       </property>
        <property name="value">
-        <double>0.010000000000000</double>
+        <double>0.100000000000000</double>
        </property>
       </widget>
      </widget>

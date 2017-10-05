@@ -17,6 +17,14 @@
 using namespace cv;
 using namespace std;
 
+void FaultDetection::updateHessianThreshold(double threshold){
+    fDetector_->setHessianThreshold(threshold);
+}
+
+void FaultDetection::setMatchPercentage(double value){
+    matcher_.setMatchPercentage(value);
+}
+
 void FaultDetection::runSURF(){
   Mat img,descriptors;// = first_.getDescriptors();
   img = first_.getFrame();

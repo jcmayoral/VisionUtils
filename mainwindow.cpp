@@ -41,6 +41,8 @@ void MainWindow::on_match_button_clicked()
 
     while(fd_.run()){
         current_threshold = plt.getThreshold();
+        fd_.updateHessianThreshold(plt.getHessian());
+        fd_.setMatchPercentage(plt.getMatchingThreshold());
 
         lastx += fd_.getVariance().x;
         lasty += fd_.getVariance().y;

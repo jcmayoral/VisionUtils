@@ -24,6 +24,10 @@ public:
     int getMainGraphIndex();
     double getThreshold();
     void setThreshold(double val);
+    double getHessian();
+    void setHessian(double val);
+    double getMatchingThreshold();
+    void setMatchingThreshold(double val);
     ~PlotWindow();
 
 private slots:
@@ -32,6 +36,10 @@ private slots:
     void on_select_graph_clicked();
 
     void on_doubleSpinBox_valueChanged(double arg1);
+
+    void on_doubleSpinBox2_valueChanged(double arg1);
+
+    void on_doubleSpinBox_2_valueChanged(double arg1);
 
 private:
     Ui::PlotWindow *ui;
@@ -42,6 +50,8 @@ private:
     int main_graph_index_;
     double threshold_;
     bool isInitialized_;
+    double matching_threshold_;
+    int hessian_;
 };
 
 #endif // PLOTWINDOW_H

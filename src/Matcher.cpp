@@ -48,7 +48,7 @@ void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
     Mat descriptors = ext1.getDescriptors();
 
     for( int i = 0; i < descriptors.rows; i++ ){
-      if ((k2[i].size > k1[i].size)&& (matches_[i].distance<0.03)){
+      if ((k2[i].size > k1[i].size)&& (matches_[i].distance< matchPercentage_)){ //0.03 ~ 0.05
         best_matches_.push_back( matches_[i]);
 		}
 	}
