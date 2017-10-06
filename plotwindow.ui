@@ -42,8 +42,6 @@
         </sizepolicy>
        </property>
       </widget>
-      <zorder>customPlot</zorder>
-      <zorder>groupBox_2</zorder>
      </widget>
     </item>
     <item>
@@ -89,11 +87,14 @@
       <widget class="QDoubleSpinBox" name="doubleSpinBox">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>30</x>
          <y>250</y>
-         <width>81</width>
+         <width>111</width>
          <height>27</height>
         </rect>
+       </property>
+       <property name="decimals">
+        <number>3</number>
        </property>
        <property name="maximum">
         <double>1.000000000000000</double>
@@ -102,7 +103,7 @@
         <double>0.001000000000000</double>
        </property>
        <property name="value">
-        <double>0.010000000000000</double>
+        <double>0.050000000000000</double>
        </property>
       </widget>
       <widget class="QLabel" name="label">
@@ -121,7 +122,7 @@
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
-         <x>176</x>
+         <x>170</x>
          <y>220</y>
          <width>141</width>
          <height>20</height>
@@ -166,9 +167,9 @@
       <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>28</x>
          <y>330</y>
-         <width>69</width>
+         <width>81</width>
          <height>27</height>
         </rect>
        </property>
@@ -179,7 +180,7 @@
         <double>5.000000000000000</double>
        </property>
        <property name="singleStep">
-        <double>0.100000000000000</double>
+        <double>0.010000000000000</double>
        </property>
        <property name="value">
         <double>0.100000000000000</double>

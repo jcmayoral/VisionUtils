@@ -46,6 +46,8 @@ protected:
   double pearson_;
   double covariance_;
   double cusum_;
+  double last_mean_;
+  double last_variance_;
   bool stop_requested_;
   VideoCapture camera_;
   std::shared_ptr<MyStatics> statics_tool;

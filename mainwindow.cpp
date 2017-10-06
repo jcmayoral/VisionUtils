@@ -47,7 +47,7 @@ void MainWindow::on_match_button_clicked()
         lastx += fd_.getVariance().x;
         lasty += fd_.getVariance().y;
         lastcov += fd_.getCovariance();
-        cusum_ += fd_.getCUSUM();
+        cusum_ = fd_.getCUSUM();
         pearson_ += fd_.getPearson();
 
         plt.addData(lastx,0);
@@ -66,7 +66,7 @@ void MainWindow::on_match_button_clicked()
            plt.addData(0,6);
         }
 
-        if (fabs(pearson_-lastpearson) < 10e-3){
+        if (fabs(pearson_-lastpearson) < current_threshold){
           plt.addData(1,5);
         }
         else{

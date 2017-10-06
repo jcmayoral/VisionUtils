@@ -14,6 +14,6 @@ class MyStatics{
     Point calculateVariance(Matcher match, Point mean);
     double CalculateCovariance(Matcher match , double meanx, double meany);
     double CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary);
-    double CUSUM(Matcher input);
+    double CUSUM(Matcher input, double & last_mean, double & last_variance);
 };
 #endif // STATICS_TOOLS_H

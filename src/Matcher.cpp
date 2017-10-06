@@ -12,6 +12,10 @@ void Matcher::setMatchPercentage(double val){
   matchPercentage_ = val;
 }
 
+double Matcher::getMatchPercentage(){
+  return matchPercentage_;
+}
+
 void Matcher::matchD(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
   match(ext1.getDescriptors(),ext2.getDescriptors(),matches_);
 }

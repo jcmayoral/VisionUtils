@@ -14,6 +14,7 @@ class Matcher:FlannBasedMatcher{
 		~Matcher();
 		void show(std::string window_name);
 		void setMatchPercentage(double val);
+		double getMatchPercentage();
 		void getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2);
 		void matchD(MyFeatureExtractor ext1, MyFeatureExtractor ext2);
 		void separateMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2);

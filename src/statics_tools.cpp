@@ -102,14 +102,15 @@ double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, doub
     return tmp;
 }
 
-double MyStatics::CUSUM(Matcher input){
+double MyStatics::CUSUM(Matcher input,double & last_mean, double & last_variance){
 
-    double cusum_mean, cusum_var = 0.0;
+    double cusum_mean, cusum_var, cusum, std_deviation, last_std_deviation = 0.0;
     std::vector<DMatch> v = input.getBestMatches();
+    double max_value = input.getMatchPercentage();
 
     if (input.getSize(4)>1){
       for (unsigned int i=0; i<input.getSize(4);i++){
-        cusum_mean += v[i].distance/0.05;
+        cusum_mean += v[i].distance/max_value;
       }
 
       cusum_mean = cusum_mean/input.getSize(4);
@@ -119,9 +120,22 @@ double MyStatics::CUSUM(Matcher input){
       }
 
       cusum_var = cusum_var/(input.getSize(4)-1);
-    }
+      // BLANKE
+      // s_z = (-np.power(z-m1,2) + np.power(z-m0,2))/(2*v1)
+      std_deviation = sqrt(cusum_var);
+      last_std_deviation = sqrt(last_variance);
 
-    return cusum_var;
+      double constant = ((1/last_std_deviation) - (1/std_deviation))/2;
+      double prefix_constant = log(last_std_deviation/std_deviation);
+
+      for (unsigned int i=0; i<input.getSize(4);i++){
+        cusum += prefix_constant + constant * pow((v[i].distance/max_value)-cusum_mean,2);
+      }
+    }
+    last_mean = cusum_mean;
+    last_variance = cusum_var;
+
+    return cusum;
 }
 
 Point MyStatics::getKMeans(const Matcher input){

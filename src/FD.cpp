@@ -50,7 +50,7 @@ void FaultDetection::stopRequest(){
     stop_requested_=true;
 }
 
-FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(),stop_requested_(false){
+FaultDetection::FaultDetection(): camera_( 0 ),first_(),second_(),stop_requested_(false), last_mean_(0.0), last_variance_(0.0){
   // TODO Auto-generated constructor stub
   fDetector_ = SURF::create();
   fDetector_->setHessianThreshold(400);
@@ -95,7 +95,7 @@ double FaultDetection::getPearson(){
 }
 
 double FaultDetection::getCUSUM(){
-    return cusum_;
+  return cusum_;
 }
 
 bool FaultDetection::start(){
@@ -132,7 +132,7 @@ bool FaultDetection::run(){
     currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentMeanPoint_);
     covariance_ = statics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
     pearson_ = statics_tool->CalculatePearsonCorrelation(matcher_,currentMeanPoint_.x,currentMeanPoint_.y, currentVariancePoint_.x, currentVariancePoint_.y);
-    cusum_ = statics_tool->CUSUM(matcher_);
+    cusum_ = statics_tool->CUSUM(matcher_, last_mean_, last_variance_);
     return true;
   }
 
