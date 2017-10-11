@@ -30,9 +30,9 @@ void MainWindow::on_match_button_clicked()
         plt.addGraph(QString("Variance Y"),QColor(0,255,0));
         plt.addGraph(QString("Covariance"),QColor(0,0,255));
         plt.addGraph(QString("Pearson Coefficient"),QColor(0,0,0));
-        plt.addGraph(QString("SURF Feature Distance"),QColor(255,0,0));
+        plt.addGraph(QString("CUSUM"),QColor(255,0,0));
         plt.addGraph(QString("Pearson-Based Collision"),QColor(255,0,255));
-        plt.addGraph(QString("SURF-Based Collision"),QColor(0,255,255));
+        plt.addGraph(QString("CUSUM Collision Detector"),QColor(0,255,255));
         plt.setMainGraphIndex(4);
         plt.setIsInitialized(true);
     }
