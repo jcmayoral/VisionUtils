@@ -1,16 +1,16 @@
-#include <statics/statics_tools.h>
+#include <statistics/statistics_tools.h>
 #include<random>
 
 using namespace std;
 using namespace cv;
 
-MyStatics::MyStatics(){
+MyStatistics::MyStatistics(){
 }
 
-MyStatics::~MyStatics(){
+MyStatistics::~MyStatistics(){
 }
 
-Point MyStatics::calculateMean(Matcher match){
+Point MyStatistics::calculateMean(Matcher match){
 
     int number_points = match.getSize(2);
     std::vector<Point2f> v = match.getVector(2);
@@ -31,7 +31,7 @@ Point MyStatics::calculateMean(Matcher match){
     return tmp;
 }
 
-Point MyStatics::calculateVariance(Matcher match, Point mean){
+Point MyStatistics::calculateVariance(Matcher match, Point mean){
     int number_points = match.getSize(2);
     std::vector<Point2f> v = match.getVector(2);
     Point tmp;
@@ -55,7 +55,7 @@ Point MyStatics::calculateVariance(Matcher match, Point mean){
     return tmp;
 }
 
-double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany){
+double MyStatistics::CalculateCovariance(Matcher match , double meanx, double meany){
 
     int number_points = match.getSize(2);
     std::vector<Point2f> v = match.getVector(2);
@@ -78,7 +78,7 @@ double MyStatics::CalculateCovariance(Matcher match , double meanx, double meany
     return tmp;
 }
 
-double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary){
+double MyStatistics::CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary){
 
     int number_points = match.getSize(2);
     std::vector<Point2f> v = match.getVector(2);
@@ -102,7 +102,7 @@ double MyStatics::CalculatePearsonCorrelation(Matcher match , double meanx, doub
     return tmp;
 }
 
-double MyStatics::CUSUM(Matcher input,double & last_mean, double & last_variance){
+double MyStatistics::CUSUM(Matcher input,double & last_mean, double & last_variance){
 
     double cusum_mean, cusum_var, cusum, std_deviation, last_std_deviation = 0.0;
     std::vector<DMatch> v = input.getBestMatches();
@@ -138,7 +138,7 @@ double MyStatics::CUSUM(Matcher input,double & last_mean, double & last_variance
     return cusum;
 }
 
-Point MyStatics::getKMeans(const Matcher input){
+Point MyStatistics::getKMeans(const Matcher input){
     Point tmp(0,0);
     Mat labels(1, 1, DataType<float>::type);
     Mat centers(1, 1, DataType<float>::type);

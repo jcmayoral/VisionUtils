@@ -12,7 +12,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <featuredetection/FD.h>
-#include <statics/statics_tools.h>
+//#include <statistics/statistics_tools.h>
 
 using namespace cv;
 using namespace std;
@@ -66,7 +66,7 @@ FaultDetection::FaultDetection(bool ros): camera_(0), first_(),second_(){
 
 FaultDetection::~FaultDetection() {
 	// TODO Auto-generated destructor stub
-  //delete this->statics_tool;
+  //delete this->statistics_tool;
   cout << "FD destroyed";
 }
 
@@ -127,12 +127,12 @@ bool FaultDetection::run(){
     //tracker.featureTracking(first_, second_,matcher_);
     matcher_.drawBestMatches(first_,second_);
     matcher_.show("BestMatchesDisplay");
-    currentMeanPoint_ = statics_tool->calculateMean(matcher_);
-    //currentCenter_ = statics_tool->getKMeans(matcher_);
-    currentVariancePoint_ = statics_tool->calculateVariance(matcher_,currentMeanPoint_);
-    covariance_ = statics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
-    pearson_ = statics_tool->CalculatePearsonCorrelation(matcher_,currentMeanPoint_.x,currentMeanPoint_.y, currentVariancePoint_.x, currentVariancePoint_.y);
-    cusum_ = statics_tool->CUSUM(matcher_, last_mean_, last_variance_);
+    currentMeanPoint_ = statistics_tool->calculateMean(matcher_);
+    //currentCenter_ = statistics_tool->getKMeans(matcher_);
+    currentVariancePoint_ = statistics_tool->calculateVariance(matcher_,currentMeanPoint_);
+    covariance_ = statistics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
+    pearson_ = statistics_tool->CalculatePearsonCorrelation(matcher_,currentMeanPoint_.x,currentMeanPoint_.y, currentVariancePoint_.x, currentVariancePoint_.y);
+    cusum_ = statistics_tool->CUSUM(matcher_, last_mean_, last_variance_);
     return true;
   }
 

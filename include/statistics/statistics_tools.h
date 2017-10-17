@@ -3,12 +3,12 @@
 #include "featuredetection/matcher.h"
 #include <math.h>
 
-#ifndef STATICS_TOOLS_H
-#define STATICS_TOOLS_H
-class MyStatics{
+#ifndef STATISTICS_TOOLS_H
+#define STATISTICS_TOOLS_H
+class MyStatistics{
   public:
-    MyStatics();
-    ~MyStatics();
+    MyStatistics();
+    ~MyStatistics();
     Point getKMeans(const Matcher input);
     Point calculateMean(Matcher match);
     Point calculateVariance(Matcher match, Point mean);
@@ -16,4 +16,4 @@ class MyStatics{
     double CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary);
     double CUSUM(Matcher input, double & last_mean, double & last_variance);
 };
-#endif // STATICS_TOOLS_H
+#endif // STATISTICS_TOOLS_H

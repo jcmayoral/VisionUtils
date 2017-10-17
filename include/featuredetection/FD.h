@@ -8,7 +8,7 @@
 //#include "../monocularvision/featuredetection.h"
 #include "featuredetection/matcher.h"
 #include "featuredetection/tracker.h"
-#include "statics/statics_tools.h"
+#include "statistics/statistics_tools.h"
 #include <memory>
 
 using namespace cv;
@@ -50,5 +50,5 @@ protected:
   double last_variance_;
   bool stop_requested_;
   VideoCapture camera_;
-  std::shared_ptr<MyStatics> statics_tool;
+  std::shared_ptr<MyStatistics> statistics_tool;
 };
