@@ -4,8 +4,8 @@ PROJECT(${PROJECT_NAME})
 cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_AUTOMOC ON)  
-set(CMAKE_AUTOUIC ON)  
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
@@ -25,7 +25,7 @@ file(GLOB UIQT *.ui)
 add_definitions( ${QT_DEFINITIONS} )
 include_directories(include )#    ${catkin_INCLUDE_DIRS})
 
-qt5_wrap_cpp(qt_visioni_qt_sources  ${HEADERSQT})
+qt5_wrap_cpp(qt_vision_qt_sources  ${HEADERSQT})
 qt5_wrap_ui(qt_vision_utils_ui ${UIQT})
 
 add_library(vision_utils SHARED ${SOURCE_FILES})
@@ -39,14 +39,14 @@ target_link_libraries(collision_detector ${OpenCV_LIBS} Qt5::Widgets Qt5::Core Q
 install (DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include)
 
 install (
-  TARGETS ${PROJECT_NAME} 
-  ARCHIVE DESTINATION lib 
-  LIBRARY DESTINATION lib 
+  TARGETS ${PROJECT_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
 
 
-install( 
+install(
   TARGETS collision_detector
   RUNTIME DESTINATION bin
 )
