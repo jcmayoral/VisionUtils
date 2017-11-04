@@ -15,5 +15,7 @@ class MyStatistics{
     double CalculateCovariance(Matcher match , double meanx, double meany);
     double CalculatePearsonCorrelation(Matcher match , double meanx, double meany, double varx, double vary);
     double CUSUM(Matcher input, double & last_mean, double & last_variance);
+    double getBlur(Mat currentFrame);
+
 };
 #endif // STATISTICS_TOOLS_H

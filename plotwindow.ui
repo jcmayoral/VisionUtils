@@ -97,13 +97,13 @@
         <number>3</number>
        </property>
        <property name="maximum">
-        <double>1.000000000000000</double>
+        <double>50.000000000000000</double>
        </property>
        <property name="singleStep">
-        <double>0.001000000000000</double>
+        <double>0.050000000000000</double>
        </property>
        <property name="value">
-        <double>0.000000000000000</double>
+        <double>1.000000000000000</double>
        </property>
       </widget>
       <widget class="QLabel" name="label">
@@ -183,7 +183,7 @@
         <double>0.010000000000000</double>
        </property>
        <property name="value">
-        <double>0.200000000000000</double>
+        <double>0.100000000000000</double>
        </property>
       </widget>
      </widget>

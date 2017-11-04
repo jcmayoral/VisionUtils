@@ -132,7 +132,8 @@ bool FaultDetection::run(){
     currentVariancePoint_ = statistics_tool->calculateVariance(matcher_,currentMeanPoint_);
     covariance_ = statistics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
     pearson_ = statistics_tool->CalculatePearsonCorrelation(matcher_,currentMeanPoint_.x,currentMeanPoint_.y, currentVariancePoint_.x, currentVariancePoint_.y);
-    cusum_ = statistics_tool->CUSUM(matcher_, last_mean_, last_variance_);
+    //cusum_ = statistics_tool->CUSUM(matcher_, last_mean_, last_variance_)
+    cusum_ = statistics_tool->getBlur(second_.getFrame());
     return true;
   }
 

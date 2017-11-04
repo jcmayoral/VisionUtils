@@ -31,6 +31,7 @@ PlotWindow::PlotWindow(QWidget *parent) :
 }
 
 void PlotWindow::setThreshold(double val){
+    std::cout << "set " << val;
     threshold_ = val;
 }
 
