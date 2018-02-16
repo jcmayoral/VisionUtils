@@ -12,8 +12,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 TARGET = VisionUtils
 TEMPLATE = app
 
-INCLUDEPATH += /usr/local/include/opencv
-INCLUDEPATH += /usr/local/include/opencv2
+INCLUDEPATH += /home/jose/opencv-3.2.0-lib/include/opencv
+INCLUDEPATH += /home/jose/opencv-3.2.0-lib/include/opencv2
 
 LIBS += -L/usr/local/lib -lopencv_shape \
                          -lopencv_stitching \
@@ -41,7 +41,7 @@ SOURCES += main.cpp \
         src/FD.cpp \
         src/tracker.cpp \
         src/myfeaturedetection.cpp \
-        src/statics_tools.cpp \
+        src/statistics_tools.cpp \
         qcustomplot/qcustomplot.cpp \
         mainwindow.cpp \
         plotwindow.cpp
@@ -51,7 +51,7 @@ HEADERS  += mainwindow.h\
         include/featuredetection/FD.h \
         include/featuredetection/myfeaturedetection.h \
         include/featuredetection/tracker.h \
-        include/statics/statics_tools.h \
+        include/statistics/statistics_tools.h \
     qcustomplot/qcustomplot.h \
     plotwindow.h
 

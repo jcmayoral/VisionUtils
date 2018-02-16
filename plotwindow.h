@@ -37,9 +37,9 @@ private slots:
 
     void on_doubleSpinBox_valueChanged(double arg1);
 
-    void on_doubleSpinBox2_valueChanged(double arg1);
+    void on_hessian_threshold_box_valueChanged(double arg1);
 
-    void on_doubleSpinBox_2_valueChanged(double arg1);
+    void on_matching_threshold_box_valueChanged(double arg1);
 
 private:
     Ui::PlotWindow *ui;

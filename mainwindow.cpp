@@ -20,8 +20,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_match_button_clicked()
 {
-    double lastx,lasty,lastcov, currentpearson, lastpearson,lastcusum,currentcusum=0.0;
-    double cusum_, pearson_ = 0.0;
+    double lastx,lasty,lastcov, lastpearson,lastcusum, last_blur=0.0;
+    double cusum_, pearson_, blur_= 0.0;
 
     fd_.start();
 
@@ -30,9 +30,11 @@ void MainWindow::on_match_button_clicked()
         plt.addGraph(QString("Variance Y"),QColor(0,255,0));
         plt.addGraph(QString("Covariance"),QColor(0,0,255));
         plt.addGraph(QString("Pearson Coefficient"),QColor(0,0,0));
-        plt.addGraph(QString("Laplacian"),QColor(255,0,0));
+        plt.addGraph(QString("CUSUM"),QColor(255,0,0));
+        plt.addGraph(QString("Laplacian Blur"),QColor(255,0,0));
         plt.addGraph(QString("Pearson-Based Collision"),QColor(255,0,255));
         plt.addGraph(QString("Laplacian Collision Detector"),QColor(0,255,255));
+        plt.addGraph(QString("Blur Collision Detector"),QColor(0,255,255));
         plt.setMainGraphIndex(5);
         plt.setIsInitialized(true);
     }
@@ -49,32 +51,42 @@ void MainWindow::on_match_button_clicked()
         lastcov += fd_.getCovariance();
         cusum_ = fd_.getCUSUM();
         pearson_ += fd_.getPearson();
+        blur_ = fd_.getBlur();
 
         plt.addData(lastx,0);
         plt.addData(lasty,1);
         plt.addData(lastcov,2);
         plt.addData(pearson_,3);
         plt.addData(cusum_,4);
+        plt.addData(blur_,5);
 
         //currentcusum = (currentcusum + fd_.getCUSUM())/2;
         //cusum_ += currentcusum;
-        cout << fabs(cusum_-lastcusum) << "threshold " << endl;
-        if (fabs(cusum_-lastcusum)  >= current_threshold){
-           plt.addData(1,6);
+
+        if (fabs(cusum_-lastcusum)  > current_threshold){
+           plt.addData(1,7);
         }
         else{
-           plt.addData(0,6);
+           plt.addData(0,7);
         }
 
-        if (fabs(pearson_-lastpearson) < current_threshold){
-          plt.addData(1,5);
+        if (fabs(pearson_-lastpearson) > current_threshold){
+          plt.addData(1,6);
         }
         else{
-          plt.addData(0,5);
-       }
-       lastcusum =  cusum_;
-       lastpearson = pearson_;
-       cv::waitKey(10);
+          plt.addData(0,6);
+        }
+
+        if (fabs(blur_-last_blur) > current_threshold){
+          plt.addData(1,8);
+        }
+        else{
+          plt.addData(0,8);
+        }
+        lastcusum =  cusum_;
+        lastpearson = pearson_;
+        last_blur = blur_;
+        cv::waitKey(10);
      }
     cout << "stop";
     fd_.stop();

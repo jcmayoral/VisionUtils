@@ -31,6 +31,7 @@ public:
   double getCovariance();
   double getPearson();
   double getCUSUM();
+  double getBlur();
   void  updateHessianThreshold(double threshold);
   void setMatchPercentage(double value);
 
@@ -46,6 +47,7 @@ protected:
   double pearson_;
   double covariance_;
   double cusum_;
+  double blur_;
   double last_mean_;
   double last_variance_;
   bool stop_requested_;

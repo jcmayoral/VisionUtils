@@ -156,12 +156,13 @@ void PlotWindow::on_doubleSpinBox_valueChanged(double arg1)
     setThreshold(arg1);
 }
 
-void PlotWindow::on_doubleSpinBox2_valueChanged(double arg1)
+void PlotWindow::on_hessian_threshold_box_valueChanged(double arg1)
 {
     setHessian(arg1);
+
 }
 
-void PlotWindow::on_doubleSpinBox_2_valueChanged(double arg1)
+void PlotWindow::on_matching_threshold_box_valueChanged(double arg1)
 {
     setMatchingThreshold(arg1);
 }
