@@ -138,6 +138,18 @@ double MyStatistics::CUSUM(Matcher input,double & last_mean, double & last_varia
     return cusum;
 }
 
+double MyStatistics::getBlur(Mat currentFrame){
+  cv::Mat lap;
+  cv::Laplacian(currentFrame, lap, CV_64F);
+
+  cv::Scalar mu, sigma;
+  cv::meanStdDev(lap, mu, sigma);
+
+  double focusMeasure = sigma.val[0]*sigma.val[0];
+  return focusMeasure;
+}
+
+
 Point MyStatistics::getKMeans(const Matcher input){
     Point tmp(0,0);
     Mat labels(1, 1, DataType<float>::type);

@@ -30,10 +30,10 @@ void MainWindow::on_match_button_clicked()
         plt.addGraph(QString("Variance Y"),QColor(0,255,0));
         plt.addGraph(QString("Covariance"),QColor(0,0,255));
         plt.addGraph(QString("Pearson Coefficient"),QColor(0,0,0));
-        plt.addGraph(QString("CUSUM"),QColor(255,0,0));
+        plt.addGraph(QString("Laplacian"),QColor(255,0,0));
         plt.addGraph(QString("Pearson-Based Collision"),QColor(255,0,255));
-        plt.addGraph(QString("CUSUM Collision Detector"),QColor(0,255,255));
-        plt.setMainGraphIndex(4);
+        plt.addGraph(QString("Laplacian Collision Detector"),QColor(0,255,255));
+        plt.setMainGraphIndex(5);
         plt.setIsInitialized(true);
     }
 
@@ -58,8 +58,8 @@ void MainWindow::on_match_button_clicked()
 
         //currentcusum = (currentcusum + fd_.getCUSUM())/2;
         //cusum_ += currentcusum;
-
-        if (fabs(cusum_-lastcusum)  <= current_threshold){
+        cout << fabs(cusum_-lastcusum) << "threshold " << endl;
+        if (fabs(cusum_-lastcusum)  >= current_threshold){
            plt.addData(1,6);
         }
         else{
