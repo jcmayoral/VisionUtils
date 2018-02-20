@@ -33,8 +33,8 @@ void MainWindow::on_match_button_clicked()
         plt.addGraph(QString("CUSUM"),QColor(255,0,0));
         plt.addGraph(QString("Laplacian Blur"),QColor(255,0,0));
         plt.addGraph(QString("Pearson-Based Collision"),QColor(255,0,255));
+        plt.addGraph(QString("Surf Collision Detector"),QColor(0,255,255));
         plt.addGraph(QString("Laplacian Collision Detector"),QColor(0,255,255));
-        plt.addGraph(QString("Blur Collision Detector"),QColor(0,255,255));
         plt.setMainGraphIndex(5);
         plt.setIsInitialized(true);
     }

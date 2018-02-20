@@ -41,6 +41,8 @@ private slots:
 
     void on_matching_threshold_box_valueChanged(double arg1);
 
+    void on_customPlot_destroyed();
+
 private:
     Ui::PlotWindow *ui;
     QTimer dataTimer;
