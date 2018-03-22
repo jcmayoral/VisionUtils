@@ -60,8 +60,6 @@ void MainWindow::on_match_button_clicked()
         plt.addData(cusum_,4);
         plt.addData(blur_,5);
 
-        //currentcusum = (currentcusum + fd_.getCUSUM())/2;
-        //cusum_ += currentcusum;
 
         if (fabs(cusum_-lastcusum)  > current_threshold){
            plt.addData(1,7);

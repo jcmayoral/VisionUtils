@@ -51,5 +51,4 @@ void MyFeatureExtractor::setKeyPoints(std::vector<cv::KeyPoint> kp){
 
 void MyFeatureExtractor::read(VideoCapture v){
     v  >> frame_;
-    //cv::cvtColor(frame_,frame_,cv::COLOR_BGR2GRAY);
 }

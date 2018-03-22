@@ -180,7 +180,6 @@ Point MyStatistics::getKMeans(const Matcher input){
     catch(Exception e){
         e.what();
     }
-   //imshow("centers", img);
   return tmp;
 
 }

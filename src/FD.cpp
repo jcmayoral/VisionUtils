@@ -26,11 +26,11 @@ void FaultDetection::setMatchPercentage(double value){
 }
 
 void FaultDetection::runSURF(){
-  Mat img,descriptors;// = first_.getDescriptors();
+
+  Mat img,descriptors;
   img = first_.getFrame();
-  std::vector<cv::KeyPoint> k1;// = first_.getKeyPoints();
-  //fDetector_->detect(first_.getFramei(),k1);
-  //fDetector_->compute(first_.getFrame(), k1, descriptors);
+  std::vector<cv::KeyPoint> k1;
+
   Mat tmp;
   fDetector_->detectAndCompute(img,tmp, k1, descriptors);
   drawKeypoints(img,k1,tmp);
@@ -128,11 +128,9 @@ bool FaultDetection::run(){
     matcher_.separateMatches(first_,second_);
     matcher_.getBestMatches(first_,second_);
     matcher_.separateBestMatches(first_,second_);
-    //tracker.featureTracking(first_, second_,matcher_);
     matcher_.drawBestMatches(first_,second_);
     matcher_.show("BestMatchesDisplay");
     currentMeanPoint_ = statistics_tool->calculateMean(matcher_);
-    //currentCenter_ = statistics_tool->getKMeans(matcher_);
     currentVariancePoint_ = statistics_tool->calculateVariance(matcher_,currentMeanPoint_);
     covariance_ = statistics_tool->CalculateCovariance(matcher_,currentMeanPoint_.x,currentMeanPoint_.y);
     pearson_ = statistics_tool->CalculatePearsonCorrelation(matcher_,currentMeanPoint_.x,currentMeanPoint_.y, currentVariancePoint_.x, currentVariancePoint_.y);

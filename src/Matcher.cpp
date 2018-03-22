@@ -27,7 +27,6 @@ void Matcher::separateMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
   for (unsigned int i= 0; i< matches_.size();i++){
     query_.push_back(k1[matches_[i].queryIdx].pt);
 		train_.push_back(k2[matches_[i].queryIdx].pt);
-		//std::cout << matches_[i].distance << std::endl;
   }
 }
 
@@ -39,12 +38,11 @@ void Matcher::separateBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ex
 	for (unsigned int i= 0; i< best_matches_.size();i++){
     best_query_.push_back(k1[best_matches_[i].queryIdx].pt);
 		best_train_.push_back(k2[best_matches_[i].queryIdx].pt);
-		//std::cout << matches_[i].distance << std::endl;
 	}
 }
 
 void Matcher::getBestMatches(MyFeatureExtractor ext1, MyFeatureExtractor ext2){
-    /*From \cite{Mori2013} First Results in Deeting and Avoiding Frontal Obstacles from
+    /*From First Results in Deeting and Avoiding Frontal Obstacles from
     * A Monocular Camera fro Micro Unmanned Aerial Vehicles
     */
     std::vector<cv::KeyPoint> k1 = ext1.getKeyPoints();
