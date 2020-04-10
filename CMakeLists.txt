@@ -9,7 +9,7 @@ set(CMAKE_AUTOUIC OFF)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-find_package(OpenCV 3.2.0 REQUIRED PATHS "/home/jose/opencv-3.2.0-lib")
+find_package(OpenCV 3.4.0 REQUIRED)
 find_package(Qt5Core)
 find_package(Qt5Gui)
 find_package(Qt5PrintSupport REQUIRED)
@@ -22,16 +22,17 @@ file(GLOB UIQT *.ui)
 
 add_definitions( ${QT_DEFINITIONS} )
 include_directories(include )#    ${catkin_INCLUDE_DIRS})
+include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 qt5_wrap_cpp(qt_vision_qt_sources  ${HEADERSQT})
 qt5_wrap_ui(qt_vision_collision_detector_ui ${UIQT})
 
 add_library(vision_collision_detector SHARED ${SOURCE_FILES})
-add_executable(collision_detector WIN32 ${SOURCESQT} ${SOURCE_FILES} ${qt_vision_qt_sources} ${qt_vision_collision_detector_ui})
+add_executable(collision_detector WIN32 ${SOURCESQT} ${qt_vision_qt_sources} ${qt_vision_collision_detector_ui})
 
-#MESSAGE( STATUS "INCLUDE_DIRS: " ${QT_LIBRARIES} )
+MESSAGE( STATUS "INCLUDE_DIRS: " ${QT_LIBRARIES} )
 target_link_libraries(vision_collision_detector ${OpenCV_LIBS} )#${catkin_LIBRARIES})
-target_link_libraries(collision_detector ${OpenCV_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::PrintSupport)
+target_link_libraries(collision_detector ${OpenCV_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::PrintSupport vision_collision_detector)
 
 install (DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION include)
 
@@ -43,7 +44,7 @@ install (
 )
 
 
-install(
-  TARGETS collision_detector
-  RUNTIME DESTINATION bin
-)
+#install(
+# TARGETS collision_detector
+# RUNTIME DESTINATION bin
+#)

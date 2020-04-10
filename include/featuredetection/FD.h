@@ -10,6 +10,8 @@
 #include "featuredetection/tracker.h"
 #include "statistics/statistics_tools.h"
 #include <memory>
+#include <opencv2/videoio.hpp>
+#include <opencv2/videoio/videoio_c.h>
 
 using namespace cv;
 using namespace cv::xfeatures2d;

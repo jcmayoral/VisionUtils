@@ -3,6 +3,8 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "featuredetection/myfeaturedetection.h"
 #include "featuredetection/matcher.h"
+#include "opencv2/video/tracking.hpp"
+
 using namespace cv;
 
 class Tracker{
